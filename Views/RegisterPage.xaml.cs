@@ -39,7 +39,7 @@ namespace ProfessionalJournal
         public async void OnRegister(object sender, EventArgs e)
         {
             var author = new Author { 
-                Username = newAuthorUsername.Text,
+                Username = newAuthorUsername.Text.ToLower(),
                 Password = AppHelper.GeneratePasswordHash(
                     newAuthorPassword.Text
                 )
