@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
+using Acr.UserDialogs;
+
 namespace ProfessionalJournal.Droid
 {
     [Activity(Label = "ProfessionalJournal.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -21,6 +23,11 @@ namespace ProfessionalJournal.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+			if (UserDialogs.Instance == null)
+			{
+				UserDialogs.Init(this);
+			}
 
             LoadApplication(new App());
         }
