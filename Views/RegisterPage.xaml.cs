@@ -11,6 +11,7 @@ namespace ProfessionalJournal
 {
     public partial class RegisterPage : ContentPage
     {
+        Boolean errored;
         MobileServiceClient client;
 
         /// <summary>
@@ -40,6 +41,7 @@ namespace ProfessionalJournal
             catch (Exception e)
             {
                 await DisplayAlert("Error", e.Message, "OK");
+                this.errored = true;
             }
         }
 
@@ -50,29 +52,36 @@ namespace ProfessionalJournal
         /// </summary>
         public async void OnRegister(object sender, EventArgs e)
         {
-            // Show loading indicator
-            UserDialogs.Instance.ShowLoading("Loading", MaskType.Black);
+            if (newAuthorPassword.Text != newAuthorConfirmPassword.Text) {
+                await DisplayAlert("Error", "Your passwords don't match!", "Try again");
+            } else {
+                // Show loading indicator
+                UserDialogs.Instance.ShowLoading("Loading", MaskType.Black);
 
-            // New author object
-            var author = new Author
-            {
-                Username = newAuthorUsername.Text.ToLower(),
-                Password = AppHelper.GeneratePasswordHash(
-                    newAuthorPassword.Text
-                )
-            };
+                // New author object
+                var author = new Author
+                {
+                    Username = newAuthorUsername.Text.ToLower(),
+                    Password = AppHelper.GeneratePasswordHash(
+                        newAuthorPassword.Text
+                    )
+                };
 
-            // Register author
-            await RegisterAuthor(author);
+                // Register author
+                await RegisterAuthor(author);
 
-            // Hide loading indicator
-            UserDialogs.Instance.HideLoading();
 
-            // Clear the register form
-            newAuthorUsername.Text = string.Empty;
-            newAuthorPassword.Text = string.Empty;
-            newAuthorUsername.Unfocus();
-            newAuthorPassword.Unfocus();
+                // Hide loading indicator
+                UserDialogs.Instance.HideLoading();
+               
+                // Clear the register form
+                newAuthorUsername.Text = string.Empty;
+                newAuthorPassword.Text = string.Empty;
+                newAuthorConfirmPassword.Text = string.Empty;
+                newAuthorUsername.Unfocus();
+                newAuthorPassword.Unfocus();
+                newAuthorConfirmPassword.Unfocus();
+            }
         }
     }
 }

@@ -20,6 +20,9 @@
             <Label Text="Password:" />
             <Entry x:Name="newAuthorPassword" Placeholder="Your password" IsPassword="true" />
 
+            <Label Text="Confirm Password:" />
+            <Entry x:Name="newAuthorConfirmPassword" Placeholder="Your password again" IsPassword="true" />
+            
             <Button x:Name="registerButton" Text="Register" Clicked="OnRegister" />
         </StackLayout>
     </ContentPage.Content>
