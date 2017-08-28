@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class MainPage : ContentPage
+    public partial class LandingPage : ContentPage
     {
-        public MainPage()
+        public LandingPage()
         {
             InitializeComponent();
         }
@@ -16,5 +16,10 @@ namespace ProfessionalJournal
 		{
 			await Navigation.PushAsync(new RegisterPage());
 		}
+
+        async void OnNavigateLogin(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
+        }
     }
 }

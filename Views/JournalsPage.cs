@@ -1,53 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public class JournalsPage : TabbedPage
+    public partial class ItemsPage : ContentPage
     {
-        public JournalsPage()
+        ItemsViewModel viewModel;
+
+        public ItemsPage()
         {
-            Page itemsPage, aboutPage = null;
+            InitializeComponent();
 
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    itemsPage = new NavigationPage(new ItemsPage())
-                    {
-                        Title = "Browse"
-                    };
-
-                    aboutPage = new NavigationPage(new AboutPage())
-                    {
-                        Title = "About"
-                    };
-                    itemsPage.Icon = "tab_feed.png";
-                    aboutPage.Icon = "tab_about.png";
-                    break;
-                default:
-                    itemsPage = new ItemsPage()
-                    {
-                        Title = "Browse"
-                    };
-
-                    aboutPage = new AboutPage()
-                    {
-                        Title = "About"
-                    };
-                    break;
-            }
-
-            Children.Add(itemsPage);
-            Children.Add(aboutPage);
-
-            Title = Children[0].Title;
+            BindingContext = viewModel = new ItemsViewModel();
         }
 
-        protected override void OnCurrentPageChanged()
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            base.OnCurrentPageChanged();
-            Title = CurrentPage?.Title ?? string.Empty;
+            var item = args.SelectedItem as Item;
+            if (item == null)
+                return;
+
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+
+            // Manually deselect item
+            ItemsListView.SelectedItem = null;
+        }
+
+        async void AddItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewItemPage());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }
