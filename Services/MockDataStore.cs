@@ -5,61 +5,58 @@ using System.Threading.Tasks;
 
 namespace ProfessionalJournal
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Journal>
     {
-        List<Item> items;
+        List<Journal> journals;
 
         public MockDataStore()
         {
-            items = new List<Item>();
-            var mockItems = new List<Item>
+            journals = new List<Journal>();
+            var mockJournals = new List<Journal>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
+                new Journal { Id = Guid.NewGuid().ToString(), Name = "First journal", Description="This is a journal description." },
+                new Journal { Id = Guid.NewGuid().ToString(), Name = "Second journal", Description="This is a journal description." },
+                new Journal { Id = Guid.NewGuid().ToString(), Name = "Third journal", Description="This is a journal description." },
             };
 
-            foreach (var item in mockItems)
+            foreach (var journal in mockJournals)
             {
-                items.Add(item);
+                journals.Add(journal);
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddJournalAsync(Journal journal)
         {
-            items.Add(item);
+            journals.Add(journal);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateJournalAsync(Journal journal)
         {
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
-            items.Add(item);
+            var _journal = journals.Where((Journal arg) => arg.Id == journal.Id).FirstOrDefault();
+            journals.Remove(_journal);
+            journals.Add(journal);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteJournalAsync(string id)
         {
-            var _item = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(_item);
+            var _journal = journals.Where((Journal arg) => arg.Id == id).FirstOrDefault();
+            journals.Remove(_journal);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Journal> GetJournalAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(journals.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Journal>> GetJournalsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(journals);
         }
     }
 }

@@ -4,18 +4,18 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class NewItemPage : ContentPage
+    public partial class NewJournalPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Journal Journal { get; set; }
 
-        public NewItemPage()
+        public NewJournalPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Journal = new Journal
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Name = "Journal name",
+                Description = "This is the journal description."
             };
 
             BindingContext = this;
@@ -23,7 +23,7 @@ namespace ProfessionalJournal
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddJournal", Journal);
             await Navigation.PopToRootAsync();
         }
     }

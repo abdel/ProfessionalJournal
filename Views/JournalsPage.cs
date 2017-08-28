@@ -6,40 +6,40 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class ItemsPage : ContentPage
+    public partial class JournalsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        JournalsViewModel viewModel;
 
-        public ItemsPage()
+        public JournalsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new JournalsViewModel();
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        async void OnJournalSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
-            if (item == null)
+            var journal = args.SelectedItem as Journal;
+            if (journal == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new JournalDetailPage(new JournalDetailViewModel(journal)));
 
-            // Manually deselect item
-            ItemsListView.SelectedItem = null;
+            // Manually deselect journal
+            JournalsListView.SelectedItem = null;
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
+        async void AddJournal_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewItemPage());
+            await Navigation.PushAsync(new NewJournalPage());
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            if (viewModel.Journals.Count == 0)
+                viewModel.LoadJournalsCommand.Execute(null);
         }
     }
 }

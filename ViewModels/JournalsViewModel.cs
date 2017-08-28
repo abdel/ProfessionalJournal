@@ -7,26 +7,26 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public class ItemsViewModel : BaseViewModel
+    public class JournalsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
-        public Command LoadItemsCommand { get; set; }
+        public ObservableCollection<Journal> Journals { get; set; }
+        public Command LoadJournalsCommand { get; set; }
 
-        public ItemsViewModel()
+        public JournalsViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Title = "Journals";
+            Journals = new ObservableCollection<Journal>();
+            LoadJournalsCommand = new Command(async () => await ExecuteLoadJournalsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewJournalPage, Journal>(this, "AddJournal", async (obj, journal) =>
             {
-                var _item = item as Item;
-                Items.Add(_item);
-                await DataStore.AddItemAsync(_item);
+                var _journal = journal as Journal;
+                Journals.Add(_journal);
+                await DataStore.AddJournalAsync(_journal);
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadJournalsCommand()
         {
             if (IsBusy)
                 return;
@@ -35,11 +35,11 @@ namespace ProfessionalJournal
 
             try
             {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                Journals.Clear();
+                var journals = await DataStore.GetJournalsAsync(true);
+                foreach (var journal in journals)
                 {
-                    Items.Add(item);
+                    Journals.Add(journal);
                 }
             }
             catch (Exception ex)

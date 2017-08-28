@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProfessionalJournal.AboutPage" xmlns:vm="clr-namespace:ProfessionalJournal;" Title="{Binding Title}">
 	<ContentPage.BindingContext>
 		<vm:AboutViewModel />
@@ -21,7 +21,7 @@
 					<Label.FormattedText>
 						<FormattedString>
 							<FormattedString.Spans>
-								<Span Text="AppName" FontAttributes="Bold" FontSize="22" />
+								<Span Text="Professional Journal" FontAttributes="Bold" FontSize="22" />
 								<Span Text=" " />
 								<Span Text="1.0" ForegroundColor="{StaticResource LightTextColor}" />
 							</FormattedString.Spans>
@@ -46,14 +46,13 @@
 							<FormattedString.Spans>
 								<Span Text="It shares code with its" />
 								<Span Text=" " />
-								<Span Text="iOS, Android, and Windows" FontAttributes="Bold" />
+								<Span Text="iOS and Android" FontAttributes="Bold" />
 								<Span Text=" " />
 								<Span Text="versions." />
 							</FormattedString.Spans>
 						</FormattedString>
 					</Label.FormattedText>
 				</Label>
-				<Button Margin="0,10,0,0" Text="Learn more" Command="{Binding OpenWebCommand}" BackgroundColor="{StaticResource Primary}" TextColor="White" />
 			</StackLayout>
 		</ScrollView>
 	</Grid>

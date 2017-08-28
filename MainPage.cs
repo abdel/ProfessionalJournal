@@ -5,11 +5,12 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class LandingPage : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public LandingPage()
+        public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, "");
         }
 
 		async void OnNavigateRegister(object sender, EventArgs e)

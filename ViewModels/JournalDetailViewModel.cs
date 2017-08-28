@@ -2,13 +2,13 @@
 
 namespace ProfessionalJournal
 {
-    public class ItemDetailViewModel : BaseViewModel
+    public class JournalDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Journal Journal { get; set; }
+        public JournalDetailViewModel(Journal journal = null)
         {
-            Title = item?.Text;
-            Item = item;
+            Title = journal?.Name;
+            Journal = journal;
         }
     }
 }

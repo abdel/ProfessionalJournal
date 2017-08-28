@@ -4,16 +4,16 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public class MainPage : TabbedPage
+    public class AppPage : TabbedPage
     {
-        public MainPage()
+        public AppPage()
         {
             Page journalsPage, aboutPage = null;
 
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    itemsPage = new NavigationPage(new ItemsPage())
+                    journalsPage = new NavigationPage(new JournalsPage())
                     {
                         Title = "Journals"
                     };
@@ -22,11 +22,11 @@ namespace ProfessionalJournal
                     {
                         Title = "About"
                     };
-                    itemsPage.Icon = "tab_feed.png";
+                    journalsPage.Icon = "tab_feed.png";
                     aboutPage.Icon = "tab_about.png";
                     break;
                 default:
-                    itemsPage = new ItemsPage()
+                    journalsPage = new JournalsPage()
                     {
                         Title = "Journals"
                     };

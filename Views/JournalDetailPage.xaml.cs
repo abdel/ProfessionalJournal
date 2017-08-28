@@ -6,24 +6,24 @@ namespace ProfessionalJournal
 {
     public partial class JournalDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        JournalDetailViewModel viewModel;
 
         // Note - The Xamarin.Forms Previewer requires a default, parameterless constructor to render a page.
         public JournalDetailPage()
         {
             InitializeComponent();
 
-            var item = new Item
+            var journal = new Journal
             {
-                Name = "Item 1",
-                Description = "This is an item description."
+                Name = "Journal 1",
+                Description = "This is a journal description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new JournalDetailViewModel(journal);
             BindingContext = viewModel;
         }
 
-        public JournalDetailPage(ItemDetailViewModel viewModel)
+        public JournalDetailPage(JournalDetailViewModel viewModel)
         {
             InitializeComponent();
 

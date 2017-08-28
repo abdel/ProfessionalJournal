@@ -9,15 +9,15 @@ using Acr.UserDialogs;
 
 namespace ProfessionalJournal
 {
-    public partial class RegisterPage : ContentPage
+    public partial class LoginPage : ContentPage
     {
         Boolean errored;
         MobileServiceClient client;
 
         /// <summary>
-        /// Constructor for RegisterPage class that sets up the MobileServiceClient
+        /// Constructor for Loginpage class that sets up the MobileServiceClient
         /// </summary>
-        public RegisterPage()
+        public LoginPage()
         {
             InitializeComponent();
 
@@ -25,18 +25,16 @@ namespace ProfessionalJournal
         }
 
         /// <summary>
-        /// Registers a new author by sending a request to the /api/register
+        /// Authenticates the author by sending a request to the /api/login
         /// endpoint
         /// </summary>
         /// <param name="author">An Author model object</param>
-        async Task RegisterAuthor(Author author)
+        async Task AuthenticateAuthor(Author author)
         {
             try
             {
-                // Send request to POST /api/register endpoint
-                var result = await client.InvokeApiAsync<Author, string>("register", author);
-
-                await DisplayAlert("Success", "You have been registered as an author.", "OK");
+                // Send request to POST /api/login endpoint
+                var result = await client.InvokeApiAsync<Author, ResponseSuccess>("login", author);
             }
             catch (Exception e)
             {
@@ -47,41 +45,44 @@ namespace ProfessionalJournal
 
 
         /// <summary>
-        /// Triggered by clicking the register button on RegisterPage to
-        /// create new authors
+        /// Triggered by clicking the login button on LoginPage to
+        /// authenticate the author.
         /// </summary>
-        public async void OnRegister(object sender, EventArgs e)
+        public async void OnLogin(object sender, EventArgs e)
         {
-            if (newAuthorPassword.Text != newAuthorConfirmPassword.Text) {
-                await DisplayAlert("Error", "Your passwords don't match!", "Try again");
-            } else {
-                // Show loading indicator
-                UserDialogs.Instance.ShowLoading("Loading", MaskType.Black);
+            // Show loading indicator
+            UserDialogs.Instance.ShowLoading("Loading", MaskType.Black);
 
-                // New author object
-                var author = new Author
-                {
-                    Username = newAuthorUsername.Text.ToLower(),
-                    Password = AppHelper.GeneratePasswordHash(
-                        newAuthorPassword.Text
-                    )
-                };
+            // Author object
+            var author = new Author
+            {
+                Username = authorUsername.Text.ToLower(),
+                Password = AppHelper.GeneratePasswordHash(
+                    authorPassword.Text
+                )
+            };
 
-                // Register author
-                await RegisterAuthor(author);
+            // Authenticate author
+            await AuthenticateAuthor(author);
 
+            // Hide loading indicator
+            UserDialogs.Instance.HideLoading();
 
-                // Hide loading indicator
-                UserDialogs.Instance.HideLoading();
+            // Clear the login form
+            authorUsername.Text = string.Empty;
+            authorPassword.Text = string.Empty;
+            authorUsername.Unfocus();
+            authorPassword.Unfocus();
 
-                // Clear the register form
-                newAuthorUsername.Text = string.Empty;
-                newAuthorPassword.Text = string.Empty;
-                newAuthorConfirmPassword.Text = string.Empty;
-                newAuthorUsername.Unfocus();
-                newAuthorPassword.Unfocus();
-                newAuthorConfirmPassword.Unfocus();
+            // Redirect to journals page
+            if (!this.errored)
+            {
+                await Navigation.PushModalAsync(new AppPage());
             }
         }
+    }
+
+    public class ResponseSuccess {
+        public string msg { get; set; }
     }
 }

@@ -5,10 +5,10 @@ namespace ProfessionalJournal
 {
     public interface IDataStore<T>
     {
-        Task<bool> AddItemAsync(T item);
-        Task<bool> UpdateItemAsync(T item);
-        Task<bool> DeleteItemAsync(string id);
-        Task<T> GetItemAsync(string id);
-        Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
+        Task<bool> AddJournalAsync(T journal);
+        Task<bool> UpdateJournalAsync(T journal);
+        Task<bool> DeleteJournalAsync(string id);
+        Task<T> GetJournalAsync(string id);
+        Task<IEnumerable<T>> GetJournalsAsync(bool forceRefresh = false);
     }
 }

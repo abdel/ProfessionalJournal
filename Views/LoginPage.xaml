@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProfessionalJournal.RegisterPage">
+             x:Class="ProfessionalJournal.LoginPage"
+             Title="Author Login">
 	<ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 40, 20, 20"
@@ -15,15 +16,12 @@
                      Spacing="15">
 
             <Label Text="Username:" />
-            <Entry x:Name="newAuthorUsername" Placeholder="Your username" />
+            <Entry x:Name="authorUsername" Placeholder="Your username" />
             
             <Label Text="Password:" />
-            <Entry x:Name="newAuthorPassword" Placeholder="Your password" IsPassword="true" />
+            <Entry x:Name="authorPassword" Placeholder="Your password" IsPassword="true" />
 
-            <Label Text="Confirm Password:" />
-            <Entry x:Name="newAuthorConfirmPassword" Placeholder="Your password again" IsPassword="true" />
-            
-            <Button x:Name="registerButton" Text="Register" Clicked="OnRegister" />
+            <Button x:Name="loginButton" Text="Login" Clicked="OnLogin" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

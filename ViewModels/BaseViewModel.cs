@@ -9,7 +9,7 @@ namespace ProfessionalJournal
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Journal> DataStore => DependencyService.Get<IDataStore<Journal>>() ?? new MockDataStore();
 
         bool isBusy;
         public bool IsBusy

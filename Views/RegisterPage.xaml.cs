@@ -11,7 +11,6 @@ namespace ProfessionalJournal
 {
     public partial class RegisterPage : ContentPage
     {
-        Boolean errored;
         MobileServiceClient client;
 
         /// <summary>
@@ -41,7 +40,6 @@ namespace ProfessionalJournal
             catch (Exception e)
             {
                 await DisplayAlert("Error", e.Message, "OK");
-                this.errored = true;
             }
         }
 
