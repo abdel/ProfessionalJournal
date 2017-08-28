@@ -24,10 +24,7 @@ namespace ProfessionalJournal.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-			if (UserDialogs.Instance == null)
-			{
-				UserDialogs.Init(this);
-			}
+            UserDialogs.Init(() => (Activity)Xamarin.Forms.Forms.Context);
 
             LoadApplication(new App());
         }
