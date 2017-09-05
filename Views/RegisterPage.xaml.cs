@@ -33,7 +33,7 @@ namespace ProfessionalJournal
             try
             {
                 // Send request to POST /api/register endpoint
-                var result = await client.InvokeApiAsync<Author, string>("register", author);
+                var result = await client.InvokeApiAsync<Author, ResponseSuccess>("register", author);
 
                 await DisplayAlert("Success", "You have been registered as an author.", "OK");
             }
