@@ -23,7 +23,7 @@ namespace ProfessionalJournal
             if (journal == null)
                 return;
 
-            await Navigation.PushAsync(new JournalDetailPage(new JournalDetailViewModel(journal)));
+            await Navigation.PushModalAsync(new JournalDetailPage(new JournalDetailViewModel(journal)));
 
             // Manually deselect journal
             JournalsListView.SelectedItem = null;
