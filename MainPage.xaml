@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.MainPage"
-             Title="Professional Journal">
-	<ContentPage.Padding>
+             Title="JOP.it">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sign Up" Clicked="OnNavigateRegisterPage" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 40, 20, 20"
                     Android="20, 20, 20, 20"
@@ -14,9 +17,15 @@
                      HorizontalOptions="FillAndExpand"
                      Orientation="Vertical"
                      Spacing="15">
-            <Label Text="Login or register to start managing your journals." XAlign="1" />
-            <Button x:Name="navigateRegister" Text="Register" Clicked="OnNavigateRegister" />
-            <Button x:Name="navigateLogin" Text="Login" Clicked="OnNavigateLogin" />
+
+            <Label Text="Username:" />
+            <Entry x:Name="authorUsername" Keyboard="Email" Placeholder="Your username" />
+            
+            <Label Text="Password:" />
+            <Entry x:Name="authorPassword" Placeholder="Your password" 
+                   IsPassword="true" />
+
+            <Button x:Name="loginButton" Text="Login" Clicked="OnLogin" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
