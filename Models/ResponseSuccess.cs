@@ -3,8 +3,6 @@ namespace ProfessionalJournal
 {
     public class ResponseSuccess
     {
-        public ResponseSuccess()
-        {
-        }
+		public string msg { get; set; }
     }
 }
