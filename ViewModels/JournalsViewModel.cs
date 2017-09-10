@@ -9,7 +9,8 @@ namespace ProfessionalJournal
 {
     public class JournalsViewModel : BaseViewModel
     {
-        public ObservableCollection<Journal> Journals { get; set; }
+		public IDataStore<Journal> JournalDataStore => DependencyService.Get<IDataStore<Journal>>() ?? new JournalDataStore();
+		public ObservableCollection<Journal> Journals { get; set; }
         public Command LoadJournalsCommand { get; set; }
 
         public JournalsViewModel()
@@ -22,7 +23,7 @@ namespace ProfessionalJournal
             {
                 var _journal = journal as Journal;
                 Journals.Add(_journal);
-                await DataStore.AddJournalAsync(_journal);
+                await JournalDataStore.AddAsync(_journal);
             });
         }
 
@@ -36,7 +37,7 @@ namespace ProfessionalJournal
             try
             {
                 Journals.Clear();
-                var journals = await DataStore.GetJournalsAsync(true);
+                var journals = await JournalDataStore.GetAllAsync(true);
                 foreach (var journal in journals)
                 {
                     Journals.Add(journal);

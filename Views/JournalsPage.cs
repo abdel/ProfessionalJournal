@@ -14,6 +14,8 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
+            NavigationPage.SetHasBackButton(this, false);
+
             BindingContext = viewModel = new JournalsViewModel();
         }
 
@@ -23,7 +25,7 @@ namespace ProfessionalJournal
             if (journal == null)
                 return;
 
-            await Navigation.PushModalAsync(new JournalDetailPage(new JournalDetailViewModel(journal)));
+            await Navigation.PushAsync(new JournalEntriesPage(new JournalEntriesViewModel(journal)));
 
             // Manually deselect journal
             JournalsListView.SelectedItem = null;

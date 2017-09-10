@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProfessionalJournal.Models
+namespace ProfessionalJournal
 {
     public class Author
     {

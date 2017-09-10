@@ -10,23 +10,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Journal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CloudDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\JournalDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\MockDataStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JournalDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JournalEntriesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JournalsViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\JournalDetailPage.xaml.cs">
-      <DependentUpon>JournalDetailPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml.cs">
+      <DependentUpon>JournalEntriesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\JournalsPage.cs">
       <DependentUpon>JournalsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\NewItemPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\NewJournalPage.xaml.cs">
       <DependentUpon>NewJournalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -35,25 +30,36 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Author.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\AppPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EntryPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ResponseSuccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EntryHistoryPage.cs">
+      <DependentUpon>EntryHistoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EntryDetailPage.xaml.cs">
+      <DependentUpon>EntryDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EntryDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Entry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EntryHistoryViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\EntryDataStore.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\AboutPage.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalDetailPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalsPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewJournalPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\EntryHistoryPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\EntryDetailPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

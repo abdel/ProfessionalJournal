@@ -12,12 +12,6 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
-            Journal = new Journal
-            {
-                Name = "Journal name",
-                Description = "This is the journal description."
-            };
-
             BindingContext = this;
         }
 

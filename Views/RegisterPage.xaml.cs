@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using ProfessionalJournal.Models;
 using Microsoft.WindowsAzure.MobileServices;
 
 using Xamarin.Forms;
@@ -11,6 +10,7 @@ namespace ProfessionalJournal
 {
     public partial class RegisterPage : ContentPage
     {
+        Boolean errored;
         MobileServiceClient client;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
-            this.client = new MobileServiceClient(Constants.ApplicationURL);
+            this.client = new MobileServiceClient(Constants.BackendURL);
         }
 
         /// <summary>
@@ -39,6 +39,7 @@ namespace ProfessionalJournal
             }
             catch (Exception e)
             {
+                this.errored = true;
                 await DisplayAlert("Error", e.Message, "OK");
             }
         }
@@ -59,6 +60,11 @@ namespace ProfessionalJournal
                 // New author object
                 var author = new Author
                 {
+
+                    FirstName = newAuthorFirstName.Text,
+                    LastName = newAuthorLastName.Text,
+                    Email = newAuthorEmail.Text,
+                    DateOfBirth = newAuthorDateOfBirth.Date,
                     Username = newAuthorUsername.Text.ToLower(),
                     Password = AppHelper.GeneratePasswordHash(
                         newAuthorPassword.Text
@@ -72,13 +78,10 @@ namespace ProfessionalJournal
                 // Hide loading indicator
                 UserDialogs.Instance.HideLoading();
                
-                // Clear the register form
-                newAuthorUsername.Text = string.Empty;
-                newAuthorPassword.Text = string.Empty;
-                newAuthorConfirmPassword.Text = string.Empty;
-                newAuthorUsername.Unfocus();
-                newAuthorPassword.Unfocus();
-                newAuthorConfirmPassword.Unfocus();
+                // Go back to login page on success
+                if (this.errored != true) {
+                    await Navigation.PopAsync();
+                }
             }
         }
     }

@@ -8,38 +8,38 @@ namespace ProfessionalJournal
     {
         public AppPage()
         {
-            Page journalsPage, aboutPage = null;
+            Page entryDetailPage, entryHistoryPage = null;
 
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    journalsPage = new NavigationPage(new JournalsPage())
+                    entryDetailPage = new NavigationPage(new EntryDetailPage())
                     {
-                        Title = "Journals"
+                        Title = "Entry Details"
                     };
 
-                    aboutPage = new NavigationPage(new AboutPage())
+                    entryHistoryPage = new NavigationPage(new EntryHistoryPage())
                     {
-                        Title = "About"
+                        Title = "History"
                     };
-                    journalsPage.Icon = "tab_feed.png";
-                    aboutPage.Icon = "tab_about.png";
+                    entryDetailPage.Icon = "tab_feed.png";
+                    entryHistoryPage.Icon = "tab_about.png";
                     break;
                 default:
-                    journalsPage = new JournalsPage()
+                    entryDetailPage = new EntryDetailPage()
                     {
                         Title = "Journals"
                     };
 
-                    aboutPage = new AboutPage()
+                    entryHistoryPage = new EntryHistoryPage()
                     {
                         Title = "About"
                     };
                     break;
             }
 
-            Children.Add(journalsPage);
-            Children.Add(aboutPage);
+            Children.Add(entryDetailPage);
+            Children.Add(entryHistoryPage);
 
             Title = Children[0].Title;
         }

@@ -5,10 +5,10 @@
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="15">
-			<Label Text="Text" FontSize="Medium" />
-			<Entry Text="{Binding Journal.Name}" FontSize="Small" />
+			<Label Text="Title" FontSize="Medium" />
+			<Entry Placeholder="Title of the journal" FontSize="Small" />
 			<Label Text="Description" FontSize="Medium" />
-			<Editor Text="{Binding Journal.Description}" FontSize="Small" Margin="0" />
+			<Editor FontSize="Small" Margin="0" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

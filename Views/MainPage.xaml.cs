@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using ProfessionalJournal.Models;
 using Microsoft.WindowsAzure.MobileServices;
 
 using Xamarin.Forms;
@@ -22,7 +21,7 @@ namespace ProfessionalJournal
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
             
-            this.client = new MobileServiceClient(Constants.ApplicationURL);
+            this.client = new MobileServiceClient(Constants.BackendURL);
         }
 
 		/// <summary>

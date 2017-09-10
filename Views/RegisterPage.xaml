@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ProfessionalJournal.RegisterPage"
-             Title="Author Registration">
+             Title="Create an Account">
 	<ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 40, 20, 20"
@@ -10,21 +11,47 @@
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand"
-                     HorizontalOptions="FillAndExpand"
-                     Orientation="Vertical"
-                     Spacing="15">
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Orientation="Vertical"
+                         Spacing="15">
 
-            <Label Text="Username:" />
-            <Entry x:Name="newAuthorUsername" Placeholder="Your username" />
-            
-            <Label Text="Password:" />
-            <Entry x:Name="newAuthorPassword" Placeholder="Your password" IsPassword="true" />
+                <Label Text="First Name:" />
+                <Entry x:Name="newAuthorFirstName" Placeholder="Your first name" />
 
-            <Label Text="Confirm Password:" />
-            <Entry x:Name="newAuthorConfirmPassword" Placeholder="Your password again" IsPassword="true" />
-            
-            <Button x:Name="registerButton" Text="Register" Clicked="OnRegister" />
-        </StackLayout>
+                <Label Text="Last Name:" />
+                <Entry x:Name="newAuthorLastName" Placeholder="Your last name" />
+                
+                <Label Text="Username:" />
+                <Entry x:Name="newAuthorUsername" Keyboard="Email" Placeholder="Your username" />
+                
+                <Label Text="Password:" />
+                <Entry x:Name="newAuthorPassword" Placeholder="Your password" IsPassword="true" />
+
+                <Label Text="Confirm Password:" />
+                <Entry x:Name="newAuthorConfirmPassword" Placeholder="Your password again" IsPassword="true" />
+
+                <Label Text="Email Address:" />
+                <Entry x:Name="newAuthorEmail" Keyboard="Email" Placeholder="Your email address" />
+
+                <Label Text="Date of Birth:" />
+                <DatePicker x:Name="newAuthorDateOfBirth"
+                            VerticalOptions="CenterAndExpand" 
+                            Date="{x:Static sys:DateTime.Now}" 
+                            MaximumDate="{x:Static sys:DateTime.Now}">
+                 <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                 <DatePicker.MinimumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                       <x:Arguments>
+                          <x:String>Jan 1 1900</x:String>
+                       </x:Arguments>
+                    </sys:DateTime>
+                 </DatePicker.MinimumDate>
+              </DatePicker>
+                
+                <Button x:Name="registerButton" Text="Sign Up" Clicked="OnRegister" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

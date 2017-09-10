@@ -9,20 +9,20 @@ using Plugin.Connectivity;
 
 namespace ProfessionalJournal
 {
-    public class CloudDataStore : IDataStore<Journal>
+    public class JournalDataStore : IDataStore<Journal>
     {
         HttpClient client;
         IEnumerable<Journal> journals;
 
-        public CloudDataStore()
+        public JournalDataStore()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri($"{App.BackendUrl}/");
+            client.BaseAddress = new Uri($"{Constants.BackendURL}/");
 
             journals = new List<Journal>();
         }
 
-        public async Task<IEnumerable<Journal>> GetJournalsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Journal>> GetAllAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
@@ -33,7 +33,7 @@ namespace ProfessionalJournal
             return journals;
         }
 
-        public async Task<Journal> GetJournalAsync(string id)
+        public async Task<Journal> GetAsync(string id)
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
@@ -44,7 +44,7 @@ namespace ProfessionalJournal
             return null;
         }
 
-        public async Task<bool> AddJournalAsync(Journal journal)
+        public async Task<bool> AddAsync(Journal journal)
         {
             if (journal == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -56,7 +56,7 @@ namespace ProfessionalJournal
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateJournalAsync(Journal journal)
+        public async Task<bool> UpdateAsync(Journal journal)
         {
             if (journal == null || journal.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
@@ -70,7 +70,7 @@ namespace ProfessionalJournal
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteJournalAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;

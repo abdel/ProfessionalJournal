@@ -2,12 +2,12 @@
 
 namespace ProfessionalJournal
 {
-    public class JournalDetailViewModel : BaseViewModel
+    public class JournalEntriesViewModel : BaseViewModel
     {
         public Journal Journal { get; set; }
-        public JournalDetailViewModel(Journal journal = null)
+        public JournalEntriesViewModel(Journal journal = null)
         {
-            Title = journal?.Name;
+            Title = journal?.Title;
             Journal = journal;
         }
     }
