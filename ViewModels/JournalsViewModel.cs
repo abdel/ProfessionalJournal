@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -45,11 +46,14 @@ namespace ProfessionalJournal
 
             try
             {
-                Journals.Clear();
                 var journals = await JournalDataStore.GetAllAsync(true);
-                foreach (var journal in journals)
-                {
-                    Journals.Add(journal);
+
+                if (journals != null && journals.Any()) {
+                    Journals.Clear();
+                    foreach (var journal in journals)
+                    {
+                        Journals.Add(journal);
+                    }
                 }
             }
             catch (Exception ex)

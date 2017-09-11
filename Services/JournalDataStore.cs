@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json;
 using Plugin.Connectivity;
 using Microsoft.WindowsAzure.MobileServices;
 
@@ -26,8 +28,8 @@ namespace ProfessionalJournal
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                journals = await client.InvokeApiAsync<IEnumerable<Journal>>("journal", HttpMethod.Get, null);
-                Console.WriteLine(journals);
+                var json = await client.InvokeApiAsync<Response>("journal", HttpMethod.Get, null);
+                journals = json.journals;
             }
 
             return journals;
