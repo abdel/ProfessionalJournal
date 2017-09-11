@@ -1,29 +1,24 @@
 ﻿using System;
-
 using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
     public partial class NewJournalPage : ContentPage
     {
-        public Journal Journal { get; set; }
-
         public NewJournalPage()
         {
             InitializeComponent();
-
-			Journal = new Journal
-            {
-                Title = "Journal name",
-                Description = "This is the journal description."
-            };
-
-            BindingContext = this;
         }
 
-        async void Save_Clicked(object sender, EventArgs e)
+        async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddJournal", Journal);
+            var journal = new Journal
+            {
+                Title = newJournalTitle.Text,
+                Description = newJournalDescription.Text
+            };
+
+            MessagingCenter.Send(this, "AddJournal", journal);
             await Navigation.PopAsync();
         }
     }
