@@ -6,7 +6,6 @@
              x:Name="BrowseJournalsPage">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Add" Clicked="OnAddJournalButtonClicked" />
-        <ToolbarItem Text="Logout" Clicked="OnLogoutButtonClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<StackLayout>
@@ -22,7 +21,7 @@
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Padding="10">
-								<Label Text="{Binding Name}" 
+								<Label Text="{Binding Title}" 
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="16" />
