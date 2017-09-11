@@ -34,7 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Author.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AppHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\EntryPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ResponseSuccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Response.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\EntryHistoryPage.cs">
       <DependentUpon>EntryHistoryPage.xaml</DependentUpon>
     </Compile>
@@ -44,10 +44,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EntryDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EntryHistoryViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Services\EntryDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ICredentialsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CredentialsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml" />
@@ -59,7 +61,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\EntryHistoryPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\EntryDetailPage.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
