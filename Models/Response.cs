@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProfessionalJournal
 {
@@ -7,5 +8,7 @@ namespace ProfessionalJournal
         public int StatusCode { get; set; }
 		public string Message { get; set; }
         public string Token { get; set; }
+
+        public IEnumerable<Journal> journals { get; set; }
     }
 }
