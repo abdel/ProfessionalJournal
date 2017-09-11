@@ -6,6 +6,10 @@ namespace ProfessionalJournal
 {
     public partial class App : Application
     {
+		public static string AppName { get { return "sdp.Professional-Journal"; } }
+
+		public static ICredentialsService CredentialsService { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -13,7 +17,15 @@ namespace ProfessionalJournal
             DependencyService.Register<JournalDataStore>();
             DependencyService.Register<EntryDataStore>();
 
-            MainPage = new NavigationPage(new MainPage());
+			CredentialsService = new CredentialsService();
+			if (CredentialsService.DoCredentialsExist())
+			{
+				MainPage = new NavigationPage(new JournalsPage());
+			}
+			else
+			{
+				MainPage = new NavigationPage(new LoginPage());
+			}
         }
     }
 }
