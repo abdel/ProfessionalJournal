@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json;
 using Plugin.Connectivity;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace ProfessionalJournal
 {
     public class JournalDataStore : IDataStore<Journal>
     {
-        HttpClient client;
+        readonly MobileServiceClient client;
         IEnumerable<Journal> journals;
 
         public JournalDataStore()
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri($"{Constants.BackendURL}/");
+            client = new MobileServiceClient(Constants.BackendURL);
+            client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+            client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
 
             journals = new List<Journal>();
         }
@@ -26,8 +26,8 @@ namespace ProfessionalJournal
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/journal");
-                journals = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Journal>>(json));
+                journals = await client.InvokeApiAsync<IEnumerable<Journal>>("journal", HttpMethod.Get, null);
+                Console.WriteLine(journals);
             }
 
             return journals;
@@ -37,8 +37,7 @@ namespace ProfessionalJournal
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/journal/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Journal>(json));
+                return await client.InvokeApiAsync<Journal>("journal/{id}", HttpMethod.Get, null);
             }
 
             return null;
@@ -49,11 +48,9 @@ namespace ProfessionalJournal
             if (journal == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedJournal = JsonConvert.SerializeObject(journal);
+            var response = await client.InvokeApiAsync<Journal, Response>("journal", journal);
 
-            var response = await client.PostAsync($"api/journal", new StringContent(serializedJournal, Encoding.UTF8, "application/json"));
-
-            return response.IsSuccessStatusCode;
+            return (response.StatusCode == 200);
         }
 
         public async Task<bool> UpdateAsync(Journal journal)
@@ -61,13 +58,9 @@ namespace ProfessionalJournal
             if (journal == null || journal.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedJournal = JsonConvert.SerializeObject(journal);
-            var buffer = Encoding.UTF8.GetBytes(serializedJournal);
-            var byteContent = new ByteArrayContent(buffer);
+            var response = await client.InvokeApiAsync<Journal, Response>("journal/{journal.Id}", journal, HttpMethod.Put, null);
 
-            var response = await client.PutAsync(new Uri($"api/journal/{journal.Id}"), byteContent);
-
-            return response.IsSuccessStatusCode;
+            return (response.StatusCode == 200);
         }
 
         public async Task<bool> DeleteAsync(string id)
@@ -75,9 +68,9 @@ namespace ProfessionalJournal
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.DeleteAsync($"api/journal/{id}");
+            var response = await client.InvokeApiAsync<Response>("journal/{id}", HttpMethod.Delete, null);
 
-            return response.IsSuccessStatusCode;
+            return (response.StatusCode == 200);
         }
     }
 }

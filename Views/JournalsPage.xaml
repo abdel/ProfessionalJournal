@@ -5,7 +5,8 @@
              Title="{Binding Title}"
              x:Name="BrowseJournalsPage">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Add" Clicked="AddJournal_Clicked" />
+		<ToolbarItem Text="Add" Clicked="OnAddJournalButtonClicked" />
+        <ToolbarItem Text="Logout" Clicked="OnLogoutButtonClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<StackLayout>

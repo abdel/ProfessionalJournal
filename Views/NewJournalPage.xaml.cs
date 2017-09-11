@@ -12,13 +12,19 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
+			Journal = new Journal
+            {
+                Title = "Journal name",
+                Description = "This is the journal description."
+            };
+
             BindingContext = this;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "AddJournal", Journal);
-            await Navigation.PopToRootAsync();
+            await Navigation.PopAsync();
         }
     }
 }

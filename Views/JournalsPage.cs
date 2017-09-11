@@ -15,7 +15,7 @@ namespace ProfessionalJournal
             InitializeComponent();
 
             NavigationPage.SetHasBackButton(this, false);
-
+                         
             BindingContext = viewModel = new JournalsViewModel();
         }
 
@@ -31,9 +31,16 @@ namespace ProfessionalJournal
             JournalsListView.SelectedItem = null;
         }
 
-        async void AddJournal_Clicked(object sender, EventArgs e)
+        async void OnAddJournalButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewJournalPage());
+        }
+
+        async void OnLogoutButtonClicked(object sender, EventArgs e)
+        {
+            App.CredentialsService.DeleteCredentials();
+            Navigation.InsertPageBefore(new LoginPage(), this);
+            await Navigation.PopAsync();
         }
 
         protected override void OnAppearing()

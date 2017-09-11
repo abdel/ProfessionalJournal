@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace ProfessionalJournal
 {
@@ -23,7 +24,15 @@ namespace ProfessionalJournal
             {
                 var _journal = journal as Journal;
                 Journals.Add(_journal);
-                await JournalDataStore.AddAsync(_journal);
+
+                try
+                {
+					await JournalDataStore.AddAsync(_journal);
+                }
+				catch (Exception e)
+				{
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+				}
             });
         }
 

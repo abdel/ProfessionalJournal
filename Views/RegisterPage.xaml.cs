@@ -32,8 +32,8 @@ namespace ProfessionalJournal
         {
             try
             {
-                // Send request to POST /api/register endpoint
-                var result = await client.InvokeApiAsync<Author, ResponseSuccess>("register", author);
+                // Send request to POST /api/author/register endpoint
+                var result = await client.InvokeApiAsync<Author, Response>("register", author);
 
                 await DisplayAlert("Success", "You have been registered as an author.", "OK");
             }
@@ -80,7 +80,7 @@ namespace ProfessionalJournal
                
                 // Go back to login page on success
                 if (this.errored != true) {
-                    await Navigation.PopAsync();
+                    await Navigation.PopToRootAsync();
                 }
             }
         }
