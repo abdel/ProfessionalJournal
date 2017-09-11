@@ -3,20 +3,21 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.WindowsAzure.MobileServices;
 
+using Xamarin.Auth;
 using Xamarin.Forms;
 using Acr.UserDialogs;
 
 namespace ProfessionalJournal
 {
-    public partial class MainPage : ContentPage
+    public partial class LoginPage : ContentPage
     {
 		Boolean errored;
 		MobileServiceClient client;
 
         /// <summary>
-        /// Constructor for MainPage class that sets up the MobileServiceClient
+        /// Constructor for LoginPage class that sets up the MobileServiceClient
         /// </summary>
-        public MainPage()
+        public LoginPage()
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
@@ -33,8 +34,14 @@ namespace ProfessionalJournal
 		{
 			try
 			{
-				// Send request to POST /api/login endpoint
-				var result = await client.InvokeApiAsync<Author, ResponseSuccess>("login", author);
+				// Send request to POST /api/author/login endpoint
+                var result = await client.InvokeApiAsync<Author, Response>("login", author);
+
+				bool doCredentialsExist = App.CredentialsService.DoCredentialsExist();
+				if (!doCredentialsExist)
+				{
+					App.CredentialsService.SaveCredentials(author.Username, result.Token);
+				}
 			}
 			catch (Exception e)
 			{
@@ -67,16 +74,18 @@ namespace ProfessionalJournal
 			// Hide loading indicator
 			UserDialogs.Instance.HideLoading();
 
-			// Clear the login form
-			authorUsername.Text = string.Empty;
-			authorPassword.Text = string.Empty;
-			authorUsername.Unfocus();
-			authorPassword.Unfocus();
-
 			// Redirect to journals page
 			if (!this.errored)
 			{
-				await Navigation.PushAsync(new JournalsPage());
+				// Clear the login form
+				authorUsername.Text = string.Empty;
+				authorPassword.Text = string.Empty;
+				authorUsername.Unfocus();
+				authorPassword.Unfocus();
+
+				//await Navigation.PushAsync(new JournalsPage());
+				Navigation.InsertPageBefore(new JournalsPage(), this);
+				await Navigation.PopAsync();
 			}
 		}
 
