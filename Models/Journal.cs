@@ -14,5 +14,11 @@ namespace ProfessionalJournal
 
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        [JsonProperty("createdAt")]
+        public string CreatedAt { get; set; }
+
+        [JsonProperty("updatedAt")]
+        public string UpdatedAt { get; set; }
     }
 }

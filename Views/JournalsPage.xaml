@@ -29,6 +29,14 @@
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemDetailTextStyle}" 
                                        FontSize="13" />
+                                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+                                    
+                                    <Label Text="{Binding CreatedAt, StringFormat='Created: {0:N}'}}" 
+                                           FontSize="10" />
+                                    <Label Text="{Binding UpdatedAt, StringFormat='Modified: {0:N}'}}}"
+                                           Margin="5,0,0,0"
+                                           FontSize="10" />
+                                </StackLayout>
 							</StackLayout>
 						</ViewCell>
 					</DataTemplate>
