@@ -6,6 +6,7 @@
              x:Name="BrowseJournalsPage">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Add" Clicked="OnAddJournalButtonClicked" />
+        <ToolbarItem Text="Logout" Order="Secondary" Clicked="OnLogoutButtonClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<StackLayout>
