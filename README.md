@@ -22,15 +22,20 @@ An immutable journal for professionals.
 ## Resolving Conflicts
 Merge conflicts occur when your branch diverts too much from the master branch. These can be resolved either automatically from the pull request in GitHub, or if it cannot resolve it for you, then you need to resolve it locally using the following commands:
 
+- Switch to the master branch and get the latest changes
 ```
 git checkout master
 git pull origin master
-
+```
+- Go back to your branch, and merge the master branch into your branch to get your branch up to date
+```
 git checkout BRANCH_NAME
 git merge origin master
+```
 
+- Commit the changes and push the new updates to your branch
+```
 git commit
-
 git push origin BRANCH_NAME
 ```
 
