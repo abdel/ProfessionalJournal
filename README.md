@@ -2,8 +2,8 @@
 An immutable journal for professionals.
 
 # Requirements
-- Visual Studio / Xamarin
-- Git (follow the instructions: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Visual Studio / Xamarin](https://www.xamarin.com/visual-studio)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 # Basic Setup
 - Clone the repository: `git clone https://github.com/abdel/ProfessionalJournal.git`
