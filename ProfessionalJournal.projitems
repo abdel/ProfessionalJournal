@@ -50,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\EntryDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ICredentialsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CredentialsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\EntryVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml" />
