@@ -181,6 +181,7 @@
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="JournalsPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
