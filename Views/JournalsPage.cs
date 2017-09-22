@@ -43,6 +43,18 @@ namespace ProfessionalJournal
             await Navigation.PopAsync();
         }
 
+		public void OnHide(object sender, EventArgs e)
+		{
+			var mi = ((MenuItem)sender);
+			DisplayAlert("Hide Context Action", mi.CommandParameter + " hide context action", "OK");
+		}
+
+		public void OnDelete(object sender, EventArgs e)
+		{
+			var mi = ((MenuItem)sender);
+			DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
+		}
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
