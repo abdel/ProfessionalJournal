@@ -15,7 +15,7 @@ namespace ProfessionalJournal
 		[JsonProperty("version_track_id")]
 		public string VersionTrackId { get; set; }
 
-        [JsonProperty("text_Entry")]
+        [JsonProperty("text_entry")]
         public string TextEntry { get; set; }
         
         [JsonProperty("attachment")]

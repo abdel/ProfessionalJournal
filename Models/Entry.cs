@@ -23,5 +23,8 @@ namespace ProfessionalJournal
 
         [JsonProperty("hidden")]
         public Boolean Hidden { get; set; }
+
+        [JsonProperty("entry_version")]
+        public EntryVersion EntryVersion { get; set; }
     }
 }

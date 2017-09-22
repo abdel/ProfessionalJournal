@@ -10,5 +10,7 @@ namespace ProfessionalJournal
         public string Token { get; set; }
 
         public IEnumerable<Journal> journals { get; set; }
+
+        public IEnumerable<Entry> entries { get; set; }
     }
 }

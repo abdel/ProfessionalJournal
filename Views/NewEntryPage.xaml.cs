@@ -3,22 +3,28 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class NewJournalPage : ContentPage
+    public partial class NewEntryPage : ContentPage
     {
-        public NewJournalPage()
+        public NewEntryPage()
         {
             InitializeComponent();
         }
 
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            var journal = new Journal
+            var entry = new Entry
             {
-                Title = newJournalTitle.Text,
-                Description = newJournalDescription.Text
+                Title = newEntryTitle.Text
             };
 
-            MessagingCenter.Send(this, "AddJournal", journal);
+            var entryVersion = new EntryVersion
+            {
+                TextEntry = newEntryText.Text
+            };
+
+            entry.EntryVersion = entryVersion;
+
+            MessagingCenter.Send(this, "AddEntry", entry);
             await Navigation.PopAsync();
         }
     }

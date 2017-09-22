@@ -4,6 +4,9 @@
              x:Class="ProfessionalJournal.JournalEntriesPage"
              Title="{Binding Title}"
              x:Name="BrowseJournalEntriesPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Priority="0" Clicked="OnAddEntryButtonClicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="JournalEntriesListView" 

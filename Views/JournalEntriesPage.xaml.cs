@@ -29,6 +29,11 @@ namespace ProfessionalJournal
             BindingContext = this.viewModel = viewModel;
         }
 
+		async void OnAddEntryButtonClicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new NewEntryPage());
+		}
+
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();

@@ -25,7 +25,22 @@ namespace ProfessionalJournal
 
             Entries = new ObservableCollection<Entry>();
             LoadEntriesCommand = new Command(async () => await ExecuteLoadEntriesCommand());
-            EntryDataStore = DependencyService.Get<IDataStore<Entry>>() ?? new EntryDataStore(journal?.Id);
+            EntryDataStore = new EntryDataStore(journal?.Id);
+
+            MessagingCenter.Subscribe<NewEntryPage, Entry>(this, "AddEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
+                Entries.Add(_entry);
+
+                try
+                {
+                    await EntryDataStore.AddAsync(_entry);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
         }
 
         async Task ExecuteLoadEntriesCommand()

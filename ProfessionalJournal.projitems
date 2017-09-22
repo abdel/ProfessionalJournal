@@ -51,6 +51,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ICredentialsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CredentialsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\EntryVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\NewEntryPage.xaml.cs">
+      <DependentUpon>NewEntryPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml" />
@@ -65,5 +68,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewEntryPage.xaml" />
   </ItemGroup>
 </Project>
