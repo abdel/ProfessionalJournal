@@ -11,22 +11,32 @@ namespace ProfessionalJournal
 {
     public class EntryDataStore : IDataStore<Entry>
     {
+        string journalId;
         HttpClient client;
         IEnumerable<Entry> entries;
 
-        public EntryDataStore()
+		public EntryDataStore()
+		{
+			client = new HttpClient();
+			client.BaseAddress = new Uri($"{Constants.BackendURL}/");
+
+			entries = new List<Entry>();
+		}
+
+        public EntryDataStore(string currentJournalId)
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{Constants.BackendURL}/");
 
             entries = new List<Entry>();
+            journalId = currentJournalId;
         }
 
         public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/entry");
+                var json = await client.GetStringAsync($"api/entry?journal_id={journalId}");
                 entries = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Entry>>(json));
             }
 

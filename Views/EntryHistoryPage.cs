@@ -16,7 +16,7 @@ namespace ProfessionalJournal
 
             NavigationPage.SetHasBackButton(this, false);
 
-            BindingContext = viewModel = new EntryHistoryViewModel();
+            BindingContext = viewModel = new EntryHistoryViewModel("1");
         }
 
         async void OnEntrySelected(object sender, SelectedItemChangedEventArgs args)
