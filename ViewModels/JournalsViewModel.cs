@@ -59,6 +59,12 @@ namespace ProfessionalJournal
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+
+                // Logout user if session expired
+                if (ex.Message == "Unauthorized")
+                {
+					MessagingCenter.Send(this, "AuthorLogout");   
+                }
             }
             finally
             {
