@@ -6,7 +6,7 @@
              x:Name="EntryDetailPage">
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="15">
-            <Label Text="{Binding Entry.Title}" FontSize="Medium" />
+            <Label Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="Medium" />
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

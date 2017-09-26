@@ -60,7 +60,7 @@ namespace ProfessionalJournal
                 Debug.WriteLine(ex);
 
                 // Logout user if session expired
-                if (ex.Message.Contains("Unauthorized"))
+                if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))
                 {
                     MessagingCenter.Send(this, "AuthorLogout");   
                 }

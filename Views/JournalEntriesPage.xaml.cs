@@ -31,6 +31,18 @@ namespace ProfessionalJournal
             BindingContext = this.viewModel = viewModel;
         }
 
+		async void OnEntrySelected(object sender, SelectedItemChangedEventArgs args)
+		{
+			var entry = args.SelectedItem as Entry;
+			if (entry == null)
+				return;
+
+            await Navigation.PushAsync(new EntryDetailPage(new EntryDetailViewModel(entry)));
+
+			// Manually deselect entry
+			JournalEntriesListView.SelectedItem = null;
+		}
+
 		async void OnAddEntryButtonClicked(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new NewEntryPage());
