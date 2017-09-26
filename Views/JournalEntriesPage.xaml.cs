@@ -18,6 +18,7 @@ namespace ProfessionalJournal
                 Description = "This is a journal description."
             };
 
+            NavigationPage.SetBackButtonTitle(this, "");
             viewModel = new JournalEntriesViewModel(journal);
             BindingContext = viewModel;
         }
@@ -26,6 +27,7 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
+            NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = this.viewModel = viewModel;
         }
 
