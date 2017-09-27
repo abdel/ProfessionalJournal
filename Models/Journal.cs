@@ -9,6 +9,9 @@ namespace ProfessionalJournal
         [JsonProperty("id")]
         public string Id { get; set; }
 
+		[JsonProperty("author_id")]
+		public string AuthorId { get; set; }
+
         [JsonProperty("title")]
         public string Title { get; set; }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ProfessionalJournal.NewEntryPage" 
+             Title="New Entry">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<StackLayout Spacing="20" Padding="15">
+			<Label Text="Title" FontSize="Medium" />
+			<Entry x:Name="newEntryTitle" Placeholder="The title of your entry" FontSize="Small" />
+			<Label Text="Description" FontSize="Medium" />
+			<Entry x:Name="newEntryText" Placeholder="Description of your entry" FontSize="Small" Margin="0" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

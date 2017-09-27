@@ -39,7 +39,7 @@ namespace ProfessionalJournal
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
-                return await client.InvokeApiAsync<Journal>("journal/{id}", HttpMethod.Get, null);
+                return await client.InvokeApiAsync<Journal>($"journal/{id}", HttpMethod.Get, null);
             }
 
             return null;
@@ -60,7 +60,7 @@ namespace ProfessionalJournal
             if (journal == null || journal.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.InvokeApiAsync<Journal, Response>("journal/{journal.Id}", journal, HttpMethod.Put, null);
+            var response = await client.InvokeApiAsync<Journal, Response>($"journal/{journal.Id}", journal, HttpMethod.Put, null);
 
             return (response.StatusCode == 200);
         }
@@ -70,7 +70,7 @@ namespace ProfessionalJournal
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.InvokeApiAsync<Response>("journal/{id}", HttpMethod.Delete, null);
+            var response = await client.InvokeApiAsync<Response>($"journal/{id}", HttpMethod.Delete, null);
 
             return (response.StatusCode == 200);
         }

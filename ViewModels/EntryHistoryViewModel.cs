@@ -9,14 +9,16 @@ namespace ProfessionalJournal
 {
     public class EntryHistoryViewModel : BaseViewModel
     {
-        public IDataStore<Entry> EntryDataStore => DependencyService.Get<IDataStore<Entry>>() ?? new EntryDataStore();
+        public IDataStore<Entry> EntryDataStore;
         public ObservableCollection<Entry> Entries { get; set; }
         public Command LoadEntryHistoryCommand { get; set; }
 
-        public EntryHistoryViewModel()
+        public EntryHistoryViewModel(string journalId)
         {
             Title = "Entry History";
             Entries = new ObservableCollection<Entry>();
+            EntryDataStore = DependencyService.Get<IDataStore<Entry>>() ?? new EntryDataStore(journalId);
+
             LoadEntryHistoryCommand = new Command(async () => await ExecuteLoadEntryHistoryCommand());
         }
 

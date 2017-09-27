@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Acr.UserDialogs;
 
 namespace ProfessionalJournal
 {
@@ -59,6 +58,12 @@ namespace ProfessionalJournal
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+
+                // Logout user if session expired
+                if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))
+                {
+                    MessagingCenter.Send(this, "AuthorLogout");   
+                }
             }
             finally
             {

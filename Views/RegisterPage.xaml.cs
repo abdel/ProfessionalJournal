@@ -30,6 +30,9 @@ namespace ProfessionalJournal
         /// <param name="author">An Author model object</param>
         async Task RegisterAuthor(Author author)
         {
+            // Reset error
+            this.errored = false;
+
             try
             {
                 // Send request to POST /api/author/register endpoint

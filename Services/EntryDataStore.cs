@@ -1,33 +1,46 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using Plugin.Connectivity;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace ProfessionalJournal
 {
     public class EntryDataStore : IDataStore<Entry>
     {
-        HttpClient client;
+        string journalId;
         IEnumerable<Entry> entries;
+        readonly MobileServiceClient client;
 
-        public EntryDataStore()
+		public EntryDataStore()
+		{
+			client = new MobileServiceClient(Constants.BackendURL);
+            client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+            client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
+
+			entries = new List<Entry>();
+		}
+
+        public EntryDataStore(string currentJournalId)
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri($"{Constants.BackendURL}/");
+            client = new MobileServiceClient(Constants.BackendURL);
+            client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+            client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
 
             entries = new List<Entry>();
+            journalId = currentJournalId;
         }
 
         public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/entry");
-                entries = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Entry>>(json));
+                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}", HttpMethod.Get, null);
+                entries = json.entries;
             }
 
             return entries;
@@ -37,8 +50,7 @@ namespace ProfessionalJournal
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.GetStringAsync($"api/entry/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Entry>(json));
+                return await client.InvokeApiAsync<Entry>($"entry/{id}", HttpMethod.Get, null);;
             }
 
             return null;
@@ -49,11 +61,10 @@ namespace ProfessionalJournal
             if (entry == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedEntry = JsonConvert.SerializeObject(entry);
+            entry.JournalId = journalId;
+            var response = await client.InvokeApiAsync<Entry, Response>("entry", entry);
 
-            var response = await client.PostAsync($"api/entry", new StringContent(serializedEntry, Encoding.UTF8, "application/json"));
-
-            return response.IsSuccessStatusCode;
+            return (response.StatusCode == 200);
         }
 
         public async Task<bool> UpdateAsync(Entry entry)
@@ -61,13 +72,9 @@ namespace ProfessionalJournal
             if (entry == null || entry.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedEntry = JsonConvert.SerializeObject(entry);
-            var buffer = Encoding.UTF8.GetBytes(serializedEntry);
-            var byteContent = new ByteArrayContent(buffer);
+            var response = await client.InvokeApiAsync<Entry, Response>($"entry/{entry.Id}", entry, HttpMethod.Put, null);
 
-            var response = await client.PutAsync(new Uri($"api/entry/{entry.Id}"), byteContent);
-
-            return response.IsSuccessStatusCode;
+            return (response.StatusCode == 200);
         }
 
         public async Task<bool> DeleteAsync(string id)
@@ -75,9 +82,9 @@ namespace ProfessionalJournal
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.DeleteAsync($"api/entry/{id}");
+            var response = await client.InvokeApiAsync<Response>($"entry/{id}", HttpMethod.Delete, null);
 
-            return response.IsSuccessStatusCode;
+            return (response.StatusCode == 200);
         }
     }
 }
