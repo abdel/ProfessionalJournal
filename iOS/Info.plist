@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Professional Journal</string>
 	<key>CFBundleIdentifier</key>
-	<string>sdp.Professional-Journal</string>
+	<string>sdp.professional-journal</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
