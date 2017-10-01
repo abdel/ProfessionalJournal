@@ -41,6 +41,24 @@ namespace ProfessionalJournal
                     await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                 }
             });
+
+            MessagingCenter.Subscribe<EditEntryPage, Entry>(this, "EditEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
+                var currentEntry = Entries.FirstOrDefault(i => i.Title == _entry.Title);
+
+                _entry.EntryVersion.EntryId = currentEntry.Id;
+                _entry.EntryVersion.VersionTrackId = currentEntry.EntryVersion.VersionTrackId + 1;
+
+                try
+                {
+                    await EntryDataStore.UpdateAsync(_entry);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
         }
 
         async Task ExecuteLoadEntriesCommand()

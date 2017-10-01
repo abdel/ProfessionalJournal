@@ -13,7 +13,7 @@ namespace ProfessionalJournal
 		public string EntryId { get; set; }
 
 		[JsonProperty("version_track_id")]
-		public string VersionTrackId { get; set; }
+		public int VersionTrackId { get; set; }
 
         [JsonProperty("text_entry")]
         public string TextEntry { get; set; }

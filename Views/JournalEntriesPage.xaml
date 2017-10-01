@@ -25,7 +25,7 @@
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="16" />
-                                <Label Text="{Binding Location}" 
+                                <Label Text="{Binding EntryVersion.VersionTrackId}" 
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemDetailTextStyle}" 
                                        FontSize="13" />

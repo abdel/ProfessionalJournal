@@ -50,7 +50,7 @@ namespace ProfessionalJournal
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
-                return await client.InvokeApiAsync<Entry>($"entry/{id}", HttpMethod.Get, null);;
+                return await client.InvokeApiAsync<Entry>($"entry?entry_id={id}", HttpMethod.Get, null);;
             }
 
             return null;
@@ -69,10 +69,11 @@ namespace ProfessionalJournal
 
         public async Task<bool> UpdateAsync(Entry entry)
         {
+            Console.WriteLine(entry.Id);
             if (entry == null || entry.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.InvokeApiAsync<Entry, Response>($"entry/{entry.Id}", entry, HttpMethod.Put, null);
+            var response = await client.InvokeApiAsync<Entry, Response>($"entry?entry_id={entry.Id}", entry, HttpMethod.Put, null);
 
             return (response.StatusCode == 200);
         }
@@ -82,7 +83,7 @@ namespace ProfessionalJournal
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var response = await client.InvokeApiAsync<Response>($"entry/{id}", HttpMethod.Delete, null);
+            var response = await client.InvokeApiAsync<Response>($"entry?entry_id={id}", HttpMethod.Delete, null);
 
             return (response.StatusCode == 200);
         }

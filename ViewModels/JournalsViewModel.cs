@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 

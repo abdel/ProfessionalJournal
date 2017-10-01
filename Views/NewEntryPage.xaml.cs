@@ -19,6 +19,7 @@ namespace ProfessionalJournal
 
             var entryVersion = new EntryVersion
             {
+                VersionTrackId = 1,
                 TextEntry = newEntryText.Text
             };
 

@@ -4,6 +4,9 @@
              x:Class="ProfessionalJournal.EntryDetailPage"
              Title="{Binding Title}"
              x:Name="EntryDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" Priority="0" Clicked="OnEditEntryButtonClicked" />
+    </ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="15">
             <Label Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="Medium" />
