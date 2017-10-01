@@ -4,38 +4,25 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public class AppPage : TabbedPage
+    public class EntryPage : TabbedPage
     {
-        public AppPage()
+        public EntryPage(Entry entry)
         {
             Page entryDetailPage, entryHistoryPage = null;
 
-            switch (Device.RuntimePlatform)
+            entryDetailPage = new EntryDetailPage(new EntryDetailViewModel(entry))
             {
-                case Device.iOS:
-                    entryDetailPage = new NavigationPage(new EntryDetailPage())
-                    {
-                        Title = "Entry Details"
-                    };
+                Title = "Entry Details"
+            };
 
-                    entryHistoryPage = new NavigationPage(new EntryHistoryPage())
-                    {
-                        Title = "History"
-                    };
-                    entryDetailPage.Icon = "tab_feed.png";
-                    entryHistoryPage.Icon = "tab_about.png";
-                    break;
-                default:
-                    entryDetailPage = new EntryDetailPage()
-                    {
-                        Title = "Journals"
-                    };
+            entryHistoryPage = new EntryHistoryPage(new EntryHistoryViewModel(entry.JournalId))
+            {
+                Title = "History"
+            };
 
-                    entryHistoryPage = new EntryHistoryPage()
-                    {
-                        Title = "About"
-                    };
-                    break;
+            if (Device.RuntimePlatform == Device.iOS) {
+                entryHistoryPage.Icon = "tab_feed.png";
+                entryDetailPage.Icon = "tab_about.png";
             }
 
             Children.Add(entryDetailPage);
