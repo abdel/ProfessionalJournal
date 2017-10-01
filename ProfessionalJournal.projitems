@@ -54,6 +54,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\NewEntryPage.xaml.cs">
       <DependentUpon>NewEntryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EditEntryPage.xaml.cs">
+      <DependentUpon>EditEntryPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml" />
@@ -69,5 +72,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewEntryPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\EditEntryPage.xaml" />
   </ItemGroup>
 </Project>

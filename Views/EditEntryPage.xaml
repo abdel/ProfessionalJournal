@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="ProfessionalJournal.EditEntryPage" 
+             Title="{Binding Title}">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<StackLayout Spacing="20" Padding="15">
+            <Label Text="Reason for modifying" FontSize="Medium" />
+            <Entry x:Name="modifyReason" FontSize="Small" />
+            
+			<Label Text="Text Entry" FontSize="Medium" />
+			<Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="Small" HeightRequest="200" Margin="0" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
