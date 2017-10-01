@@ -54,9 +54,7 @@ namespace ProfessionalJournal
         /// </summary>
         public async void OnRegister(object sender, EventArgs e)
         {
-            if (newAuthorPassword.Text != newAuthorConfirmPassword.Text) {
-                await DisplayAlert("Error", "Your passwords don't match!", "Try again");
-            } else {
+            if (newAuthorUsername.Text != null && newAuthorPassword.Text == newAuthorConfirmPassword.Text) {
                 // Show loading indicator
                 UserDialogs.Instance.ShowLoading("Loading", MaskType.Black);
 
@@ -84,6 +82,12 @@ namespace ProfessionalJournal
                 // Go back to login page on success
                 if (this.errored != true) {
                     await Navigation.PopToRootAsync();
+                }
+            } else {
+                if (newAuthorUsername.Text == null) {
+                    await DisplayAlert("Error", "Your username can't be empty!", "Try again");
+                } else if (newAuthorPassword.Text != newAuthorConfirmPassword.Text) {
+                    await DisplayAlert("Error", "Your passwords don't match!", "Try again");
                 }
             }
         }

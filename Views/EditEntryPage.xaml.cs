@@ -33,15 +33,30 @@ namespace ProfessionalJournal
 
             var entryVersion = new EntryVersion
             {
+                EntryId = entry.Id,
                 TextEntry = entryText.Text,
-                ModifyReason = modifyReason.Text
+                ModifyReason = modifyReason.Text,
+                VersionTrackId = entry.EntryVersion.VersionTrackId + 1
             };
 
             entry.EntryVersion = entryVersion;
 
-            MessagingCenter.Send(this, "EditEntry", entry);
-
-            await Navigation.PopAsync();
+			if (entryVersion.ModifyReason != null && entryVersion.TextEntry != null)
+			{
+				MessagingCenter.Send(this, "EditEntry", entry);
+				await Navigation.PopAsync();
+			}
+			else
+			{
+				if (entryVersion.ModifyReason == null)
+				{
+					await DisplayAlert("Error", "The modification reason can't be empty!", "Try again");
+				}
+				else if (entryVersion.TextEntry == null)
+				{
+					await DisplayAlert("Error", "The entry text can't be empty!", "Try again");
+				}
+			}
         }
     }
 }

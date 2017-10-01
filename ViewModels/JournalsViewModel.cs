@@ -28,6 +28,7 @@ namespace ProfessionalJournal
                 try
                 {
 					await JournalDataStore.AddAsync(_journal);
+                    LoadJournalsCommand.Execute(null);
                 }
 				catch (Exception e)
 				{

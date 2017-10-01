@@ -86,9 +86,7 @@ namespace ProfessionalJournal
 				authorUsername.Unfocus();
 				authorPassword.Unfocus();
 
-				//await Navigation.PushAsync(new JournalsPage());
-				Navigation.InsertPageBefore(new JournalsPage(), this);
-				await Navigation.PopAsync();
+				await Navigation.PushAsync(new JournalsPage());
 			}
 		}
 
