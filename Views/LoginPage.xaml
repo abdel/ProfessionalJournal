@@ -36,7 +36,7 @@
             <Button x:Name="loginButton" Text="Login" Clicked="OnLogin" 
                 BorderColor="Black" BorderWidth="1" TextColor="White" BorderRadius="5"
                 BackgroundColor="Transparent" Opacity="0.7"
-                Font="GillSans-Light" FontAttributes="Bold" FontSize="30"/>
+                Font="GillSans-Light" FontAttributes="Bold" FontSize="30" />
        </StackLayout>
             
     </ContentPage.Content>
