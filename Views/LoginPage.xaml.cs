@@ -32,9 +32,6 @@ namespace ProfessionalJournal
 		/// <param name="author">An Author model object</param>
 		async Task AuthenticateAuthor(Author author)
 		{
-            // Reset error
-            this.errored = false;
-                
 			try
 			{
 				// Send request to POST /api/author/login endpoint
@@ -86,7 +83,9 @@ namespace ProfessionalJournal
 				authorUsername.Unfocus();
 				authorPassword.Unfocus();
 
-				await Navigation.PushAsync(new JournalsPage());
+				//await Navigation.PushAsync(new JournalsPage());
+				Navigation.InsertPageBefore(new JournalsPage(), this);
+				await Navigation.PopAsync();
 			}
 		}
 

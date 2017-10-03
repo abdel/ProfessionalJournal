@@ -15,13 +15,8 @@ namespace ProfessionalJournal
             InitializeComponent();
 
             NavigationPage.SetHasBackButton(this, false);
-
+                         
             BindingContext = viewModel = new JournalsViewModel();
-
-            MessagingCenter.Subscribe<JournalsViewModel>(this, "AuthorLogout", async (obj) =>
-            {
-                await DoLogout();
-            });
         }
 
         async void OnJournalSelected(object sender, SelectedItemChangedEventArgs args)
@@ -43,19 +38,9 @@ namespace ProfessionalJournal
 
         async void OnLogoutButtonClicked(object sender, EventArgs e)
         {
-            await DoLogout();
-        }
-
-        public void OnHide(object sender, EventArgs e)
-        {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("Hide Context Action", mi.CommandParameter + " hide context action", "OK");
-        }
-
-        public void OnDelete(object sender, EventArgs e)
-        {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
+            App.CredentialsService.DeleteCredentials();
+            Navigation.InsertPageBefore(new LoginPage(), this);
+            await Navigation.PopAsync();
         }
 
         protected override void OnAppearing()
@@ -64,11 +49,6 @@ namespace ProfessionalJournal
 
             if (viewModel.Journals.Count == 0)
                 viewModel.LoadJournalsCommand.Execute(null);
-        }
-
-        async Task DoLogout() {
-            App.CredentialsService.DeleteCredentials();
-            await Navigation.PopToRootAsync();
         }
     }
 }
