@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProfessionalJournal.NewJournalPage" Title="New Journal">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="ProfessionalJournal.NewJournalPage" Title="New Journal" BackgroundImage="MainBG.png">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
+		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked"/>
 	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<StackLayout Spacing="20" Padding="15">
-			<Label Text="Title" FontSize="Medium" />
-			<Entry x:Name="newJournalTitle" Placeholder="The title of your journal" FontSize="Small" />
-			<Label Text="Description" FontSize="Medium" />
-			<Entry x:Name="newJournalDescription" Placeholder="Description of your journal" FontSize="Small" Margin="0" />
-		</StackLayout>
-	</ContentPage.Content>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="10, 100, 10, 100"
+                    Android="20, 20, 20, 20"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
+    <ContentPage.Content>
+        <RelativeLayout BackgroundColor="Transparent"
+             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=220}" 
+             HeightRequest="60" 
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+            <Label Text="New Journal" FontSize="70" TextColor="White" FontFamily="GillSans-Light"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=20}" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=5}"/>
+        <StackLayout Spacing="15" VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            Orientation="Vertical" Padding="40,80,0,0" WidthRequest="280">
+            <Label Text="space" FontSize="40" Opacity="0"/>
+            <Label Text="Title" FontSize="Large" TextColor="White" FontFamily="GillSans-Light"/>
+            <Entry x:Name="newJournalTitle" HeightRequest="50" Opacity="0.7" FontSize="Medium" 
+                    PlaceholderColor="Gray" TextColor="White" Placeholder="Title of entry"/>
+            <Label Text="space" FontSize="5" Opacity="0"/>
+            <Label Text="Description" FontSize="Large" TextColor="White" FontFamily="GillSans-Light"/>
+            <Entry x:Name="newJournalDescription" HeightRequest="50" Placeholder="Description of entry"
+                   FontSize="Medium" PlaceholderColor="Gray" Opacity="0.7"/>
+            <Label Text="space" FontSize="20" Opacity="0"/>
+            <Button Text="Save"
+                BorderColor="White" BorderWidth="1" TextColor="White" BorderRadius="5"
+                BackgroundColor="Transparent" Opacity="0.7"
+                Font="GillSans-Light" FontAttributes="Bold" FontSize="30"/>
+        </StackLayout>
+        </RelativeLayout>
+    </ContentPage.Content>
 </ContentPage>

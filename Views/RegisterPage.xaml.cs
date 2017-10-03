@@ -30,6 +30,9 @@ namespace ProfessionalJournal
         /// <param name="author">An Author model object</param>
         async Task RegisterAuthor(Author author)
         {
+            // Reset error
+            this.errored = false;
+
             try
             {
                 // Send request to POST /api/author/register endpoint
@@ -64,7 +67,7 @@ namespace ProfessionalJournal
                     FirstName = newAuthorFirstName.Text,
                     LastName = newAuthorLastName.Text,
                     Email = newAuthorEmail.Text,
-                    DateOfBirth = newAuthorDateOfBirth.Date,
+                    //DateOfBirth = newAuthorDateOfBirth.Date,
                     Username = newAuthorUsername.Text.ToLower(),
                     Password = AppHelper.GeneratePasswordHash(
                         newAuthorPassword.Text
