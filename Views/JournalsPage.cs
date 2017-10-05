@@ -68,7 +68,14 @@ namespace ProfessionalJournal
 
         async Task DoLogout() {
             App.CredentialsService.DeleteCredentials();
-            await Navigation.PopToRootAsync();
+
+			Page page = Application.Current.MainPage.Navigation.NavigationStack[0];
+
+            if (page.ToString() != "ProfessionalJournal.LoginPage") {
+				Navigation.InsertPageBefore(new LoginPage(), this);
+            }
+
+			await Navigation.PopAsync();
         }
     }
 }
