@@ -12,46 +12,44 @@
      </ContentPage.Padding>
     <ContentPage.Content>
         <ScrollView>
-        <RelativeLayout BackgroundColor="Transparent"
-             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=220}" 
-             HeightRequest="60" 
-             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+        <RelativeLayout BackgroundColor="Transparent">
             <Label Text="Register" FontSize="70" TextColor="White" FontFamily="GillSans-Light"
+                HorizontalTextAlignment="Center" 
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=0}" 
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=65}"/>
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
         <StackLayout Spacing="15" VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Orientation="Vertical" Padding="40,100,0,0" WidthRequest="280">
                 <Label Text="First Name:" TextColor="White" FontFamily="GillSans-Light"/>
                 <Entry x:Name="newAuthorFirstName" Placeholder="your first name" 
-                       HeightRequest="50" Opacity="0.7" FontSize="Medium" 
-                       PlaceholderColor="Gray" TextColor="White"/>
+                       HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                       PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Last Name:" TextColor="White" FontFamily="GillSans-Light"/>
                 <Entry x:Name="newAuthorLastName" Placeholder="your last name" 
-                       HeightRequest="50" Opacity="0.7" FontSize="Medium" 
-                       PlaceholderColor="Gray" TextColor="White"/>
+                       HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                       PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Username:" TextColor="White" FontFamily="GillSans-Light"/>
                 <Entry x:Name="newAuthorUsername" Keyboard="Email" Placeholder="your username" 
-                       HeightRequest="50" Opacity="0.7" FontSize="Medium" 
-                       PlaceholderColor="Gray" TextColor="White"/>
+                       HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                       PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Password:" TextColor="White" FontFamily="GillSans-Light"/>
                 <Entry x:Name="newAuthorPassword" Placeholder="your password" IsPassword="true" 
-                       HeightRequest="50" Opacity="0.7" FontSize="Medium" 
-                       PlaceholderColor="Gray" TextColor="White"/>
+                       HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                       PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Confirm Password:" TextColor="White" FontFamily="GillSans-Light"/>
                 <Entry x:Name="newAuthorConfirmPassword" Placeholder="your password again" IsPassword="true" 
-                       HeightRequest="50" Opacity="0.7" FontSize="Medium" 
-                       PlaceholderColor="Gray" TextColor="White"/>
+                       HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                       PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Email Address:" TextColor="White" FontFamily="GillSans-Light"/>
                 <Entry x:Name="newAuthorEmail" Keyboard="Email" Placeholder="your email address"
-                       HeightRequest="50" Opacity="0.7" FontSize="Medium" 
-                       PlaceholderColor="Gray" TextColor="White"/>
+                       HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                       PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Date of Birth:" TextColor="White" FontFamily="GillSans-Light"/>
                     <Label Text="Add Date Picker" TextColor="Red" FontFamily="GillSans-Light"/>
                 <Label Text="space" Opacity="0" FontSize="32"/>
                 <Button x:Name="registerButton" Text="Sign up" 
-                        BorderColor="White" BorderWidth="1" TextColor="White" BorderRadius="5"
-                        BackgroundColor="Transparent" Opacity="0.7"
+                        BorderColor="Gray" BorderWidth="2" TextColor="White" BorderRadius="5"
+                        BackgroundColor="White" Opacity="0.45"
                         Font="GillSans-Light" FontAttributes="Bold" FontSize="30"/>
         </StackLayout>
         </RelativeLayout>

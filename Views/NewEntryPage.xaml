@@ -14,24 +14,22 @@
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
-        <RelativeLayout BackgroundColor="Transparent"
-             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=220}" 
-             HeightRequest="60" 
-             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+        <RelativeLayout BackgroundColor="Transparent">
             <Label Text="New Entry" FontSize="70" TextColor="White" FontFamily="GillSans-Light"
+                HorizontalTextAlignment="Center" 
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=20}" 
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=25}"/>
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
         <StackLayout Spacing="15" VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Orientation="Vertical" Padding="40,80,0,0" WidthRequest="280">
             <Label Text="space" FontSize="40" Opacity="0"/>
             <Label Text="Title" FontSize="Large" TextColor="White" FontFamily="GillSans-Light"/>
-            <Entry x:Name="newEntryTitle" HeightRequest="50" Placeholder="Title of entry" 
-                   FontSize="Medium" PlaceholderColor="Gray" TextColor="White" Opacity="0.7"/>
+            <Entry x:Name="newEntryTitle" HeightRequest="50" Placeholder="title of entry" 
+                   FontSize="Medium" PlaceholderColor="Black" TextColor="Black" Opacity="0.7" FontFamily="GillSans-Light"/>
             <Label Text="space" FontSize="5" Opacity="0"/>
             <Label Text="Description" FontSize="Large" TextColor="White" FontFamily="GillSans-Light"/>
-            <Entry x:Name="newEntryText" HeightRequest="50" Placeholder="Description of entry"
-                   FontSize="Medium" PlaceholderColor="Gray" Opacity="0.7"/>
+            <Entry x:Name="newEntryText" HeightRequest="50" Placeholder="description of entry"
+                   FontSize="Medium" PlaceholderColor="Black" TextColor="Black" Opacity="0.7" FontFamily="GillSans-Light"/>
             <Label Text="space" FontSize="20" Opacity="0"/>
             <Button Text="Save"
                 BorderColor="White" BorderWidth="1" TextColor="White" BorderRadius="5"

@@ -26,16 +26,16 @@
                     HeightRequest="50"
                     FontSize="25" WidthRequest="300" BackgroundColor="White"
                     Opacity="0.3" TextColor="Black" Placeholder="username" 
-                    PlaceholderColor="Black"/>
+                    PlaceholderColor="Black" FontFamily="GillSans-Light"/>
             
             <Entry x:Name="authorPassword" Placeholder="password" 
                    IsPassword="true" HeightRequest="50" PlaceholderColor="Black"
                    FontSize="25" WidthRequest="300" BackgroundColor="White"
-                   Opacity="0.3" TextColor="Black"/>
+                   Opacity="0.3" TextColor="Black" FontFamily="GillSans-Light"/>
             
             <Button x:Name="loginButton" Text="Login" Clicked="OnLogin" 
-                BorderColor="Black" BorderWidth="1" TextColor="White" BorderRadius="5"
-                BackgroundColor="Transparent" Opacity="0.7"
+                BorderColor="Gray" BorderWidth="1" TextColor="White" BorderRadius="5"
+                BackgroundColor="Black" Opacity="0.45"
                 Font="GillSans-Light" FontAttributes="Bold" FontSize="30"/>
        </StackLayout>
             

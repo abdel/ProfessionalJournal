@@ -3,12 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.JournalEntriesPage"
              Title="{Binding Title}"
-             x:Name="BrowseJournalEntriesPage">
+             x:Name="BrowseJournalEntriesPage"
+             BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Priority="0" Clicked="OnAddEntryButtonClicked" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="0,50,0,0"
+                    Android="20, 20, 20, 20"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout>
+        <RelativeLayout BackgroundColor="Transparent">
+            <Label Text="JournalName" FontSize="60" TextColor="White" FontFamily="GillSans-Light"
+                HorizontalTextAlignment="Center" 
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=10}" 
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
+            <StackLayout Spacing="5" VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical" Padding="15,80,0,0" WidthRequest="343">
+                         <SearchBar BackgroundColor="Transparent" Opacity="0.55"
+                                    TextColor="Black" FontFamily="GillSans-Light"
+                                    Placeholder="Search" PlaceholderColor="Black"/>
+            <StackLayout Spacing="10" VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical" Padding="10,0,10,10" WidthRequest="340">
+                         <DatePicker> 
+                         </DatePicker>
             <ListView x:Name="JournalEntriesListView" 
                       ItemsSource="{Binding Entries}" 
                       VerticalOptions="FillAndExpand" HasUnevenRows="true" 
@@ -16,7 +38,8 @@
                       IsPullToRefreshEnabled="true" 
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
                       CachingStrategy="RecycleElement"
-                      ItemSelected="OnEntrySelected">
+                      ItemSelected="OnEntrySelected"
+                      Opacity="0.45" BackgroundColor="Silver">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -34,6 +57,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+           </StackLayout>
         </StackLayout>
+            </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>
