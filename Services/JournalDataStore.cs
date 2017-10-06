@@ -35,6 +35,12 @@ namespace ProfessionalJournal
             return journals;
         }
 
+		public async Task<IEnumerable<Journal>> GetHistoryAsync(string id, bool forceRefresh = false)
+		{
+            journals = await GetAllAsync(forceRefresh);
+            return journals;
+		}
+
         public async Task<Journal> GetAsync(string id)
         {
             if (id != null && CrossConnectivity.Current.IsConnected)

@@ -17,14 +17,16 @@
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Padding="10">
-								<Label Text="{Binding Title}" 
+								<Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version {0}'}}" 
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="16" />
-								<Label Text="{Binding Description}" 
+								<Label Text="{Binding EntryVersion.ModifyReason}" 
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemDetailTextStyle}" 
                                        FontSize="13" />
+                                <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}" 
+                                       FontSize="10" />
 							</StackLayout>
 						</ViewCell>
 					</DataTemplate>

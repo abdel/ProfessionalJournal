@@ -10,5 +10,6 @@ namespace ProfessionalJournal
         Task<bool> DeleteAsync(string id);
         Task<T> GetAsync(string id);
         Task<IEnumerable<T>> GetAllAsync(bool forceRefresh = false);
+        Task<IEnumerable<T>> GetHistoryAsync(string id, bool forceRefresh = false);
     }
 }

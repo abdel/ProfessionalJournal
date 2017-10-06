@@ -46,6 +46,17 @@ namespace ProfessionalJournal
             return entries;
         }
 
+		public async Task<IEnumerable<Entry>> GetHistoryAsync(string id, bool forceRefresh = false)
+		{
+			if (forceRefresh && CrossConnectivity.Current.IsConnected)
+			{
+				var json = await client.InvokeApiAsync<Response>($"history?entry_id={id}", HttpMethod.Get, null);
+				entries = json.entries;
+			}
+
+			return entries;
+		}
+
         public async Task<Entry> GetAsync(string id)
         {
             if (id != null && CrossConnectivity.Current.IsConnected)

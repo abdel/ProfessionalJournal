@@ -26,6 +26,10 @@ namespace ProfessionalJournal
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
+
+            if (!viewModel.editMode) {
+                ToolbarItems.Clear();
+            }
         }
 
         async void OnEditEntryButtonClicked(object sender, EventArgs e)
