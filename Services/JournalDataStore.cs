@@ -80,5 +80,25 @@ namespace ProfessionalJournal
 
             return (response.StatusCode == 200);
         }
+
+		public async Task<bool> HideAsync(string id)
+		{
+			if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+				return false;
+
+			var response = await client.InvokeApiAsync<Response>($"hide?journal_id={id}");
+
+			return (response.StatusCode == 200);
+		}
+
+		public async Task<bool> UnhideAsync(string id)
+		{
+			if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+				return false;
+
+			var response = await client.InvokeApiAsync<Response>($"unhide?journal_id={id}");
+
+			return (response.StatusCode == 200);
+		}
     }
 }

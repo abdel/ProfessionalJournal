@@ -46,12 +46,6 @@ namespace ProfessionalJournal
             await DoLogout();
         }
 
-        public void OnHide(object sender, EventArgs e)
-        {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("Hide Context Action", mi.CommandParameter + " hide context action", "OK");
-        }
-
         public void OnDelete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);

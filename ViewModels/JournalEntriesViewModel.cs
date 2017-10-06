@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 
@@ -10,13 +10,13 @@ namespace ProfessionalJournal
 {
     public class JournalEntriesViewModel : BaseViewModel
     {
-        public EntryVersion EntryVersion { get; set; }
-        public Journal Journal { get; set; }
         public Entry Entry { get; set; }
+        public Journal Journal { get; set; }
+        public EntryVersion EntryVersion { get; set; }
 
-        public ObservableCollection<Entry> Entries { get; set; }
-        public Command LoadEntriesCommand { get; set; }
         public IDataStore<Entry> EntryDataStore;
+        public Command LoadEntriesCommand { get; set; }
+        public ObservableCollection<Entry> Entries { get; set; }
 
         public JournalEntriesViewModel(Journal journal = null)
         {
@@ -50,6 +50,53 @@ namespace ProfessionalJournal
                 try
                 {
                     await EntryDataStore.UpdateAsync(_entry);
+                    LoadEntriesCommand.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
+
+            MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "HideEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
+
+                try
+                {
+                    Entries.Remove(_entry);
+                    await EntryDataStore.HideAsync(_entry.Id);
+                    LoadEntriesCommand.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
+
+			MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "UnhideEntry", async (obj, entry) =>
+			{
+				var _entry = entry as Entry;
+
+				try
+				{
+					await EntryDataStore.UnhideAsync(_entry.Id);
+					LoadEntriesCommand.Execute(null);
+				}
+				catch (Exception e)
+				{
+					await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+				}
+			});
+
+            MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "DeleteEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
+
+                try
+                {
+                    Entries.Remove(_entry);
+                    await EntryDataStore.DeleteAsync(_entry.Id);
                     LoadEntriesCommand.Execute(null);
                 }
                 catch (Exception e)
