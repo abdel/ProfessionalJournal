@@ -48,10 +48,9 @@
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="16" />
-                                <Label Text="{Binding Location}" 
-                                       LineBreakMode="NoWrap" 
-                                       Style="{DynamicResource ListItemDetailTextStyle}" 
-                                       FontSize="13" />
+                                
+                                <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
+                                           FontSize="13" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

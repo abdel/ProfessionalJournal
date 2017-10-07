@@ -38,6 +38,5 @@
                 BackgroundColor="Black" Opacity="0.45"
                 Font="GillSans-Light" FontAttributes="Bold" FontSize="30"/>
        </StackLayout>
-            
     </ContentPage.Content>
 </ContentPage>
