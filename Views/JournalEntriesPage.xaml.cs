@@ -28,6 +28,7 @@ namespace ProfessionalJournal
 
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = this.viewModel = viewModel;
+            this.viewModel.searchBar = searchBar;
         }
 
         async void OnEntrySelected(object sender, SelectedItemChangedEventArgs args)
@@ -70,6 +71,12 @@ namespace ProfessionalJournal
 
             MessagingCenter.Send(this, "DeleteEntry", entry);
         }
+
+		public void ToggleAllEntries(object sender, ToggledEventArgs e)
+		{
+            viewModel.toggleAll = e.Value;
+			viewModel.LoadEntriesCommand.Execute(null);
+		}
 
         protected override void OnAppearing()
         {

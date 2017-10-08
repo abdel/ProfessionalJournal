@@ -63,9 +63,9 @@ namespace ProfessionalJournal
         async Task DoLogout() {
             App.CredentialsService.DeleteCredentials();
 
-			Page page = Application.Current.MainPage.Navigation.NavigationStack[0];
+            IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
 
-            if (page.ToString() != "ProfessionalJournal.LoginPage") {
+            if (pageStack.Count > 2 && pageStack[0].ToString() != "ProfessionalJournal.LoginPage") {
 				Navigation.InsertPageBefore(new LoginPage(), this);
             }
 

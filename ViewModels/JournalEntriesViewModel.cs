@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
@@ -10,12 +9,16 @@ namespace ProfessionalJournal
 {
     public class JournalEntriesViewModel : BaseViewModel
     {
+        public bool toggleAll;
+        public SearchBar searchBar;
+
         public Entry Entry { get; set; }
         public Journal Journal { get; set; }
         public EntryVersion EntryVersion { get; set; }
 
         public IDataStore<Entry> EntryDataStore;
         public Command LoadEntriesCommand { get; set; }
+        public Command SearchCommand { get; private set; }
         public ObservableCollection<Entry> Entries { get; set; }
 
         public JournalEntriesViewModel(Journal journal = null)
@@ -24,8 +27,9 @@ namespace ProfessionalJournal
             Title = journal?.Title;
 
             Entries = new ObservableCollection<Entry>();
-            LoadEntriesCommand = new Command(async () => await ExecuteLoadEntriesCommand());
             EntryDataStore = new EntryDataStore(journal?.Id);
+            LoadEntriesCommand = new Command(async () => await ExecuteLoadEntriesCommand());
+            SearchCommand = new Command<string>(async (text) => await ExecuteLoadEntriesCommand(text));
 
             MessagingCenter.Subscribe<NewEntryPage, Entry>(this, "AddEntry", async (obj, entry) =>
             {
@@ -106,16 +110,28 @@ namespace ProfessionalJournal
             });
         }
 
-        async Task ExecuteLoadEntriesCommand()
+        public async Task ExecuteLoadEntriesCommand(string text = null)
         {
             if (IsBusy)
                 return;
 
             IsBusy = true;
+			bool hidden = false;
+			bool deleted = false;
+
+            if (text != null)
+            {
+                text = searchBar.Text;
+            }
 
             try
             {
-                var entries = await EntryDataStore.GetAllAsync(true);
+                if (toggleAll) {
+                    hidden = true;
+                    deleted = true;
+                }
+
+                var entries = await EntryDataStore.GetAllAsync(true, text, deleted, hidden);
 
                 if (entries != null && entries.Any())
                 {
@@ -128,7 +144,7 @@ namespace ProfessionalJournal
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Console.WriteLine(ex);
 
                 // Logout user if session expired
                 if (ex.Message == "Unauthorized")
