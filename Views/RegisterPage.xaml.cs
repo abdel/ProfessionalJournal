@@ -61,7 +61,6 @@ namespace ProfessionalJournal
                 // New author object
                 var author = new Author
                 {
-
                     FirstName = newAuthorFirstName.Text,
                     LastName = newAuthorLastName.Text,
                     Email = newAuthorEmail.Text,
