@@ -54,7 +54,14 @@ namespace ProfessionalJournal
         /// </summary>
         public async void OnRegister(object sender, EventArgs e)
         {
-            if (newAuthorUsername.Text != null && newAuthorPassword.Text != null && newAuthorPassword.Text == newAuthorConfirmPassword.Text) {
+            if (newAuthorFirstName.Text != null &&
+				newAuthorLastName.Text != null &&
+				newAuthorEmail.Text != null &&
+                newAuthorDateOfBirth.Date != null &&
+				newAuthorUsername.Text != null && 
+                newAuthorPassword.Text != null && 
+                newAuthorPassword.Text == newAuthorConfirmPassword.Text)
+            {
                 // Show loading indicator
                 UserDialogs.Instance.ShowLoading("Loading", MaskType.Black);
 
@@ -89,7 +96,23 @@ namespace ProfessionalJournal
                 {
                     await DisplayAlert("Error", "Your username can't be empty!", "Try again");
                 }
-                else if (newAuthorUsername.Text == null)
+				else if (newAuthorFirstName.Text == null)
+				{
+					await DisplayAlert("Error", "Your first name can't be empty!", "Try again");
+				}
+				else if (newAuthorLastName.Text == null)
+				{
+					await DisplayAlert("Error", "Your last name can't be empty!", "Try again");
+				}
+				else if (newAuthorEmail.Text == null)
+				{
+					await DisplayAlert("Error", "Your email address can't be empty!", "Try again");
+				}
+                else if (newAuthorDateOfBirth.Date == null)
+				{
+					await DisplayAlert("Error", "Your date of birth can't be empty!", "Try again");
+				}
+                else if (newAuthorPassword.Text == null)
 				{
 					await DisplayAlert("Error", "Your password can't be empty!", "Try again");
                 }
