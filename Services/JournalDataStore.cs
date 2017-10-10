@@ -12,7 +12,7 @@ namespace ProfessionalJournal
 {
     public class JournalDataStore : IDataStore<Journal>
     {
-        readonly MobileServiceClient client;
+        public MobileServiceClient client;
         IEnumerable<Journal> journals;
 
         public JournalDataStore()
@@ -81,24 +81,30 @@ namespace ProfessionalJournal
             return (response.StatusCode == 200);
         }
 
-		public async Task<bool> HideAsync(string id)
-		{
-			if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
-				return false;
+        public async Task<bool> HideAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+                return false;
 
-			var response = await client.InvokeApiAsync<Response>($"hide?journal_id={id}");
+            var response = await client.InvokeApiAsync<Response>($"hide?journal_id={id}");
 
-			return (response.StatusCode == 200);
-		}
+            return (response.StatusCode == 200);
+        }
 
-		public async Task<bool> UnhideAsync(string id)
-		{
-			if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
-				return false;
+        public async Task<bool> UnhideAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+                return false;
 
-			var response = await client.InvokeApiAsync<Response>($"unhide?journal_id={id}");
+            var response = await client.InvokeApiAsync<Response>($"unhide?journal_id={id}");
 
-			return (response.StatusCode == 200);
-		}
+            return (response.StatusCode == 200);
+        }
+
+        public void ResetClient()
+        {
+            client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+            client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
+        }
     }
 }

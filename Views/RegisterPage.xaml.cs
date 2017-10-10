@@ -96,25 +96,25 @@ namespace ProfessionalJournal
                 {
                     await DisplayAlert("Error", "Your username can't be empty!", "Try again");
                 }
-				else if (newAuthorFirstName.Text == null)
-				{
-					await DisplayAlert("Error", "Your first name can't be empty!", "Try again");
-				}
-				else if (newAuthorLastName.Text == null)
-				{
-					await DisplayAlert("Error", "Your last name can't be empty!", "Try again");
-				}
-				else if (newAuthorEmail.Text == null)
-				{
-					await DisplayAlert("Error", "Your email address can't be empty!", "Try again");
-				}
+                else if (newAuthorFirstName.Text == null)
+                {
+                    await DisplayAlert("Error", "Your first name can't be empty!", "Try again");
+                }
+                else if (newAuthorLastName.Text == null)
+                {
+                    await DisplayAlert("Error", "Your last name can't be empty!", "Try again");
+                }
+                else if (newAuthorEmail.Text == null)
+                {
+                    await DisplayAlert("Error", "Your email address can't be empty!", "Try again");
+                }
                 else if (newAuthorDateOfBirth.Date == null)
-				{
-					await DisplayAlert("Error", "Your date of birth can't be empty!", "Try again");
-				}
+                {
+                    await DisplayAlert("Error", "Your date of birth can't be empty!", "Try again");
+                }
                 else if (newAuthorPassword.Text == null)
-				{
-					await DisplayAlert("Error", "Your password can't be empty!", "Try again");
+                {
+                    await DisplayAlert("Error", "Your password can't be empty!", "Try again");
                 }
                 else if (newAuthorPassword.Text != newAuthorConfirmPassword.Text)
                 {

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class JournalsPage : ContentPage
+	public partial class JournalsPage : ContentPage
     {
         JournalsViewModel viewModel;
 
@@ -43,6 +43,7 @@ namespace ProfessionalJournal
 
         async void OnLogoutButtonClicked(object sender, EventArgs e)
         {
+			MessagingCenter.Send(this, "AuthorLogout");
             await DoLogout();
         }
 
@@ -52,24 +53,26 @@ namespace ProfessionalJournal
             DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
         }
 
+        async Task DoLogout()
+        {
+            App.CredentialsService.DeleteCredentials();
+
+            IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
+
+            if (pageStack.Count >= 1 && pageStack[0].ToString() != "ProfessionalJournal.LoginPage")
+            {
+                Navigation.InsertPageBefore(new LoginPage(), this);
+            }
+
+            await Navigation.PopAsync();
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
             if (viewModel.Journals.Count == 0)
                 viewModel.LoadJournalsCommand.Execute(null);
-        }
-
-        async Task DoLogout() {
-            App.CredentialsService.DeleteCredentials();
-
-            IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
-
-            if (pageStack.Count >= 1 && pageStack[0].ToString() != "ProfessionalJournal.LoginPage") {
-				Navigation.InsertPageBefore(new LoginPage(), this);
-            }
-
-			await Navigation.PopAsync();
         }
     }
 }

@@ -118,5 +118,11 @@ namespace ProfessionalJournal
 
 			return (response.StatusCode == 200);
 		}
+
+		public void ResetClient()
+		{
+			client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+			client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
+		}
     }
 }

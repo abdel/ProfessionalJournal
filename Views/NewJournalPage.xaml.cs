@@ -19,21 +19,21 @@ namespace ProfessionalJournal
             };
 
             if (journal.Title != null && journal.Description != null)
-			{
-				MessagingCenter.Send(this, "AddJournal", journal);
-				await Navigation.PopAsync();
-			}
-			else
-			{
-				if (journal.Title == null)
-				{
-					await DisplayAlert("Error", "The journal title can't be empty!", "Try again");
-				}
+            {
+                MessagingCenter.Send(this, "AddJournal", journal);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                if (journal.Title == null)
+                {
+                    await DisplayAlert("Error", "The journal title can't be empty!", "Try again");
+                }
                 else if (journal.Description == null)
-				{
-					await DisplayAlert("Error", "The journal description can't be empty!", "Try again");
-				}
-			}
+                {
+                    await DisplayAlert("Error", "The journal description can't be empty!", "Try again");
+                }
+            }
         }
     }
 }

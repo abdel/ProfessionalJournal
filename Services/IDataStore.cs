@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Microsoft.WindowsAzure.MobileServices;
+
 namespace ProfessionalJournal
 {
     public interface IDataStore<T>
@@ -13,5 +15,6 @@ namespace ProfessionalJournal
         Task<T> GetAsync(string id);
         Task<IEnumerable<T>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false);
         Task<IEnumerable<T>> GetHistoryAsync(string id, bool forceRefresh = false);
+        void ResetClient();
     }
 }

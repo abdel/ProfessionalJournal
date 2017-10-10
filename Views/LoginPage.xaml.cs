@@ -44,6 +44,7 @@ namespace ProfessionalJournal
 				if (!doCredentialsExist)
 				{
 					App.CredentialsService.SaveCredentials(author.Username, result.Token);
+					MessagingCenter.Send(this, "AuthorLogin");
 				}
 			}
 			catch (Exception e)
@@ -71,6 +72,9 @@ namespace ProfessionalJournal
 				)
 			};
 
+			IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
+			Console.WriteLine(pageStack.Count);
+
 			// Authenticate author
 			await AuthenticateAuthor(author);
 
@@ -86,7 +90,7 @@ namespace ProfessionalJournal
 				authorUsername.Unfocus();
 				authorPassword.Unfocus();
 
-				await Navigation.PushAsync(new JournalsPage());
+                await Navigation.PushAsync(new JournalsPage());
 			}
 		}
 

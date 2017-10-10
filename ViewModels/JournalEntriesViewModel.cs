@@ -99,7 +99,6 @@ namespace ProfessionalJournal
 
                 try
                 {
-                    Entries.Remove(_entry);
                     await EntryDataStore.DeleteAsync(_entry.Id);
                     LoadEntriesCommand.Execute(null);
                 }
@@ -116,8 +115,8 @@ namespace ProfessionalJournal
                 return;
 
             IsBusy = true;
-			bool hidden = false;
-			bool deleted = false;
+            bool hidden = false;
+            bool deleted = false;
 
             if (text != null)
             {
@@ -146,11 +145,15 @@ namespace ProfessionalJournal
             {
                 Console.WriteLine(ex);
 
-                // Logout user if session expired
-                if (ex.Message == "Unauthorized")
-                {
-                    MessagingCenter.Send(this, "AuthorLogout");
+                if (ex.Message.Contains("No entries found for this journal.")) {
+                    Entries.Clear();   
                 }
+
+				// Logout user if session expired
+				if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))
+				{
+					MessagingCenter.Send(this, "AuthorLogout");
+				}
             }
             finally
             {
