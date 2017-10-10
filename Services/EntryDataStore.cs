@@ -35,16 +35,27 @@ namespace ProfessionalJournal
             journalId = currentJournalId;
         }
 
-        public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}", HttpMethod.Get, null);
+                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}&text={text}&deleted={deleted}&hidden={hidden}", HttpMethod.Get, null);
                 entries = json.entries;
             }
 
             return entries;
         }
+
+		public async Task<IEnumerable<Entry>> GetHistoryAsync(string id, bool forceRefresh = false)
+		{
+			if (forceRefresh && CrossConnectivity.Current.IsConnected)
+			{
+				var json = await client.InvokeApiAsync<Response>($"history?entry_id={id}", HttpMethod.Get, null);
+				entries = json.entries;
+			}
+
+			return entries;
+		}
 
         public async Task<Entry> GetAsync(string id)
         {
@@ -87,5 +98,31 @@ namespace ProfessionalJournal
 
             return (response.StatusCode == 200);
         }
+
+        public async Task<bool> HideAsync(string id)
+        {
+        	if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+        		return false;
+
+        	var response = await client.InvokeApiAsync<Response>($"hide?entry_id={id}");
+
+        	return (response.StatusCode == 200);
+        }
+
+		public async Task<bool> UnhideAsync(string id)
+		{
+			if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+				return false;
+
+			var response = await client.InvokeApiAsync<Response>($"unhide?entry_id={id}");
+
+			return (response.StatusCode == 200);
+		}
+
+		public void ResetClient()
+		{
+			client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+			client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
+		}
     }
 }

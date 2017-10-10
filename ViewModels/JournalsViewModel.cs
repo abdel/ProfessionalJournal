@@ -10,8 +10,8 @@ namespace ProfessionalJournal
 {
     public class JournalsViewModel : BaseViewModel
     {
-		public IDataStore<Journal> JournalDataStore => DependencyService.Get<IDataStore<Journal>>() ?? new JournalDataStore();
-		public ObservableCollection<Journal> Journals { get; set; }
+        public IDataStore<Journal> JournalDataStore => DependencyService.Get<IDataStore<Journal>>() ?? new JournalDataStore();
+        public ObservableCollection<Journal> Journals { get; set; }
         public Command LoadJournalsCommand { get; set; }
 
         public JournalsViewModel()
@@ -20,20 +20,28 @@ namespace ProfessionalJournal
             Journals = new ObservableCollection<Journal>();
             LoadJournalsCommand = new Command(async () => await ExecuteLoadJournalsCommand());
 
+            MessagingCenter.Subscribe<LoginPage>(this, "AuthorLogin", (obj) =>
+            {
+                JournalDataStore.ResetClient();
+            });
+
+            MessagingCenter.Unsubscribe<string>(this, "AddJournal");
             MessagingCenter.Subscribe<NewJournalPage, Journal>(this, "AddJournal", async (obj, journal) =>
             {
                 var _journal = journal as Journal;
                 Journals.Add(_journal);
 
+                Console.WriteLine("AddJournal: Triggered");
+
                 try
                 {
-					await JournalDataStore.AddAsync(_journal);
+                    await JournalDataStore.AddAsync(_journal);
                     LoadJournalsCommand.Execute(null);
                 }
-				catch (Exception e)
-				{
+                catch (Exception e)
+                {
                     await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-				}
+                }
             });
         }
 

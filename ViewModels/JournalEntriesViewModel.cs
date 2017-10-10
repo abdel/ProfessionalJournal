@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 using Xamarin.Forms;
 
@@ -10,13 +9,17 @@ namespace ProfessionalJournal
 {
     public class JournalEntriesViewModel : BaseViewModel
     {
-        public EntryVersion EntryVersion { get; set; }
-        public Journal Journal { get; set; }
-        public Entry Entry { get; set; }
+        public bool toggleAll;
+        public SearchBar searchBar;
 
-        public ObservableCollection<Entry> Entries { get; set; }
-        public Command LoadEntriesCommand { get; set; }
+        public Entry Entry { get; set; }
+        public Journal Journal { get; set; }
+        public EntryVersion EntryVersion { get; set; }
+
         public IDataStore<Entry> EntryDataStore;
+        public Command LoadEntriesCommand { get; set; }
+        public Command SearchCommand { get; private set; }
+        public ObservableCollection<Entry> Entries { get; set; }
 
         public JournalEntriesViewModel(Journal journal = null)
         {
@@ -24,8 +27,9 @@ namespace ProfessionalJournal
             Title = journal?.Title;
 
             Entries = new ObservableCollection<Entry>();
-            LoadEntriesCommand = new Command(async () => await ExecuteLoadEntriesCommand());
             EntryDataStore = new EntryDataStore(journal?.Id);
+            LoadEntriesCommand = new Command(async () => await ExecuteLoadEntriesCommand());
+            SearchCommand = new Command<string>(async (text) => await ExecuteLoadEntriesCommand(text));
 
             MessagingCenter.Subscribe<NewEntryPage, Entry>(this, "AddEntry", async (obj, entry) =>
             {
@@ -57,18 +61,76 @@ namespace ProfessionalJournal
                     await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                 }
             });
+
+            MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "HideEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
+
+                try
+                {
+                    Entries.Remove(_entry);
+                    await EntryDataStore.HideAsync(_entry.Id);
+                    LoadEntriesCommand.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
+
+			MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "UnhideEntry", async (obj, entry) =>
+			{
+				var _entry = entry as Entry;
+
+				try
+				{
+					await EntryDataStore.UnhideAsync(_entry.Id);
+					LoadEntriesCommand.Execute(null);
+				}
+				catch (Exception e)
+				{
+					await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+				}
+			});
+
+            MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "DeleteEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
+
+                try
+                {
+                    await EntryDataStore.DeleteAsync(_entry.Id);
+                    LoadEntriesCommand.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
         }
 
-        async Task ExecuteLoadEntriesCommand()
+        public async Task ExecuteLoadEntriesCommand(string text = null)
         {
             if (IsBusy)
                 return;
 
             IsBusy = true;
+            bool hidden = false;
+            bool deleted = false;
+
+            if (text != null)
+            {
+                text = searchBar.Text;
+            }
 
             try
             {
-                var entries = await EntryDataStore.GetAllAsync(true);
+                if (toggleAll) {
+                    hidden = true;
+                    deleted = true;
+                }
+
+                var entries = await EntryDataStore.GetAllAsync(true, text, deleted, hidden);
 
                 if (entries != null && entries.Any())
                 {
@@ -81,13 +143,17 @@ namespace ProfessionalJournal
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Console.WriteLine(ex);
 
-                // Logout user if session expired
-                if (ex.Message == "Unauthorized")
-                {
-                    MessagingCenter.Send(this, "AuthorLogout");
+                if (ex.Message.Contains("No entries found for this journal.")) {
+                    Entries.Clear();   
                 }
+
+				// Logout user if session expired
+				if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))
+				{
+					MessagingCenter.Send(this, "AuthorLogout");
+				}
             }
             finally
             {

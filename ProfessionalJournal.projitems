@@ -35,7 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AppHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\EntryPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Response.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\EntryHistoryPage.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\EntryHistoryPage.xaml.cs">
       <DependentUpon>EntryHistoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\EntryDetailPage.xaml.cs">

@@ -6,12 +6,14 @@ namespace ProfessionalJournal
 {
     public class EntryDetailViewModel : BaseViewModel
     {
+        public bool editMode;
         public Entry Entry { get; set; }
 
-        public EntryDetailViewModel(Entry entry = null)
+        public EntryDetailViewModel(Entry entry = null, bool editMode = true)
         {
             Title = entry?.Title;
             Entry = entry;
+            this.editMode = editMode;
 
             MessagingCenter.Subscribe<EditEntryPage, Entry>(this, "EditEntry", (obj, editedEntry) =>
             {

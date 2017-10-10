@@ -15,7 +15,7 @@ namespace ProfessionalJournal
                 Title = "Entry Details"
             };
 
-            entryHistoryPage = new EntryHistoryPage(new EntryHistoryViewModel(entry.JournalId))
+            entryHistoryPage = new EntryHistoryPage(new EntryHistoryViewModel(entry.Id))
             {
                 Title = "History"
             };

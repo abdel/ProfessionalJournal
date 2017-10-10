@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="ProfessionalJournal.RegisterPage" Title="JOP.it" BackgroundImage="MainBG.png">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="ProfessionalJournal.RegisterPage"
+             Title="JOP.it" 
+             BackgroundImage="MainBG.png">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="10, 50, 10, 100"
@@ -42,7 +46,19 @@
                        HeightRequest="50" Opacity="0.65" FontSize="Medium" 
                        PlaceholderColor="Black" TextColor="Black" FontFamily="GillSans-Light"/>
                 <Label Text="Date of Birth:" TextColor="White" FontFamily="GillSans-Light"/>
-                    <Label Text="Add Date Picker" TextColor="Red" FontFamily="GillSans-Light"/>
+                <DatePicker x:Name="newAuthorDateOfBirth"
+                            VerticalOptions="CenterAndExpand" 
+                            Date="{x:Static sys:DateTime.Now}" 
+                            MaximumDate="{x:Static sys:DateTime.Now}">
+                     <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                     <DatePicker.MinimumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                           <x:Arguments>
+                              <x:String>Jan 1 1900</x:String>
+                           </x:Arguments>
+                        </sys:DateTime>
+                     </DatePicker.MinimumDate>
+                </DatePicker>
                 <Label Text="space" Opacity="0" FontSize="32"/>
                 <Button x:Name="registerButton" Text="Sign up" 
                         BorderColor="Gray" BorderWidth="2" TextColor="White" BorderRadius="5"

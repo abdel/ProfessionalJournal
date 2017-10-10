@@ -30,7 +30,7 @@ namespace ProfessionalJournal
             if (entry == null)
                 return;
 
-            await Navigation.PushAsync(new EntryDetailPage(new EntryDetailViewModel(entry)));
+            await Navigation.PushAsync(new EntryDetailPage(new EntryDetailViewModel(entry, false)));
 
             // Manually deselect journal
             EntryHistoryListView.SelectedItem = null;

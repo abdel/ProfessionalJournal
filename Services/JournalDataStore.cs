@@ -12,7 +12,7 @@ namespace ProfessionalJournal
 {
     public class JournalDataStore : IDataStore<Journal>
     {
-        readonly MobileServiceClient client;
+        public MobileServiceClient client;
         IEnumerable<Journal> journals;
 
         public JournalDataStore()
@@ -24,7 +24,7 @@ namespace ProfessionalJournal
             journals = new List<Journal>();
         }
 
-        public async Task<IEnumerable<Journal>> GetAllAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Journal>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
@@ -34,6 +34,12 @@ namespace ProfessionalJournal
 
             return journals;
         }
+
+		public async Task<IEnumerable<Journal>> GetHistoryAsync(string id, bool forceRefresh = false)
+		{
+            journals = await GetAllAsync(forceRefresh);
+            return journals;
+		}
 
         public async Task<Journal> GetAsync(string id)
         {
@@ -73,6 +79,32 @@ namespace ProfessionalJournal
             var response = await client.InvokeApiAsync<Response>($"journal/{id}", HttpMethod.Delete, null);
 
             return (response.StatusCode == 200);
+        }
+
+        public async Task<bool> HideAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+                return false;
+
+            var response = await client.InvokeApiAsync<Response>($"hide?journal_id={id}");
+
+            return (response.StatusCode == 200);
+        }
+
+        public async Task<bool> UnhideAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
+                return false;
+
+            var response = await client.InvokeApiAsync<Response>($"unhide?journal_id={id}");
+
+            return (response.StatusCode == 200);
+        }
+
+        public void ResetClient()
+        {
+            client.CurrentUser = new MobileServiceUser(App.CredentialsService.Username);
+            client.CurrentUser.MobileServiceAuthenticationToken = App.CredentialsService.Token;
         }
     }
 }

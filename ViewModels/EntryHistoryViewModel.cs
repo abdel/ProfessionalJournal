@@ -9,15 +9,17 @@ namespace ProfessionalJournal
 {
     public class EntryHistoryViewModel : BaseViewModel
     {
+        string entryId;
         public IDataStore<Entry> EntryDataStore;
         public ObservableCollection<Entry> Entries { get; set; }
         public Command LoadEntryHistoryCommand { get; set; }
 
-        public EntryHistoryViewModel(string journalId)
+        public EntryHistoryViewModel(string entryId)
         {
+            this.entryId = entryId;
             Title = "Entry History";
             Entries = new ObservableCollection<Entry>();
-            EntryDataStore = DependencyService.Get<IDataStore<Entry>>() ?? new EntryDataStore(journalId);
+            EntryDataStore = DependencyService.Get<IDataStore<Entry>>() ?? new EntryDataStore(entryId);
 
             LoadEntryHistoryCommand = new Command(async () => await ExecuteLoadEntryHistoryCommand());
         }
@@ -32,9 +34,10 @@ namespace ProfessionalJournal
             try
             {
                 Entries.Clear();
-                var entries = await EntryDataStore.GetAllAsync(true);
+                var entries = await EntryDataStore.GetHistoryAsync(entryId, true);
 				foreach (var entry in entries)
 				{
+                    Console.WriteLine(entry);
 					Entries.Add(entry);
 				}
             }

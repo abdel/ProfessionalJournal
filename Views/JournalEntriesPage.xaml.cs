@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Xamarin.Forms;
 
 namespace ProfessionalJournal
@@ -27,34 +26,63 @@ namespace ProfessionalJournal
 		{
 			InitializeComponent();
 
-			NavigationPage.SetBackButtonTitle(this, "");
-			BindingContext = this.viewModel = viewModel;
-		}
+            NavigationPage.SetBackButtonTitle(this, "");
+            BindingContext = this.viewModel = viewModel;
+        }
 
-		async void OnEntrySelected(object sender, SelectedItemChangedEventArgs args)
-		{
-			var entry = args.SelectedItem as Entry;
-			if (entry == null)
-				return;
+        async void OnEntrySelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var entry = args.SelectedItem as Entry;
+            if (entry == null)
+                return;
 
 			await Navigation.PushAsync(new EntryPage(entry));
 
-			// Manually deselect entry
-			JournalEntriesListView.SelectedItem = null;
-		}
+            // Manually deselect entry
+            JournalEntriesListView.SelectedItem = null;
+        }
 
-		async void OnAddEntryButtonClicked(object sender, EventArgs e)
+        async void OnAddEntryButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewEntryPage());
+        }
+
+        public void OnHide(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            var entry = mi.CommandParameter as Entry;
+
+            MessagingCenter.Send(this, "HideEntry", entry);
+        }
+
+        public void OnUnhide(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            var entry = mi.CommandParameter as Entry;
+
+            MessagingCenter.Send(this, "UnhideEntry", entry);
+        }
+
+        public void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            var entry = mi.CommandParameter as Entry;
+
+            MessagingCenter.Send(this, "DeleteEntry", entry);
+        }
+
+		public void ToggleAllEntries(object sender, ToggledEventArgs e)
 		{
-			await Navigation.PushAsync(new NewEntryPage());
+            viewModel.toggleAll = e.Value;
+			viewModel.LoadEntriesCommand.Execute(null);
 		}
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
-			if (viewModel.Entries.Count == 0)
-				viewModel.LoadEntriesCommand.Execute(null);
-		}
-
-	}
+            if (viewModel.Entries.Count == 0)
+                viewModel.LoadEntriesCommand.Execute(null);
+        }
+    }
 }

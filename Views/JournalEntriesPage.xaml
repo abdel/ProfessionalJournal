@@ -11,12 +11,12 @@
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="0,50,0,0"
-                    Android="20, 20, 20, 20"
+                    Android="0, 50, 0, 0"
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
         <RelativeLayout BackgroundColor="Transparent">
-            <Label Text="JournalName" FontSize="60" TextColor="White" FontFamily="GillSans-Light"
+            <Label Text="JournalName" FontSize="60" Scale="0.75" TextColor="White" FontFamily="GillSans-Light"
                 HorizontalTextAlignment="Center" 
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=10}" 
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
