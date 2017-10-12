@@ -40,15 +40,15 @@
                             VerticalOptions="CenterAndExpand" 
                             Date="{x:Static sys:DateTime.Now}" 
                             MaximumDate="{x:Static sys:DateTime.Now}">
-                 <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
-                 <DatePicker.MinimumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                       <x:Arguments>
-                          <x:String>Jan 1 1900</x:String>
-                       </x:Arguments>
-                    </sys:DateTime>
-                 </DatePicker.MinimumDate>
-              </DatePicker>
+                     <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                     <DatePicker.MinimumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                           <x:Arguments>
+                              <x:String>Jan 1 1900</x:String>
+                           </x:Arguments>
+                        </sys:DateTime>
+                     </DatePicker.MinimumDate>
+                 </DatePicker>
                 
                 <Button x:Name="registerButton" Text="Sign Up" Clicked="OnRegister" />
             </StackLayout>
