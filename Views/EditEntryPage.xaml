@@ -2,31 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="ProfessionalJournal.EditEntryPage" 
-             Title="JOP it"
-              BackgroundImage="MainBG.png">
+             Title="{Binding Title}">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
-        <ToolbarItem Text="Back"/>
-        <ToolbarItem Text="History"/>
 	</ContentPage.ToolbarItems>
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness"
-                    iOS="5, 30, 10, 100"
-                    Android="20, 20, 20, 20"
-                    WinPhone="20, 20, 20, 20" />
-     </ContentPage.Padding>
 	<ContentPage.Content>
-		<StackLayout Spacing="5" Padding="10">
-           <Label Text="date" FontSize="20" TextColor="White" FontFamily="GillSans-Light"/>
-           <Label Text="EntryName" FontSize="50" TextColor="White" FontFamily="GillSans-Light"/>
-            <Label Text="Version#" FontSize="25" TextColor="White" FontFamily="GillSans-Light"/>
-            <Label Text="Location" FontSize="20" TextColor="White" FontFamily="GillSans-Light"/>
-            <Entry x:Name="modifyReason" FontSize="15" BackgroundColor="White" 
-                   Placeholder="enter reason for modification" PlaceholderColor="Black"
-                   FontFamily="GillSans-Light" TextColor="White" HeightRequest="50" Opacity="0.3"/>
-            <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" 
-                    HeightRequest="360" FontSize="15" TextColor="White" Opacity="0.3" 
-                    FontFamily="GillSans-Light"/>
-        </StackLayout>
+		<StackLayout Spacing="20" Padding="15">
+            <Label Text="Reason for modifying" FontSize="Medium" />
+            <Entry x:Name="modifyReason" FontSize="Small" />
+            
+			<Label Text="Text Entry" FontSize="Medium" />
+			<Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="Small" HeightRequest="200" Margin="0" />
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

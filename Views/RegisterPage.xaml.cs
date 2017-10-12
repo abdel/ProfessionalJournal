@@ -71,7 +71,7 @@ namespace ProfessionalJournal
                     FirstName = newAuthorFirstName.Text,
                     LastName = newAuthorLastName.Text,
                     Email = newAuthorEmail.Text,
-                    //DateOfBirth = newAuthorDateOfBirth.Date,
+                    DateOfBirth = newAuthorDateOfBirth.Date,
                     Username = newAuthorUsername.Text.ToLower(),
                     Password = AppHelper.GeneratePasswordHash(
                         newAuthorPassword.Text

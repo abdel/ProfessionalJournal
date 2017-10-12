@@ -2,38 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.EntryHistoryPage"
-             x:Name="EntryHistoryPage"
-             BackgroundImage="MainBG.png">
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness"
-                    iOS="0,50,0,10"
-                    Android="20, 20, 20, 20"
-                    WinPhone="20, 20, 20, 20" />
-     </ContentPage.Padding>
+             x:Name="EntryHistoryPage">
 	<ContentPage.Content>
-        <RelativeLayout BackgroundColor="Transparent">
-            <Label Text="History" FontSize="60" TextColor="White" FontFamily="GillSans-Light"
-                HorizontalTextAlignment="Center" 
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=0}" 
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
-            <Label Text="EntryName" FontSize="30" TextColor="White" FontFamily="GillSans-Light"
-                HorizontalTextAlignment="Center" 
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=75}" 
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
-            <StackLayout Spacing="15" VerticalOptions="CenterAndExpand"
-            HorizontalOptions="CenterAndExpand"
-            Orientation="Vertical" Padding="35,120,0,0" WidthRequest="303">
+		<StackLayout>
 			<ListView x:Name="EntryHistoryListView" 
                       ItemsSource="{Binding Entries}" 
-                      VerticalOptions="End" 
-                      HorizontalOptions="CenterAndExpand"
-                      HasUnevenRows="true" 
+                      VerticalOptions="FillAndExpand" HasUnevenRows="true" 
                       RefreshCommand="{Binding LoadEntryHistoryCommand}" 
                       IsPullToRefreshEnabled="true" 
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
                       CachingStrategy="RecycleElement"
-                      ItemSelected="OnEntrySelected"
-                      Opacity="0.45" BackgroundColor="Silver">
+                      ItemSelected="OnEntrySelected">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
@@ -53,7 +32,6 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
-                </StackLayout>
-            </RelativeLayout>
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
