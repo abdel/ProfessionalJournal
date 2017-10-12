@@ -3,11 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.JournalsPage"
              Title="{Binding Title}"
-             x:Name="BrowseJournalsPage">
+             x:Name="BrowseJournalsPage"
+             BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Priority="0" Clicked="OnAddJournalButtonClicked" />
         <ToolbarItem Text="Logout" Priority="1" Clicked="OnLogoutButtonClicked" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="0,50,0,10"
+                    Android="20, 20, 20, 20"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="JournalsListView" 

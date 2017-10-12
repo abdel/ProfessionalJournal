@@ -3,32 +3,31 @@ using Xamarin.Forms;
 
 namespace ProfessionalJournal
 {
-    public partial class JournalEntriesPage : ContentPage
-    {
-        JournalEntriesViewModel viewModel;
+	public partial class JournalEntriesPage : ContentPage
+	{
+		JournalEntriesViewModel viewModel;
 
-        public JournalEntriesPage()
-        {
-            InitializeComponent();
+		public JournalEntriesPage()
+		{
+			InitializeComponent();
 
-            var journal = new Journal
-            {
-                Title = "Journal 1",
-                Description = "This is a journal description."
-            };
+			var journal = new Journal
+			{
+				Title = "Journal 1",
+				Description = "This is a journal description."
+			};
 
-            NavigationPage.SetBackButtonTitle(this, "");
-            viewModel = new JournalEntriesViewModel(journal);
-            BindingContext = viewModel;
-        }
+			NavigationPage.SetBackButtonTitle(this, "");
+			viewModel = new JournalEntriesViewModel(journal);
+			BindingContext = viewModel;
+		}
 
-        public JournalEntriesPage(JournalEntriesViewModel viewModel)
-        {
-            InitializeComponent();
+		public JournalEntriesPage(JournalEntriesViewModel viewModel)
+		{
+			InitializeComponent();
 
             NavigationPage.SetBackButtonTitle(this, "");
             BindingContext = this.viewModel = viewModel;
-            this.viewModel.searchBar = searchBar;
         }
 
         async void OnEntrySelected(object sender, SelectedItemChangedEventArgs args)
@@ -37,7 +36,7 @@ namespace ProfessionalJournal
             if (entry == null)
                 return;
 
-            await Navigation.PushAsync(new EntryPage(entry));
+			await Navigation.PushAsync(new EntryPage(entry));
 
             // Manually deselect entry
             JournalEntriesListView.SelectedItem = null;
