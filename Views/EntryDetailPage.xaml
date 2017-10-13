@@ -6,9 +6,16 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="editButton" Text="Edit" Priority="0" Clicked="OnEditEntryButtonClicked"  />
     </ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<StackLayout Spacing="20" Padding="15">
-            <Label Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="Medium" />
-        </StackLayout>
+	<ContentPage.Content>   
+        <ScrollView>
+    		<StackLayout Spacing="20" Padding="15">
+                <Label Text="{Binding Entry.EntryVersion.CreatedAt}" FontSize="20" />
+                <Label Text="{Binding Title}" FontSize="40" />
+                <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" FontSize="25" />
+                <Label Text="{Binding Entry.Location, StringFormat='Location: {0}'}}" FontSize="20" />
+                
+                <Label Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="15" />
+            </StackLayout>
+        </ScrollView>
 	</ContentPage.Content>
 </ContentPage>
