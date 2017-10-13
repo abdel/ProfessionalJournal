@@ -46,7 +46,7 @@
                                        LineBreakMode="NoWrap" TextColor="Black"
                                        Style="{DynamicResource ListItemDetailTextStyle}" 
                                        FontSize="15" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
-                                <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}" 
+                                <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}"
                                        FontSize="13" FontFamily="{DynamicResource FontFamilyName2}"
                                        TextColor="Black" Margin="7,0,0,5"/>
                             </StackLayout>

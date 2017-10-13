@@ -40,8 +40,7 @@ namespace ProfessionalJournal
         {
             base.OnAppearing();
 
-            if (viewModel.Entries.Count == 0)
-                viewModel.LoadEntryHistoryCommand.Execute(null);
+            viewModel.LoadEntryHistoryCommand.Execute(null);
         }
     }
 }

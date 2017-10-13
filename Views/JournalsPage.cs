@@ -71,8 +71,7 @@ namespace ProfessionalJournal
         {
             base.OnAppearing();
 
-            if (viewModel.Journals.Count == 0)
-                viewModel.LoadJournalsCommand.Execute(null);
+            viewModel.LoadJournalsCommand.Execute(null);
         }
     }
 }
