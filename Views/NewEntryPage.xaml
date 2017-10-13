@@ -18,17 +18,17 @@
                     HorizontalOptions="CenterAndExpand"
                     Orientation="Vertical" Padding="50,90,50,0" WidthRequest="260">
 
-            <Label Text="Location" FontSize="Large" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+            <Label Text="Title" FontSize="Large" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
 
-            <Entry x:Name="newEntryLocation" HeightRequest="50" Placeholder="your current location" 
+            <Entry x:Name="newEntryTitle" HeightRequest="50" Placeholder="title of entry" 
                       FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" FontFamily="{DynamicResource FontFamilyName}"
                       BackgroundColor="Black"/>
 
             <Label Text="space" FontSize="5" Opacity="0"/>
+            
+            <Label Text="Location" FontSize="Large" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
 
-            <Label Text="Title" FontSize="Large" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
-
-            <Entry x:Name="newEntryTitle" HeightRequest="50" Placeholder="title of entry" 
+            <Entry x:Name="newEntryLocation" HeightRequest="50" Placeholder="your current location" 
                       FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" FontFamily="{DynamicResource FontFamilyName}"
                       BackgroundColor="Black"/>
 
