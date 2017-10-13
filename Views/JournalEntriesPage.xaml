@@ -2,10 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ProfessionalJournal;assembly=ProfessionalJournal"
-             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ProfessionalJournal.JournalEntriesPage"
-             Title="Your journal entries"
+             Title="{Binding Title}"
              x:Name="BrowseJournalEntriesPage"
              BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
@@ -13,84 +11,90 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
-                    iOS="10, 50, 10, 100"
-                    Android="0, 10, 10, 10"
+                    iOS="10, 50, 10, 10"
+                    Android="3, 10, 0, 5"
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
         <RelativeLayout BackgroundColor="Transparent">
-            <Label Text="{Binding Title}" FontSize="{DynamicResource FontSizeNo1}" TextColor="White" 
-                FontFamily="{DynamicResource FontFamilyName1}"
-                HorizontalTextAlignment="Center" 
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=10}" 
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
             <SearchBar x:Name="searchBar" SearchCommand="{Binding SearchCommand}" 
                 SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" 
-                BackgroundColor="White" Opacity="0.3"
+                BackgroundColor="White" Opacity="0.4"
                 TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                 Placeholder="Search" PlaceholderColor="Black" HeightRequest="35"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=85}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=20}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=15}"
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.7}"/>
+
             <Button Image="DateTimeSearch.png" WidthRequest="{DynamicResource ButtonWidthNo}" Scale="{DynamicResource ButtonScaleNo}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=25}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=-35}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=275}"
                 BorderWidth="0"/>
+
             <Switch x:Name="toggleAll" Toggled="ToggleAllEntries" Scale="0.75"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=125}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=65}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=110}" 
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}"/>
-            <Label Text="Active Entries" FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=127}"
+
+            <Label Text="Active Entries" FontSize="20" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=67}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=13}" 
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
-            <Label Text="All Entries" FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=127}"
+
+            <Label Text="All Entries" FontSize="20" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=67}"
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=180}" 
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" />
+
             <StackLayout VerticalOptions="CenterAndExpand"
                          HorizontalOptions="CenterAndExpand"
-                         Orientation="Vertical" Padding="10,160,10,50" WidthRequest="335">
-                <ListView x:Name="JournalEntriesListView" 
-                          ItemsSource="{Binding Entries}" 
-                          VerticalOptions="FillAndExpand" HasUnevenRows="true" 
-                          RefreshCommand="{Binding LoadEntriesCommand}" 
-                          IsPullToRefreshEnabled="true" 
-                          IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
-                          CachingStrategy="RecycleElement"
-                          ItemSelected="OnEntrySelected"
-                          Opacity="0.6" BackgroundColor="Transparent">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell x:Name="EntryViewCell">
-                                <ViewCell.ContextActions>
-                                        <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
-                                           Text="Hide" IsDestructive="True" />
-                                        <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
-                                           Text="Unhide" IsDestructive="True" />
-                                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                           Text="Delete" IsDestructive="True"/>
-                                    </ViewCell.ContextActions>
-                                    <StackLayout Padding="0,0,0,0" Opacity="0.8" BackgroundColor="Silver" Spacing="10">
-                                        <Label Text="{Binding Title}" 
-                                               LineBreakMode="NoWrap" 
-                                               Style="{DynamicResource ListItemTextStyle}" 
-                                               FontSize="20" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
-                                        <StackLayout Grid.Row="1" Orientation="Horizontal">
-                                            <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
-                                                   FontSize="15" TextColor="Black" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,0"/>
-                                            <Label Text="{Binding Hidden, StringFormat='Hidden: {0}'}"
-                                                   Margin="7,0,0,0"
-                                                   FontSize="15" TextColor="Black" FontFamily="{DynamicResource FontFamilyName2}"/>
-                                            <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
-                                                   Margin="7,0,0,0"
-                                                   FontSize="15" TextColor="Black" FontFamily="{DynamicResource FontFamilyName2}"/>
+                         Orientation="Vertical" Padding="10,105,10,50" WidthRequest="335">
+                <ScrollView>
+                    <ListView x:Name="JournalEntriesListView" 
+                              ItemsSource="{Binding Entries}" 
+                              VerticalOptions="FillAndExpand" HasUnevenRows="true" 
+                              RefreshCommand="{Binding LoadEntriesCommand}" 
+                              IsPullToRefreshEnabled="true" 
+                              IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                              CachingStrategy="RecycleElement"
+                              ItemSelected="OnEntrySelected"
+                              BackgroundColor="Transparent">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell x:Name="EntryViewCell">
+                                    <ViewCell.ContextActions>
+                                            <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
+                                               Text="Hide" IsDestructive="True" />
+                                            <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
+                                               Text="Unhide" IsDestructive="True" />
+                                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                               Text="Delete" IsDestructive="True"/>
+                                        </ViewCell.ContextActions>
+                                    
+                                        <StackLayout Padding="0,0,0,0" Spacing="10" Opacity="0.5" BackgroundColor="Black">
+                                            <Label Text="{Binding Title}" 
+                                                   LineBreakMode="NoWrap" 
+                                                   Style="{DynamicResource ListItemTextStyle}" 
+                                                   FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
+                                        
+                                            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                                <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
+                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
+                                            
+                                                <Label Text="{Binding Hidden, StringFormat='Hidden: {0}'}"
+                                                       Margin="7,0,0,5"
+                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
+                                            
+                                                <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
+                                                       Margin="7,0,0,5"
+                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
+                                                </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
             </StackLayout>
         </RelativeLayout>
     </ContentPage.Content>

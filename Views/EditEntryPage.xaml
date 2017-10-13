@@ -2,30 +2,56 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="ProfessionalJournal.EditEntryPage" 
-             Title="Edit your entry"
+             Title="{Binding Title}"
              BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
-                    iOS="5, 30, 10, 100"
-                    Android="20, 20, 20, 20"
+                    iOS="5, 30, 5, 20"
+                    Android="5, 10, 5, 20"
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Label Text="date" FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
-            <Label Text="EntryName" FontSize="40" TextColor="White" FontFamily="{DynamicResource FontFamilyName1}"/>
-            <Label Text="Version#" FontSize="25" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
-            <Label Text="Location" FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
-            <Entry x:Name="modifyReason" FontSize="15" BackgroundColor="Transparent" 
-                   Placeholder="enter reason for modification" PlaceholderColor="White"
-                   FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 
-                   HeightRequest="50"/>
-            <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" 
-                    HeightRequest="390" FontSize="15" TextColor="White" BackgroundColor="Transparent"
-                    FontFamily="{DynamicResource FontFamilyName}"/>
+            <Label Text="{Binding Entry.EntryVersion.CreatedAt}"
+                   FontSize="20" 
+                   TextColor="Black"
+                   FontFamily="{DynamicResource FontFamilyName}"/>
+            
+            <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}"
+                   FontSize="25"
+                   TextColor="Black" 
+                   FontFamily="{DynamicResource FontFamilyName}"/>
+            
+            <Label Text="{Binding Entry.Location, StringFormat='Location: {0}'}}"
+                   FontSize="20" 
+                   TextColor="Black"
+                   FontFamily="{DynamicResource FontFamilyName}"/>
+            
+            <Entry x:Name="modifyReason"
+                   FontSize="15" 
+                   BackgroundColor="Black" 
+                   Opacity="0.55"
+                   Placeholder="enter reason for modification" 
+                   PlaceholderColor="Silver"
+                   FontFamily="{DynamicResource FontFamilyName}"
+                   TextColor="White" 
+                   HeightRequest="45"/>
+            
+            <ScrollView>
+                <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
+                    <Editor x:Name="entryText"
+                            Text="{Binding Entry.EntryVersion.TextEntry}"
+                            BackgroundColor="Transparent"
+                            FontSize="17"
+                            HeightRequest="2000" 
+                            TextColor="White"
+                            Margin="5,5,5,5"
+                            FontFamily="{DynamicResource FontFamilyName}"/>
+                 </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

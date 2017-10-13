@@ -3,28 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.EntryDetailPage"
              x:Name="EntryDetailPage"
-             Title="View your entry"
+             Title="{Binding Title}"
              BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="editButton" Text="Edit" Priority="0" Clicked="OnEditEntryButtonClicked"  />
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
     <OnPlatform x:TypeArguments="Thickness"
-                    iOS="10, 30, 10, 100"
-                    Android="20, 20, 20, 5"
+                    iOS="5, 30, 5, 20"
+                    Android="5, 10, 5, 5"
                     WinPhone="20, 20, 20, 20" />
-    </ContentPage.Padding>
+     </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout Spacing="5" Padding="10">
-            <Label Text="{Binding Entry.EntryVersion.CreatedAt}" FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
-            <Label Text="{Binding Title}" FontSize="40" TextColor="White" FontFamily="{DynamicResource FontFamilyName1}"/>
-            <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" FontSize="25" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
-            <Label Text="{Binding Entry.Location, StringFormat='Location: {0}'}}" FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
-            <Label Text="" FontSize="10" Opacity="0"/>
-            
-            <Label Text="{Binding Entry.EntryVersion.TextEntry}" HeightRequest="500" FontSize="15" 
-                   TextColor="White" BackgroundColor="Transparent"
+            <Label Text="{Binding Entry.EntryVersion.CreatedAt}" 
+                   FontSize="20"
+                   TextColor="Black"
                    FontFamily="{DynamicResource FontFamilyName}"/>
+
+            <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
+                   FontSize="25"
+                   TextColor="Black" 
+                   FontFamily="{DynamicResource FontFamilyName}"/>
+            
+            <Label Text="{Binding Entry.Location, StringFormat='Location: {0}'}}"
+                   FontSize="20"
+                   TextColor="Black"
+                   FontFamily="{DynamicResource FontFamilyName}"/>
+            
+            <Label Text="space" FontSize="1" Opacity="0"/>
+
+            <StackLayout Spacing="5" Padding="10" BackgroundColor="Black" Opacity="0.55">
+                <ScrollView>
+                    <Label Text="{Binding Entry.EntryVersion.TextEntry}"
+                           FontSize="17" 
+                           TextColor="White"
+                           HorizontalTextAlignment="Start"
+                           Margin="5,5,5,5"
+                           FontFamily="{DynamicResource FontFamilyName}"/>
+                </ScrollView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

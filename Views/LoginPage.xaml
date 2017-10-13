@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.LoginPage"
              Title="Professional Journal"
-             BackgroundImage="LoginBG.png">
+             BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Sign Up" Clicked="OnNavigateRegisterPage" />
     </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="10, 80, 20, 100"
-                    Android="20, 20, 20, 20"
+                    Android="20, 20, 20, 40"
                     WinPhone="20, 20, 20, 20"/>
      </ContentPage.Padding>
     <ContentPage.Content>
@@ -20,22 +20,22 @@
             Orientation="Vertical"
             Spacing="60">
             <Label Text="JOP it" XAlign="Center" FontSize="100" FontFamily="{DynamicResource FontFamilyName1}"
-                   TextColor="White" Opacity="0.8"></Label>
+                   TextColor="Black"></Label>
 
             <Entry x:Name="authorUsername" Keyboard="Email" 
                     HeightRequest="50"
-                    FontSize="25" WidthRequest="300" BackgroundColor="White"
-                    Opacity="0.3" TextColor="Black" Placeholder="username" 
-                    PlaceholderColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+                    FontSize="25" WidthRequest="300" BackgroundColor="Black"
+                    Opacity="0.5" TextColor="White" Placeholder="username" 
+                    PlaceholderColor="Silver" FontFamily="{DynamicResource FontFamilyName}"/>
             
             <Entry x:Name="authorPassword" Placeholder="password" 
-                   IsPassword="true" HeightRequest="50" PlaceholderColor="Black"
-                   FontSize="25" WidthRequest="300" BackgroundColor="White"
-                   Opacity="0.3" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+                   IsPassword="true" HeightRequest="50" PlaceholderColor="Silver"
+                   FontSize="25" WidthRequest="300" BackgroundColor="Black"
+                   Opacity="0.5" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
             
             <Button x:Name="loginButton" Text="Login" Clicked="OnLogin" 
-                BorderColor="Gray" BorderWidth="1" TextColor="White" BorderRadius="5"
-                BackgroundColor="Black" Opacity="0.45"
+                BorderColor="Black" BorderWidth="1.6" TextColor="Black" BorderRadius="5"
+                BackgroundColor="Transparent" Opacity="0.8"
                 Font="{DynamicResource FontFamilyName1}" FontSize="30"/>
        </StackLayout>
     </ContentPage.Content>

@@ -201,6 +201,7 @@
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <BundleResource Include="Resources\LoginBG.png" />
     <BundleResource Include="Resources\MainBG.png" />
+    <BundleResource Include="Resources\DateTimeSearch.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
