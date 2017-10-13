@@ -2,36 +2,59 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfessionalJournal.EntryHistoryPage"
-             x:Name="EntryHistoryPage">
-	<ContentPage.Content>
-		<StackLayout>
-			<ListView x:Name="EntryHistoryListView" 
+             x:Name="EntryHistoryPage"
+             Title="Your entry history"
+             BackgroundImage="MainBG.png">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="10, 50, 10, 100"
+                    Android="0, 10, 10, 30"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
+    <ContentPage.Content>
+        <RelativeLayout BackgroundColor="Transparent">
+            <Label Text="{Binding Title}" FontSize="60" TextColor="White" FontFamily="{DynamicResource FontFamilyName1}"
+                HorizontalTextAlignment="Center" 
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=0}" 
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+            <Label Text="History" FontSize="30" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                HorizontalTextAlignment="Center" 
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=75}" 
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+            <StackLayout Spacing="10" VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical" Padding="10,130,10,0" WidthRequest="335">
+            <ListView x:Name="EntryHistoryListView" 
                       ItemsSource="{Binding Entries}" 
-                      VerticalOptions="FillAndExpand" HasUnevenRows="true" 
+                      VerticalOptions="End" 
+                      HorizontalOptions="CenterAndExpand"
+                      HasUnevenRows="true" 
                       RefreshCommand="{Binding LoadEntryHistoryCommand}" 
                       IsPullToRefreshEnabled="true" 
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
                       CachingStrategy="RecycleElement"
-                      ItemSelected="OnEntrySelected">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<StackLayout Padding="10">
-								<Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version {0}'}}" 
-                                       LineBreakMode="NoWrap" 
+                      ItemSelected="OnEntrySelected" BackgroundColor="Transparent">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="65">
+                            <StackLayout Padding="0,0,0,0" Opacity="0.6" BackgroundColor="Silver" Spacing="10">
+                                <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version {0}'}}" 
+                                       LineBreakMode="NoWrap" TextColor="Black"
                                        Style="{DynamicResource ListItemTextStyle}" 
-                                       FontSize="16" />
-								<Label Text="{Binding EntryVersion.ModifyReason}" 
-                                       LineBreakMode="NoWrap" 
+                                       FontSize="20" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
+                                <Label Text="{Binding EntryVersion.ModifyReason}" 
+                                       LineBreakMode="NoWrap" TextColor="Black"
                                        Style="{DynamicResource ListItemDetailTextStyle}" 
-                                       FontSize="13" />
+                                       FontSize="15" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
                                 <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}" 
-                                       FontSize="10" />
-							</StackLayout>
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</StackLayout>
-	</ContentPage.Content>
+                                       FontSize="13" FontFamily="{DynamicResource FontFamilyName2}"
+                                       TextColor="Black" Margin="7,0,0,5"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+                </StackLayout>
+            </RelativeLayout>
+    </ContentPage.Content>
 </ContentPage>

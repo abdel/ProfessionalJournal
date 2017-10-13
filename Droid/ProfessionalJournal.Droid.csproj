@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ProfessionalJournal.Droid</RootNamespace>
     <AssemblyName>ProfessionalJournal.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -201,6 +201,8 @@
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\drawable\LoginBG.png" />
+    <AndroidResource Include="Resources\drawable\MainBG.png" />
   </ItemGroup>
   <Import Project="..\ProfessionalJournal.projitems" Label="Shared" Condition="Exists('..\ProfessionalJournal.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -3,55 +3,86 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ProfessionalJournal.RegisterPage"
-             Title="Create an Account">
-	<ContentPage.Padding>
+             Title="Create an account"
+             BackgroundImage="MainBG.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Priority="0" Text="Sign Up" Clicked="OnRegister" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
-                    iOS="20, 40, 20, 20"
-                    Android="20, 20, 20, 20"
+                    iOS="10, 50, 10, 30"
+                    Android="0, 10, 10, 30"
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout VerticalOptions="FillAndExpand"
-                         HorizontalOptions="FillAndExpand"
-                         Orientation="Vertical"
-                         Spacing="15">
-
-                <Label Text="First Name:" />
-                <Entry x:Name="newAuthorFirstName" Placeholder="Your first name" />
-
-                <Label Text="Last Name:" />
-                <Entry x:Name="newAuthorLastName" Placeholder="Your last name" />
-                
-                <Label Text="Username:" />
-                <Entry x:Name="newAuthorUsername" Keyboard="Email" Placeholder="Your username" />
-                
-                <Label Text="Password:" />
-                <Entry x:Name="newAuthorPassword" Placeholder="Your password" IsPassword="true" />
-
-                <Label Text="Confirm Password:" />
-                <Entry x:Name="newAuthorConfirmPassword" Placeholder="Your password again" IsPassword="true" />
-
-                <Label Text="Email Address:" />
-                <Entry x:Name="newAuthorEmail" Keyboard="Email" Placeholder="Your email address" />
-
-                <Label Text="Date of Birth:" />
-                <DatePicker x:Name="newAuthorDateOfBirth"
-                            VerticalOptions="CenterAndExpand" 
-                            Date="{x:Static sys:DateTime.Now}" 
-                            MaximumDate="{x:Static sys:DateTime.Now}">
-                     <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
-                     <DatePicker.MinimumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                           <x:Arguments>
-                              <x:String>Jan 1 1900</x:String>
-                           </x:Arguments>
-                        </sys:DateTime>
-                     </DatePicker.MinimumDate>
-                 </DatePicker>
-                
-                <Button x:Name="registerButton" Text="Sign Up" Clicked="OnRegister" />
-            </StackLayout>
+            <RelativeLayout BackgroundColor="Transparent">
+                <Label Text="Register" FontSize="70" TextColor="White" FontFamily="{DynamicResource FontFamilyName1}"
+                       HorizontalTextAlignment="Center" 
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=0}" 
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"/>
+                <StackLayout Spacing="7" VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       Orientation="Vertical" Padding="40,110,0,0" WidthRequest="280">
+                    <Label Text="First Name:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <Entry x:Name="newAuthorFirstName" Placeholder="your first name"
+                           HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="White" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            Margin="2"/>
+                    <Label Text="Last Name:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <Entry x:Name="newAuthorLastName" Placeholder="your last name" 
+                           HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="White" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            Margin="2"/>
+                    <Label Text="Username:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <Entry x:Name="newAuthorUsername" Keyboard="Email" Placeholder="your username" 
+                           HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="White" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            Margin="2"/>
+                    <Label Text="Password:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <Entry x:Name="newAuthorPassword" Placeholder="your password" IsPassword="true" 
+                           HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="White" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            Margin="2"/>
+                    <Label Text="Confirm Password:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <Entry x:Name="newAuthorConfirmPassword" Placeholder="your password again" IsPassword="true" 
+                           HeightRequest="50" Opacity="0.65" FontSize="Medium" 
+                           BackgroundColor="Transparent"
+                           PlaceholderColor="White" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            Margin="2"/>
+                    <Label Text="Email Address:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <Entry x:Name="newAuthorEmail" Keyboard="Email" Placeholder="your email address"
+                           HeightRequest="50" Opacity="0.65" FontSize="Medium" BackgroundColor="Transparent"
+                           PlaceholderColor="White" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            Margin="2"/>
+                    <Label Text="Date of Birth:" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                            FontSize="20"/>
+                    <DatePicker x:Name="newAuthorDateOfBirth"
+                                VerticalOptions="CenterAndExpand" 
+                                Date="{x:Static sys:DateTime.Now}" 
+                                MaximumDate="{x:Static sys:DateTime.Now}" 
+                                TextColor="White" Margin="2">
+                        <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                               <x:Arguments>
+                                  <x:String>Jan 1 1900</x:String>
+                               </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MinimumDate>
+                  </DatePicker>
+                </StackLayout>
+            </RelativeLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
