@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 
+using Acr.UserDialogs;
+
 namespace ProfessionalJournal
 {
     public partial class JournalEntriesPage : ContentPage

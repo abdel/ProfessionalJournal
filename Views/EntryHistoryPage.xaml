@@ -26,7 +26,7 @@
                                        Style="{DynamicResource ListItemDetailTextStyle}" 
                                        FontSize="13" />
                                 <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}" 
-                                       FontSize="10" />
+                                       FontSize="13" />
 							</StackLayout>
 						</ViewCell>
 					</DataTemplate>

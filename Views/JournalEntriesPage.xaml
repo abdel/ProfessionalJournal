@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ProfessionalJournal;assembly=ProfessionalJournal"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ProfessionalJournal.JournalEntriesPage"
              Title="{Binding Title}"
              x:Name="BrowseJournalEntriesPage">
@@ -14,6 +16,23 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Switch x:Name="toggleAll" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Toggled="ToggleAllEntries" Scale="0.75"/>
                 <Label Text="Show All Entries" FontSize="13" VerticalOptions="CenterAndExpand" Grid.Column="0" />
+                <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                    <DatePicker.MinimumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                            <x:Arguments>
+                                <x:String>Jan 1 2000</x:String>
+                            </x:Arguments>
+                        </sys:DateTime>
+                    </DatePicker.MinimumDate>
+                    <DatePicker.MaximumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                            <x:Arguments>
+                                <x:String>Dec 31 2050</x:String>
+                            </x:Arguments>
+                        </sys:DateTime>
+                    </DatePicker.MaximumDate>
+                </DatePicker>
             </StackLayout>
             <ListView x:Name="JournalEntriesListView" 
                       ItemsSource="{Binding Entries}" 
@@ -39,7 +58,6 @@
                                            LineBreakMode="NoWrap" 
                                            Style="{DynamicResource ListItemTextStyle}" 
                                            FontSize="16" />
-
 
                                     <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
                                         <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
