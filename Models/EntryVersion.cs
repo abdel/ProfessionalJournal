@@ -23,5 +23,11 @@ namespace ProfessionalJournal
 
         [JsonProperty("modify_reason")]
         public string ModifyReason { get; set; }
+
+        [JsonProperty("createdAt")]
+        public string CreatedAt { get; set; }
+
+        [JsonProperty("updatedAt")]
+        public string UpdatedAt { get; set; }
     }
 }
