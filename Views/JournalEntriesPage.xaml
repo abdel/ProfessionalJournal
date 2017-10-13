@@ -13,7 +13,7 @@
             <SearchBar x:Name="searchBar" Placeholder="Search" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Switch x:Name="toggleAll" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Toggled="ToggleAllEntries" Scale="0.75"/>
-                <Label Text="All Entries" FontSize="13" VerticalOptions="CenterAndExpand" Grid.Column="0" />
+                <Label Text="Show All Entries" FontSize="13" VerticalOptions="CenterAndExpand" Grid.Column="0" />
             </StackLayout>
             <ListView x:Name="JournalEntriesListView" 
                       ItemsSource="{Binding Entries}" 
