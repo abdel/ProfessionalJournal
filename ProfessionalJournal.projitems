@@ -57,6 +57,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\EditEntryPage.xaml.cs">
       <DependentUpon>EditEntryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SearchPopupPage.xaml.cs">
+      <DependentUpon>SearchPopupPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JournalEntriesPage.xaml" />
@@ -73,5 +76,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewEntryPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\EditEntryPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SearchPopupPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

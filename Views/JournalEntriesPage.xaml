@@ -16,23 +16,7 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Switch x:Name="toggleAll" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Toggled="ToggleAllEntries" Scale="0.75"/>
                 <Label Text="Show All Entries" FontSize="13" VerticalOptions="CenterAndExpand" Grid.Column="0" />
-                <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
-                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                    <DatePicker.MinimumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                            <x:Arguments>
-                                <x:String>Jan 1 2000</x:String>
-                            </x:Arguments>
-                        </sys:DateTime>
-                    </DatePicker.MinimumDate>
-                    <DatePicker.MaximumDate>
-                        <sys:DateTime x:FactoryMethod="Parse">
-                            <x:Arguments>
-                                <x:String>Dec 31 2050</x:String>
-                            </x:Arguments>
-                        </sys:DateTime>
-                    </DatePicker.MaximumDate>
-                </DatePicker>
+                <Button Text="Select Date" Clicked="OnDateSearch" />
             </StackLayout>
             <ListView x:Name="JournalEntriesListView" 
                       ItemsSource="{Binding Entries}" 

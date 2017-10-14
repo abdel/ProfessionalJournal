@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 
 using Acr.UserDialogs;
+using Rg.Plugins.Popup.Extensions;
 
 namespace ProfessionalJournal
 {
@@ -79,6 +80,12 @@ namespace ProfessionalJournal
             viewModel.toggleAll = e.Value;
 			viewModel.LoadEntriesCommand.Execute(null);
 		}
+
+        public async void OnDateSearch(object sender, EventArgs e)
+        {
+            var page = new SearchPopupPage();
+            await Navigation.PushPopupAsync(page);
+        }
 
         protected override void OnAppearing()
         {
