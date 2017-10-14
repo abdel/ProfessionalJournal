@@ -10,6 +10,9 @@ namespace ProfessionalJournal
 {
     public class JournalsViewModel : BaseViewModel
     {
+        public Label listViewNoItems;
+        public ListView JournalsListView;
+
         public IDataStore<Journal> JournalDataStore => DependencyService.Get<IDataStore<Journal>>() ?? new JournalDataStore();
         public ObservableCollection<Journal> Journals { get; set; }
         public Command LoadJournalsCommand { get; set; }
@@ -54,6 +57,9 @@ namespace ProfessionalJournal
 
             try
             {
+                JournalsListView.IsVisible = true;
+                listViewNoItems.IsVisible = false;
+
                 var journals = await JournalDataStore.GetAllAsync(true);
 
                 if (journals != null && journals.Any()) {
@@ -67,6 +73,14 @@ namespace ProfessionalJournal
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+
+                if (ex.Message.Contains("No journals found for this author."))
+                {
+                    Journals.Clear();
+
+                    JournalsListView.IsVisible = false;
+                    listViewNoItems.IsVisible = true;
+                }
 
                 // Logout user if session expired
                 if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))

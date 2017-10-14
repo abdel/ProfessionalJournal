@@ -72,6 +72,9 @@ namespace ProfessionalJournal
         {
             base.OnAppearing();
 
+            this.viewModel.listViewNoItems = listViewNoItems;
+            this.viewModel.JournalsListView = JournalsListView;
+
             viewModel.LoadJournalsCommand.Execute(null);
         }
     }

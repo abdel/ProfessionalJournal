@@ -11,6 +11,10 @@ namespace ProfessionalJournal
     {
         public bool toggleAll;
         public SearchBar searchBar;
+        public DateTime[] searchDates;
+
+        public Label listViewNoItems;
+        public ListView EntriesListView;
 
         public Entry Entry { get; set; }
         public Journal Journal { get; set; }
@@ -108,6 +112,21 @@ namespace ProfessionalJournal
                     await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                 }
             });
+
+            MessagingCenter.Subscribe<SearchPopupPage, DateTime[]>(this, "DateSearch", async (obj, dates) =>
+            {
+                var _dates = dates as DateTime[];
+
+                try
+                {
+                    this.searchDates = dates;
+                    LoadEntriesCommand.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
         }
 
         public async Task ExecuteLoadEntriesCommand(string text = null)
@@ -119,19 +138,22 @@ namespace ProfessionalJournal
             bool hidden = false;
             bool deleted = false;
 
-            if (text != null)
+            if (text == null)
             {
                 text = searchBar.Text;
             }
 
             try
             {
+                EntriesListView.IsVisible = true;
+                listViewNoItems.IsVisible = false;
+
                 if (toggleAll) {
                     hidden = true;
                     deleted = true;
                 }
 
-                var entries = await EntryDataStore.GetAllAsync(true, text, deleted, hidden);
+                var entries = await EntryDataStore.GetAllAsync(true, text, deleted, hidden, searchDates);
 
                 if (entries != null && entries.Any())
                 {
@@ -147,7 +169,10 @@ namespace ProfessionalJournal
                 Console.WriteLine(ex);
 
                 if (ex.Message.Contains("No entries found for this journal.")) {
-                    Entries.Clear();   
+                    Entries.Clear();
+
+                    EntriesListView.IsVisible = false;
+                    listViewNoItems.IsVisible = true;
                 }
 
 				// Logout user if session expired

@@ -29,7 +29,9 @@ namespace ProfessionalJournal
 
         private async void OnDateSearch(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "DateSearch", "date");
+            DateTime[] dates = { searchStartDate.Date, searchEndDate.Date };
+
+            MessagingCenter.Send(this, "DateSearch", dates);
 
             await Task.Delay(2000);
 

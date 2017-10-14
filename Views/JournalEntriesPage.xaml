@@ -18,7 +18,7 @@
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -40,6 +40,7 @@
                            TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                            Placeholder="Search" PlaceholderColor="Black"
                            Margin="0,0,50,0"
+                           TextChanged="OnSearchTextChanged"
                            WidthRequest="1" />
 
                  <ContentView Grid.Row="0" Grid.Column="1">
@@ -66,49 +67,57 @@
                         VerticalOptions="Center" />
             </StackLayout>
 
-            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                <ScrollView>
-                    <ListView x:Name="JournalEntriesListView" 
-                              ItemsSource="{Binding Entries}" 
-                              VerticalOptions="FillAndExpand" HasUnevenRows="true" 
-                              RefreshCommand="{Binding LoadEntriesCommand}" 
-                              IsPullToRefreshEnabled="true"
-                              IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
-                              CachingStrategy="RecycleElement"
-                              ItemSelected="OnEntrySelected"
-                              BackgroundColor="Transparent">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell x:Name="EntryViewCell">
-                                    <ViewCell.ContextActions>
-                                            <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
-                                               Text="Hide" IsDestructive="True" />
-                                            <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
-                                               Text="Unhide" IsDestructive="True" />
-                                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                               Text="Delete" IsDestructive="True"/>
-                                        </ViewCell.ContextActions>
-                                        <StackLayout Padding="0,0,0,0" Spacing="10" Opacity="0.5" BackgroundColor="Black">
-                                            <Label Text="{Binding Title}" 
-                                                   LineBreakMode="NoWrap" 
-                                                   Style="{DynamicResource ListItemTextStyle}" 
-                                                   FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
-                                            <StackLayout Grid.Row="1" Orientation="Horizontal">
-                                                <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
-                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
-                                                <Label Text="{Binding Hidden, StringFormat='Hidden: {0}'}"
-                                                       Margin="7,0,0,5"
-                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
-                                                <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
-                                                       Margin="7,0,0,5"
-                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
-                                                </StackLayout>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                <ListView x:Name="JournalEntriesListView" 
+                          ItemsSource="{Binding Entries}" 
+                          VerticalOptions="FillAndExpand" HasUnevenRows="true" 
+                          RefreshCommand="{Binding LoadEntriesCommand}" 
+                          IsPullToRefreshEnabled="true"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                          CachingStrategy="RecycleElement"
+                          ItemSelected="OnEntrySelected"
+                          BackgroundColor="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="EntryViewCell">
+                                <ViewCell.ContextActions>
+                                    <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
+                                       Text="Hide" IsDestructive="True" />
+                                    <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
+                                       Text="Unhide" IsDestructive="True" />
+                                    <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                       Text="Delete" IsDestructive="True"/>
+                                </ViewCell.ContextActions>
+                                <StackLayout Padding="0,0,0,0" Spacing="10" Opacity="0.5" BackgroundColor="Black">
+                                    <Label Text="{Binding Title}" 
+                                           LineBreakMode="NoWrap" 
+                                           Style="{DynamicResource ListItemTextStyle}" 
+                                           FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
+                                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                        <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
+                                               FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
+                                        <Label Text="{Binding Hidden, StringFormat='Hidden: {0}'}"
+                                               Margin="7,0,0,5"
+                                               FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
+                                        <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
+                                               Margin="7,0,0,5"
+                                               FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
                                         </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </ScrollView>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label  
+                    x:Name="listViewNoItems"  
+                    Margin="5,5,5,5"  
+                    VerticalOptions="CenterAndExpand"  
+                    HorizontalOptions="CenterAndExpand"  
+                    Text="No entries found."
+                    FontSize="20"
+                    FontFamily="{DynamicResource FontFamilyName}"
+                    IsVisible="false" />
             </StackLayout>
        </StackLayout>
     </ContentPage.Content>

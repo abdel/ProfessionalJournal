@@ -37,6 +37,6 @@
                     BorderColor="Black" BorderWidth="1.6" TextColor="Black" BorderRadius="5"
                     BackgroundColor="Transparent" Opacity="0.8"
                     Font="{DynamicResource FontFamilyName1}" FontSize="30"/>
-       </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

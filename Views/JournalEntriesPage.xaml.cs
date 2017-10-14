@@ -8,6 +8,11 @@ namespace ProfessionalJournal
 {
     public partial class JournalEntriesPage : ContentPage
     {
+        void Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         JournalEntriesViewModel viewModel;
 
         public JournalEntriesPage()
@@ -87,9 +92,21 @@ namespace ProfessionalJournal
             await Navigation.PushPopupAsync(page);
         }
 
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        {
+            // Has Cancel has been pressed?
+            if (textChangedEventArgs.NewTextValue == "" || textChangedEventArgs.NewTextValue == null)
+            {
+                viewModel.LoadEntriesCommand.Execute(null);   
+            }
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            this.viewModel.listViewNoItems = listViewNoItems;
+            this.viewModel.EntriesListView = JournalEntriesListView;
 
             viewModel.LoadEntriesCommand.Execute(null);
         }

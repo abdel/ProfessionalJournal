@@ -35,11 +35,11 @@ namespace ProfessionalJournal
             journalId = currentJournalId;
         }
 
-        public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false)
+        public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false, DateTime[] dates = null)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}&text={text}&deleted={deleted}&hidden={hidden}", HttpMethod.Get, null);
+                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}&text={text}&deleted={deleted}&hidden={hidden}&dates={dates}", HttpMethod.Get, null);
                 entries = json.entries;
             }
 
