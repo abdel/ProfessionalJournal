@@ -34,16 +34,6 @@ namespace ProfessionalJournal
             return true;
         }
 
-        private async void OnSearch(object sender, EventArgs e)
-        {
-            var loadingPage = new LoadingPopupPage();
-            await Navigation.PushPopupAsync(loadingPage);
-            await Task.Delay(2000);
-            await Navigation.RemovePopupPageAsync(loadingPage);
-            await Navigation.PushPopupAsync(new LoginSuccessPopupPage());
-        }
-
-
         // Invoced when background is clicked
         protected override bool OnBackgroundClicked()
         {

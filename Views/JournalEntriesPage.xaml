@@ -6,58 +6,108 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="ProfessionalJournal.JournalEntriesPage"
              Title="{Binding Title}"
-             x:Name="BrowseJournalEntriesPage">
+             x:Name="BrowseJournalEntriesPage"
+             BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Priority="0" Clicked="OnAddEntryButtonClicked" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="10, 10, 10, 10"
+                    Android="3, 0, 0, 5"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout>
-            <SearchBar x:Name="searchBar" Placeholder="Search" SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" />
-            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
-                <Switch x:Name="toggleAll" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Toggled="ToggleAllEntries" Scale="0.75"/>
-                <Label Text="Show All Entries" FontSize="13" VerticalOptions="CenterAndExpand" Grid.Column="0" />
-                <Button Text="Select Date" Clicked="OnDateSearch" />
-            </StackLayout>
-            <ListView x:Name="JournalEntriesListView" 
-                      ItemsSource="{Binding Entries}" 
-                      VerticalOptions="FillAndExpand" HasUnevenRows="true" 
-                      RefreshCommand="{Binding LoadEntriesCommand}" 
-                      IsPullToRefreshEnabled="true" 
-                      IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
-                      CachingStrategy="RecycleElement"
-                      ItemSelected="OnEntrySelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell x:Name="EntryViewCell">
-                            <ViewCell.ContextActions>
-                                    <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
-                                       Text="Hide" IsDestructive="True" />
-                                    <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
-                                       Text="Unhide" IsDestructive="True" />
-                                    <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                       Text="Delete" IsDestructive="True" />
-                                </ViewCell.ContextActions>
-                                <StackLayout Padding="10">
-                                    <Label Text="{Binding Title}" 
-                                           LineBreakMode="NoWrap" 
-                                           Style="{DynamicResource ListItemTextStyle}" 
-                                           FontSize="16" />
+        <AbsoluteLayout>
+            <SearchBar x:Name="searchBar" SearchCommand="{Binding SearchCommand}" 
+                    SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" 
+                    BackgroundColor="White" Opacity="0.4"
+                    TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
+                    Placeholder="Search" PlaceholderColor="Black"
+                    AbsoluteLayout.LayoutBounds="0.15,0.08,180,40"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"/>
 
-                                    <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
-                                        <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
-                                               FontSize="13" />
-                                        <Label Text="{Binding Hidden, StringFormat='Hidden: {0}'}"
-                                               Margin="5,0,0,0"
-                                               FontSize="13" />
-                                        <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
-                                               Margin="5,0,0,0"
-                                               FontSize="13" />
-                                    </StackLayout>
-                                </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+           <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}"
+                       AbsoluteLayout.LayoutBounds="0.87,0.083"
+                       AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="White"
+                       TextColor="Black" Opacity="0.5">
+                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                <DatePicker.MinimumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Jan 1 2000</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MinimumDate>
+                <DatePicker.MaximumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Dec 31 2050</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MaximumDate>
+            </DatePicker>
+
+            <Switch x:Name="toggleAll" Toggled="ToggleAllEntries" HorizontalOptions="Center"
+                AbsoluteLayout.LayoutBounds="0.53,0.18,45,45"
+                AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        
+            <Label Text="Active Entries" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" 
+                    FontFamily="{DynamicResource FontFamilyName}"
+                    AbsoluteLayout.LayoutBounds="0.35,0.2,0.65,0.07" 
+                    AbsoluteLayout.LayoutFlags="All" />
+            
+            <Label Text="All Entries" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" 
+                    FontFamily="{DynamicResource FontFamilyName}" 
+                    AbsoluteLayout.LayoutBounds="1.9,0.2,0.65,0.07" 
+                    AbsoluteLayout.LayoutFlags="All" />
+
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical" Padding="10,125,10,50" WidthRequest="335">
+                <ScrollView>
+                    <ListView x:Name="JournalEntriesListView" 
+                              ItemsSource="{Binding Entries}" 
+                              VerticalOptions="FillAndExpand" HasUnevenRows="true" 
+                              RefreshCommand="{Binding LoadEntriesCommand}" 
+                              IsPullToRefreshEnabled="true" 
+                              IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                              CachingStrategy="RecycleElement"
+                              ItemSelected="OnEntrySelected"
+                              BackgroundColor="Transparent">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell x:Name="EntryViewCell">
+                                    <ViewCell.ContextActions>
+                                            <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
+                                               Text="Hide" IsDestructive="True" />
+                                            <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
+                                               Text="Unhide" IsDestructive="True" />
+                                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                               Text="Delete" IsDestructive="True"/>
+                                        </ViewCell.ContextActions>
+                                        <StackLayout Padding="0,0,0,0" Spacing="10" Opacity="0.5" BackgroundColor="Black">
+                                            <Label Text="{Binding Title}" 
+                                                   LineBreakMode="NoWrap" 
+                                                   Style="{DynamicResource ListItemTextStyle}" 
+                                                   FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
+                                            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                                <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
+                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
+                                                <Label Text="{Binding Hidden, StringFormat='Hidden: {0}'}"
+                                                       Margin="7,0,0,5"
+                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
+                                                <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
+                                                       Margin="7,0,0,5"
+                                                       FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
+                                                </StackLayout>
+                                        </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+            </StackLayout>
+       </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

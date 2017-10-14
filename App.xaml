@@ -1,18 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ProfessionalJournal.App">
-	<Application.Resources>
-		<ResourceDictionary>
-			<Color x:Key="Primary">#2196F3</Color>
-			<Color x:Key="PrimaryDark">#1976D2</Color>
-			<Color x:Key="Accent">#96d1ff</Color>
-			<Color x:Key="LightBackgroundColor">#FAFAFA</Color>
-			<Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
-			<Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
-			<Color x:Key="LightTextColor">#999999</Color>
-			<Style TargetType="NavigationPage">
-				<Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
-				<Setter Property="BarTextColor" Value="White" />
-			</Style>
-		</ResourceDictionary>
-	</Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="PrimaryDark">#1976D2</Color>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
+            <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
+            <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
+            <Color x:Key="LightTextColor">#999999</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+            <OnPlatform x:Key="FontFamilyName" x:TypeArguments="x:String" iOS="GillSans-Light" Android="sans-serif-light" WinPhone="GillSans-Light" />
+            <Style x:Key="FontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource FontFamilyName}" />
+            </Style>
+            <OnPlatform x:Key="FontFamilyName1" x:TypeArguments="x:String" iOS="GillSans-Light" Android="sans-serif-thin" WinPhone="GillSans-Light" />
+            <Style x:Key="FontLabel1" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource FontFamilyName1}" />
+            </Style>
+            <OnPlatform x:Key="FontFamilyName2" x:TypeArguments="x:String" iOS="GillSans-Light" Android="sans-serif-medium" WinPhone="GillSans-Light" />
+            <Style x:Key="FontLabel2" TargetType="Label">
+                <Setter Property="FontFamily" Value="{DynamicResource FontFamilyName2}" />
+            </Style>
+            <OnPlatform x:Key="FontSizeNo" x:TypeArguments="x:Double" iOS="70" Android="50" WinPhone="70" />
+            <Style x:Key="FontNo" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeNo}" />
+            </Style>
+            <OnPlatform x:Key="FontSizeNo1" x:TypeArguments="x:Double" iOS="60" Android="40" WinPhone="60" />
+            <Style x:Key="FontNo1" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeNo1}" />
+            </Style>
+            <OnPlatform x:Key="FontSizeNo2" x:TypeArguments="x:Double" iOS="15" Android="15" WinPhone="15" />
+            <Style x:Key="FontNo2" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeNo2}" />
+            </Style>
+            <OnPlatform x:Key="FontSizeNo3" x:TypeArguments="x:Double" iOS="20" Android="17" WinPhone="15" />
+            <Style x:Key="FontNo3" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeNo3}" />
+            </Style>
+            <OnPlatform x:Key="ButtonWidthNo" x:TypeArguments="x:Double" iOS="60" Android="5" WinPhone="60" />
+            <Style x:Key="WidthNo" TargetType="Button">
+                <Setter Property="WidthRequest" Value="{DynamicResource ButtonWidthNo}" />
+            </Style>
+            <OnPlatform x:Key="ButtonScaleNo" x:TypeArguments="x:Double" iOS="0.7" Android="0.6" WinPhone="1" />
+            <Style x:Key="ScaleNo" TargetType="Button">
+                <Setter Property="Scale" Value="{DynamicResource ButtonScaleNo}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

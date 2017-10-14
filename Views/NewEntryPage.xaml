@@ -2,20 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="ProfessionalJournal.NewEntryPage" 
-             Title="New Entry">
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
-	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<StackLayout Spacing="20" Padding="15">
-			<Label Text="Title" FontSize="Medium" />
-			<Entry x:Name="newEntryTitle" Placeholder="The title of your entry" FontSize="Small" />
-            
-            <Label Text="Location" FontSize="Medium" />
-            <Entry x:Name="newEntryLocation" Placeholder="Your current location" FontSize="Small" />
-            
-			<Label Text="Text Entry" FontSize="Medium" />
-			<Editor x:Name="newEntryText" FontSize="Small" HeightRequest="200" Margin="0" />
-		</StackLayout>
-	</ContentPage.Content>
+             Title="Create A New Entry"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             BackgroundImage="MainBG.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="10, 50, 10, 20"
+                    Android="0, 10, 0, 20"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" FontSize="20" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+            <Entry x:Name="newEntryTitle" HeightRequest="50" Placeholder="title of entry" 
+                      FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" FontFamily="{DynamicResource FontFamilyName}"
+                      BackgroundColor="Black"/>
+            <Entry x:Name="newEntryLocation" HeightRequest="50" Placeholder="your current location" 
+                      FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" 
+                      FontFamily="{DynamicResource FontFamilyName}"
+                      BackgroundColor="Black"/>
+            <ScrollView>
+            <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
+            <Entry x:Name="newEntryText" HeightRequest="2000" Placeholder="description of entry" 
+                      FontSize="Medium" PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
+                      BackgroundColor="Transparent"/>
+                    </StackLayout>
+             </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

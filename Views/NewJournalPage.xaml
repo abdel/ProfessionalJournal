@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="ProfessionalJournal.NewJournalPage"
-             Title="New Journal">
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Save" Clicked="OnSaveButtonClicked" />
-	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<StackLayout Spacing="20" Padding="15">
-			<Label Text="Title" FontSize="Medium" />
-			<Entry x:Name="newJournalTitle" Placeholder="The title of your journal" FontSize="Small" />
-			<Label Text="Description" FontSize="Medium" />
-			<Entry x:Name="newJournalDescription" Placeholder="Description of your journal" FontSize="Small" Margin="0" />
-		</StackLayout>
-	</ContentPage.Content>
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            x:Class="ProfessionalJournal.NewJournalPage" 
+            Title="Create A New Journal" 
+    BackgroundImage="MainBG.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="OnSaveButtonClicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="10, 150, 10, 100"
+                    Android="0, 50, 0, 30"
+                    WinPhone="20, 20, 20, 20" />
+     </ContentPage.Padding>
+    <ContentPage.Content> 
+        <StackLayout Spacing="10" 
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Vertical" Padding="50,10,50,0" WidthRequest="260">
+            <Label Text="space" FontSize="40" Opacity="0"/>
+            <Label Text="Title" FontSize="Large" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+            <Entry x:Name="newJournalTitle" HeightRequest="50"
+                      FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" FontFamily="{DynamicResource FontFamilyName}"
+                      BackgroundColor="Black" Placeholder="title of journal"/>
+            <Label Text="space" FontSize="5" Opacity="0"/>
+            <Label Text="Description" FontSize="Large" TextColor="Black" FontFamily="GillSans-Light"/>
+            <Entry x:Name="newJournalDescription" Placeholder="description of journal"
+                   HeightRequest="50" FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.55" FontFamily="{DynamicResource FontFamilyName}"
+                   BackgroundColor="Black"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
