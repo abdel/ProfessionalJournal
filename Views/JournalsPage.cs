@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Xamarin.Forms;
 
@@ -65,6 +65,8 @@ namespace ProfessionalJournal
                 Navigation.InsertPageBefore(new LoginPage(), this);
             }
 
+            viewModel.UnsubscribeFromMessages();
+
             await Navigation.PopAsync();
         }
 
@@ -76,6 +78,11 @@ namespace ProfessionalJournal
             this.viewModel.JournalsListView = JournalsListView;
 
             viewModel.LoadJournalsCommand.Execute(null);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
         }
     }
 }

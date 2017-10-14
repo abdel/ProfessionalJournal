@@ -1,6 +1,7 @@
 ﻿using System;
-using Xamarin.Forms;
+using System.Collections.Generic;
 
+using Xamarin.Forms;
 using Acr.UserDialogs;
 using Rg.Plugins.Popup.Extensions;
 
@@ -92,7 +93,7 @@ namespace ProfessionalJournal
             await Navigation.PushPopupAsync(page);
         }
 
-        private void OnSearchTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        protected void OnSearchTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             // Has Cancel has been pressed?
             if (textChangedEventArgs.NewTextValue == "" || textChangedEventArgs.NewTextValue == null)
@@ -105,10 +106,27 @@ namespace ProfessionalJournal
         {
             base.OnAppearing();
 
-            this.viewModel.listViewNoItems = listViewNoItems;
-            this.viewModel.EntriesListView = JournalEntriesListView;
+            // Pass contextual details to viewmodel
+            viewModel.listViewNoItems = listViewNoItems;
+            viewModel.EntriesListView = JournalEntriesListView;
 
+            // Load entries
             viewModel.LoadEntriesCommand.Execute(null);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
+
+            Console.WriteLine(pageStack.Count);
+            // Page is getting popped
+            if ((pageStack[0].ToString() == "ProfessionalJournal.JournalsPage" && pageStack.Count < 3) ||
+                (pageStack[0].ToString() == "ProfessionalJournal.LoginPage" && pageStack.Count < 4))
+            {
+                viewModel.UnsubscribeFromMessages();
+            }
         }
     }
 }

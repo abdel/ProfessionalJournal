@@ -17,19 +17,22 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" FontSize="20" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+
             <Entry x:Name="newEntryTitle" HeightRequest="50" Placeholder="title of entry" 
                       FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" FontFamily="{DynamicResource FontFamilyName}"
                       BackgroundColor="Black"/>
+            
             <Entry x:Name="newEntryLocation" HeightRequest="50" Placeholder="your current location" 
                       FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" 
                       FontFamily="{DynamicResource FontFamilyName}"
                       BackgroundColor="Black"/>
+            
             <ScrollView>
-            <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
-            <Entry x:Name="newEntryText" HeightRequest="2000" Placeholder="content of entry" 
-                      FontSize="Medium" PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
-                      BackgroundColor="Transparent"/>
-                    </StackLayout>
+                <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
+                    <Editor x:Name="newEntryText" BackgroundColor="Transparent"
+                            FontSize="17" HeightRequest="2000" TextColor="White" Margin="5,5,5,5"
+                            FontFamily="{DynamicResource FontFamilyName}" />
+                </StackLayout>
              </ScrollView>
         </StackLayout>
     </ContentPage.Content>

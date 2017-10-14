@@ -35,6 +35,11 @@ namespace ProfessionalJournal
             LoadEntriesCommand = new Command(async () => await ExecuteLoadEntriesCommand());
             SearchCommand = new Command<string>(async (text) => await ExecuteLoadEntriesCommand(text));
 
+            SubscribeToMessages();
+        }
+
+        public void SubscribeToMessages()
+        {
             MessagingCenter.Subscribe<NewEntryPage, Entry>(this, "AddEntry", async (obj, entry) =>
             {
                 var _entry = entry as Entry;
@@ -82,20 +87,20 @@ namespace ProfessionalJournal
                 }
             });
 
-			MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "UnhideEntry", async (obj, entry) =>
-			{
-				var _entry = entry as Entry;
+            MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "UnhideEntry", async (obj, entry) =>
+            {
+                var _entry = entry as Entry;
 
-				try
-				{
-					await EntryDataStore.UnhideAsync(_entry.Id);
-					LoadEntriesCommand.Execute(null);
-				}
-				catch (Exception e)
-				{
-					await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
-				}
-			});
+                try
+                {
+                    await EntryDataStore.UnhideAsync(_entry.Id);
+                    LoadEntriesCommand.Execute(null);
+                }
+                catch (Exception e)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                }
+            });
 
             MessagingCenter.Subscribe<JournalEntriesPage, Entry>(this, "DeleteEntry", async (obj, entry) =>
             {
@@ -127,6 +132,16 @@ namespace ProfessionalJournal
                     await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                 }
             });
+        }
+
+        public void UnsubscribeFromMessages()
+        {
+            MessagingCenter.Unsubscribe<NewEntryPage, Entry>(this, "AddEntry");
+            MessagingCenter.Unsubscribe<EditEntryPage, Entry>(this, "EditEntry");
+            MessagingCenter.Unsubscribe<JournalEntriesPage, Entry>(this, "HideEntry");
+            MessagingCenter.Unsubscribe<JournalEntriesPage, Entry>(this, "UnhideEntry");
+            MessagingCenter.Unsubscribe<JournalEntriesPage, Entry>(this, "DeleteEntry");
+            MessagingCenter.Unsubscribe<SearchPopupPage, DateTime[]>(this, "DateSearch");
         }
 
         public async Task ExecuteLoadEntriesCommand(string text = null)
@@ -168,7 +183,7 @@ namespace ProfessionalJournal
             {
                 Console.WriteLine(ex);
 
-                if (ex.Message.Contains("No entries found for this journal.")) {
+                if (ex.Message.Contains("No entries found")) {
                     Entries.Clear();
 
                     EntriesListView.IsVisible = false;
@@ -178,6 +193,8 @@ namespace ProfessionalJournal
 				// Logout user if session expired
 				if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))
 				{
+                    this.UnsubscribeFromMessages();
+
 					MessagingCenter.Send(this, "AuthorLogout");
 				}
             }

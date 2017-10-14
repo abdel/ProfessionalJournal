@@ -21,11 +21,6 @@
 
             <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" FontSize="25" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
 
-            <Entry FontSize="17" BackgroundColor="Black"  Opacity="0.55"
-                   Placeholder="enter current location" PlaceholderColor="Silver"
-                   FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 
-                   HeightRequest="45"/>
-
             <Entry x:Name="modifyReason" FontSize="17" BackgroundColor="Black"  Opacity="0.55"
                    Placeholder="enter reason for modification" PlaceholderColor="Silver"
                    FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 

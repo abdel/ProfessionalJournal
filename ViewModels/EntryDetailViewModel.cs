@@ -11,10 +11,15 @@ namespace ProfessionalJournal
 
         public EntryDetailViewModel(Entry entry = null, bool editMode = true)
         {
-            Title = entry?.Title;
             Entry = entry;
+            Title = entry?.Title;
             this.editMode = editMode;
 
+            SubscribeToMessages();
+        }
+
+        public void SubscribeToMessages()
+        {
             MessagingCenter.Subscribe<EditEntryPage, Entry>(this, "EditEntry", (obj, editedEntry) =>
             {
                 var _entry = editedEntry as Entry;
@@ -22,6 +27,11 @@ namespace ProfessionalJournal
                 Entry = _entry;
                 OnPropertyChanged("Entry");
             });
+        }
+
+        public void UnsubscribeFromMessages()
+        {
+            MessagingCenter.Unsubscribe<EditEntryPage, Entry>(this, "EditEntry");
         }
     }
 }

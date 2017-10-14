@@ -38,5 +38,14 @@ namespace ProfessionalJournal
             await Navigation.PushAsync(new EditEntryPage(new EntryDetailViewModel(entry)));
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnDisappearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
     }
 }

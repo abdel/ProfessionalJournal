@@ -23,18 +23,20 @@ namespace ProfessionalJournal
             Journals = new ObservableCollection<Journal>();
             LoadJournalsCommand = new Command(async () => await ExecuteLoadJournalsCommand());
 
+            SubscribeToMessages();
+        }
+
+        public void SubscribeToMessages()
+        {
             MessagingCenter.Subscribe<LoginPage>(this, "AuthorLogin", (obj) =>
             {
                 JournalDataStore.ResetClient();
             });
 
-            MessagingCenter.Unsubscribe<string>(this, "AddJournal");
             MessagingCenter.Subscribe<NewJournalPage, Journal>(this, "AddJournal", async (obj, journal) =>
             {
                 var _journal = journal as Journal;
                 Journals.Add(_journal);
-
-                Console.WriteLine("AddJournal: Triggered");
 
                 try
                 {
@@ -46,6 +48,12 @@ namespace ProfessionalJournal
                     await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                 }
             });
+        }
+
+        public void UnsubscribeFromMessages()
+        {
+            MessagingCenter.Unsubscribe<LoginPage>(this, "AuthorLogin");
+            MessagingCenter.Unsubscribe<NewJournalPage, Journal>(this, "AddJournal");
         }
 
         async Task ExecuteLoadJournalsCommand()
@@ -74,7 +82,7 @@ namespace ProfessionalJournal
             {
                 Debug.WriteLine(ex);
 
-                if (ex.Message.Contains("No journals found for this author."))
+                if (ex.Message.Contains("No journals found"))
                 {
                     Journals.Clear();
 
@@ -85,7 +93,9 @@ namespace ProfessionalJournal
                 // Logout user if session expired
                 if (ex.Message.Contains("Unauthorized") || ex.Message.Contains("Internal Server Error"))
                 {
-                    MessagingCenter.Send(this, "AuthorLogout");   
+                    this.UnsubscribeFromMessages();
+
+                    MessagingCenter.Send(this, "AuthorLogout");
                 }
             }
             finally

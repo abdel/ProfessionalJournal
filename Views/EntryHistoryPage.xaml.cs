@@ -42,5 +42,10 @@ namespace ProfessionalJournal
 
             viewModel.LoadEntryHistoryCommand.Execute(null);
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
     }
 }

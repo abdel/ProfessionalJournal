@@ -58,5 +58,15 @@ namespace ProfessionalJournal
 				}
 			}
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnDisappearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
     }
 }
