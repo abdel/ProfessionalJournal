@@ -27,18 +27,30 @@ namespace ProfessionalJournal
             base.OnDisappearing();
         }
 
-        protected override bool OnBackButtonPressed()
+        private async void OnDateSearch(object sender, EventArgs e)
         {
-            // Prevent hide popup
-            //return base.OnBackButtonPressed();
-            return true;
+            MessagingCenter.Send(this, "DateSearch", "date");
+
+            await Task.Delay(2000);
+
+            CloseAllPopup();
         }
 
-        // Invoced when background is clicked
+        private void OnCloseButtonTapped(object sender, EventArgs e)
+        {
+            CloseAllPopup();
+        }
+
         protected override bool OnBackgroundClicked()
         {
-            // Return default value - CloseWhenBackgroundIsClicked
-            return base.OnBackgroundClicked();
+            CloseAllPopup();
+
+            return false;
+        }
+
+        private async void CloseAllPopup()
+        {
+            await Navigation.PopAllPopupAsync();
         }
     }
 }

@@ -7,27 +7,25 @@
              BackgroundImage="MainBG.png">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
-                    iOS="10, 50, 10, 20"
-                    Android="10, 10, 10, 30"
+                    iOS="10, 10, 10, 10"
+                    Android="10, 10, 10, 10"
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
-            <StackLayout Spacing="10" VerticalOptions="CenterAndExpand"
-                         HorizontalOptions="CenterAndExpand"
-                         Orientation="Vertical" Padding="10,10,10,0" WidthRequest="335">
+            <StackLayout Spacing="10" HorizontalOptions="CenterAndExpand"
+                         Orientation="Vertical" Padding="10,10,10,0">
             <ListView x:Name="EntryHistoryListView" 
                       ItemsSource="{Binding Entries}" 
-                      VerticalOptions="End" 
-                      HorizontalOptions="CenterAndExpand"
-                      HasUnevenRows="true" 
+                      VerticalOptions="FillAndExpand" HasUnevenRows="true" 
                       RefreshCommand="{Binding LoadEntryHistoryCommand}" 
                       IsPullToRefreshEnabled="true" 
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
-                      CachingStrategy="RecycleElement" HeightRequest="600"
-                      ItemSelected="OnEntrySelected" BackgroundColor="Transparent">
+                      CachingStrategy="RecycleElement"
+                      ItemSelected="OnEntrySelected"
+                      BackgroundColor="Transparent">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell Height="78">
+                        <ViewCell x:Name="EntryViewCell">
                             <StackLayout Padding="0,0,0,0" Spacing="3" Opacity="0.5" BackgroundColor="Black">
                                 <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version {0}'}}" 
                                        LineBreakMode="NoWrap" TextColor="White"
@@ -47,6 +45,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-                </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

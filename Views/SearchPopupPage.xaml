@@ -19,8 +19,17 @@
     <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
         <AbsoluteLayout>
             <Frame x:Name="FrameContainer" Margin="15" HorizontalOptions="Center" BackgroundColor="White">
-                <StackLayout IsClippedToBounds="True" Padding="10, 5" Spacing="3">
-                    <Label Text="Start Date:" />
+                <StackLayout IsClippedToBounds="True" Padding="10, 5" Spacing="5">
+                    <Label Text="Search Entries By Date"
+                           TextColor="Black" 
+                           FontFamily="{DynamicResource FontFamilyName}"
+                           FontSize="30" />
+
+                    <Label Text="space" FontSize="5" Opacity="0"/>
+                    
+                    <Label Text="Start Date" TextColor="Black" 
+                           FontFamily="{DynamicResource FontFamilyName}"
+                           FontSize="20" />
                     <DatePicker x:Name="searchStartDate"
                             VerticalOptions="CenterAndExpand" 
                             Date="{x:Static sys:DateTime.Now}" 
@@ -35,7 +44,11 @@
                         </DatePicker.MinimumDate>
                     </DatePicker>
 
-                    <Label Text="End Date:" />
+                    <Label Text="space" FontSize="1" Opacity="0"/>
+                    
+                    <Label Text="End Date" TextColor="Black" 
+                           FontFamily="{DynamicResource FontFamilyName}"
+                           FontSize="20" />
                     <DatePicker x:Name="searchEndDate"
                             VerticalOptions="CenterAndExpand" 
                             MaximumDate="{x:Static sys:DateTime.Now}">
@@ -48,25 +61,30 @@
                             </sys:DateTime>
                         </DatePicker.MinimumDate>
                     </DatePicker>
-                    <Button
-                        Margin="10, 5"
-                        BackgroundColor="#7dbbe6"
-                        HorizontalOptions="Fill"
-                        x:Name="searchButton"
-                        Text="Search">
+                    
+                    <Button Margin="10, 5" BackgroundColor="#7dbbe6"
+                            HorizontalOptions="Fill"
+                            x:Name="searchButton"
+                            TextColor="Black"
+                            Clicked="OnDateSearch"
+                            Text="Search">
+                        
                         <Button.HeightRequest>
-                          <OnPlatform x:TypeArguments="x:Double" Android="50" iOS="30" WinPhone="30"/>
+                          <OnPlatform x:TypeArguments="x:Double" 
+                                      Android="50" 
+                                      iOS="30" 
+                                      WinPhone="30" />
                         </Button.HeightRequest>
                     </Button>
                 </StackLayout>
             </Frame>
-            <ContentView
+<!--            <ContentView
                   AbsoluteLayout.LayoutFlags="PositionProportional"
-                  AbsoluteLayout.LayoutBounds="1, 0, -1, -1"><!--
+                  AbsoluteLayout.LayoutBounds="1, 0, -1, -1">
                 <ContentView.GestureRecognizers>
-                  <TapGestureRecognizer Tapped="OnCloseButtonTapped"/>
-                </ContentView.GestureRecognizers>-->
-                <!--<Image
+                    <TapGestureRecognizer Tapped="OnCloseButtonTapped"/>
+                </ContentView.GestureRecognizers>
+                <Image
                   x:Name="CloseImage"
                   HeightRequest="30"
                   WidthRequest="30">
@@ -77,8 +95,8 @@
                       iOS="close_circle_button.png"
                       WinPhone="Assets/close_circle_button.png"/>
                   </Image.Source>
-                </Image>-->
-            </ContentView>
+                </Image>
+            </ContentView>-->
         </AbsoluteLayout>
     </ScrollView>
 </pages:PopupPage>

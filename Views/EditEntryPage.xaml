@@ -14,26 +14,30 @@
                     iOS="5, 30, 5, 20"
                     Android="5, 10, 5, 20"
                     WinPhone="20, 20, 20, 20" />
-     </ContentPage.Padding>
+    </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+
             <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" FontSize="25" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+
             <Entry FontSize="17" BackgroundColor="Black"  Opacity="0.55"
                    Placeholder="enter current location" PlaceholderColor="Silver"
                    FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 
                    HeightRequest="45"/>
+
             <Entry x:Name="modifyReason" FontSize="17" BackgroundColor="Black"  Opacity="0.55"
                    Placeholder="enter reason for modification" PlaceholderColor="Silver"
                    FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 
                    HeightRequest="45"/>
+
             <ScrollView>
-            <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
-            <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" BackgroundColor="Transparent"
-                    FontSize="17" HeightRequest="2000" TextColor="White" Margin="5,5,5,5"
-                    FontFamily="{DynamicResource FontFamilyName}"/>
-                    </StackLayout>
-                    </ScrollView>
+                <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
+                    <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" BackgroundColor="Transparent"
+                            FontSize="17" HeightRequest="2000" TextColor="White" Margin="5,5,5,5"
+                            FontFamily="{DynamicResource FontFamilyName}"/>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

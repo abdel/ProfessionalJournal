@@ -26,7 +26,7 @@
                       BackgroundColor="Black"/>
             <ScrollView>
             <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
-            <Entry x:Name="newEntryText" HeightRequest="2000" Placeholder="description of entry" 
+            <Entry x:Name="newEntryText" HeightRequest="2000" Placeholder="content of entry" 
                       FontSize="Medium" PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                       BackgroundColor="Transparent"/>
                     </StackLayout>

@@ -19,6 +19,7 @@
             <StackLayout Spacing="7" VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand"
                    Orientation="Vertical" Padding="10,10,0,0" WidthRequest="280">
+
                 <Label Text="First Name:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <Entry x:Name="newAuthorFirstName" Placeholder="your first name"
@@ -26,6 +27,7 @@
                        BackgroundColor="Black"
                        PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                         Margin="2"/>
+
                 <Label Text="Last Name:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <Entry x:Name="newAuthorLastName" Placeholder="your last name" 
@@ -33,6 +35,7 @@
                        BackgroundColor="Black"
                        PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                         Margin="2"/>
+
                 <Label Text="Username:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <Entry x:Name="newAuthorUsername" Keyboard="Email" Placeholder="your username" 
@@ -40,6 +43,7 @@
                        BackgroundColor="Black"
                        PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                         Margin="2"/>
+
                 <Label Text="Password:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <Entry x:Name="newAuthorPassword" Placeholder="your password" IsPassword="true" 
@@ -47,6 +51,7 @@
                        BackgroundColor="Black"
                        PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                         Margin="2"/>
+
                 <Label Text="Confirm Password:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <Entry x:Name="newAuthorConfirmPassword" Placeholder="your password again" IsPassword="true" 
@@ -54,28 +59,30 @@
                        BackgroundColor="Black"
                        PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                         Margin="2"/>
+
                 <Label Text="Email Address:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <Entry x:Name="newAuthorEmail" Keyboard="Email" Placeholder="your email address"
                        HeightRequest="50" Opacity="0.5" FontSize="Medium" BackgroundColor="Black"
                        PlaceholderColor="Silver" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"
                         Margin="2"/>
+
                 <Label Text="Date of Birth:" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
                         FontSize="20"/>
                 <DatePicker x:Name="newAuthorDateOfBirth"
-                            VerticalOptions="CenterAndExpand" 
-                            Date="{x:Static sys:DateTime.Now}" 
-                            MaximumDate="{x:Static sys:DateTime.Now}" 
-                            TextColor="White" Margin="2" BackgroundColor="Black" Opacity="0.5">
-                 <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
-                 <DatePicker.MinimumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                       <x:Arguments>
-                          <x:String>Jan 1 1900</x:String>
-                       </x:Arguments>
-                    </sys:DateTime>
-                 </DatePicker.MinimumDate>
-              </DatePicker>
+                        VerticalOptions="CenterAndExpand" 
+                        Date="{x:Static sys:DateTime.Now}" 
+                        MaximumDate="{x:Static sys:DateTime.Now}" 
+                        TextColor="White" Margin="2" BackgroundColor="Black" Opacity="0.5">
+                    <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                    <DatePicker.MinimumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                            <x:Arguments>
+                                <x:String>Jan 1 1900</x:String>
+                            </x:Arguments>
+                        </sys:DateTime>
+                    </DatePicker.MinimumDate>
+                </DatePicker>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

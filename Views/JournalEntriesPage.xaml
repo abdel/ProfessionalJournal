@@ -14,63 +14,65 @@
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="10, 10, 10, 10"
-                    Android="3, 0, 0, 5"
+                    Android="10, 10, 10, 10"
                     WinPhone="20, 20, 20, 20" />
      </ContentPage.Padding>
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <SearchBar x:Name="searchBar" SearchCommand="{Binding SearchCommand}" 
-                    SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" 
-                    BackgroundColor="White" Opacity="0.4"
-                    TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
-                    Placeholder="Search" PlaceholderColor="Black"
-                    AbsoluteLayout.LayoutBounds="0.15,0.08,180,40"
-                    AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-           <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}"
-                       AbsoluteLayout.LayoutBounds="0.87,0.083"
-                       AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="White"
-                       TextColor="Black" Opacity="0.5">
-                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                <DatePicker.MinimumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                        <x:Arguments>
-                            <x:String>Jan 1 2000</x:String>
-                        </x:Arguments>
-                    </sys:DateTime>
-                </DatePicker.MinimumDate>
-                <DatePicker.MaximumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                        <x:Arguments>
-                            <x:String>Dec 31 2050</x:String>
-                        </x:Arguments>
-                    </sys:DateTime>
-                </DatePicker.MaximumDate>
-            </DatePicker>
+                <SearchBar Grid.Row="0" 
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2" 
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="End"
+                           x:Name="searchBar" SearchCommand="{Binding SearchCommand}" 
+                           SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}" 
+                           BackgroundColor="White" Opacity="0.4"
+                           TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"
+                           Placeholder="Search" PlaceholderColor="Black"
+                           Margin="0,0,50,0"
+                           WidthRequest="1" />
 
-            <Switch x:Name="toggleAll" Toggled="ToggleAllEntries" HorizontalOptions="Center"
-                AbsoluteLayout.LayoutBounds="0.53,0.18,45,45"
-                AbsoluteLayout.LayoutFlags="PositionProportional"/>
-        
-            <Label Text="Active Entries" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" 
-                    FontFamily="{DynamicResource FontFamilyName}"
-                    AbsoluteLayout.LayoutBounds="0.35,0.2,0.65,0.07" 
-                    AbsoluteLayout.LayoutFlags="All" />
-            
-            <Label Text="All Entries" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" 
-                    FontFamily="{DynamicResource FontFamilyName}" 
-                    AbsoluteLayout.LayoutBounds="1.9,0.2,0.65,0.07" 
-                    AbsoluteLayout.LayoutFlags="All" />
+                 <ContentView Grid.Row="0" Grid.Column="1">
+                    <ContentView.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="OnDateSearch"/>
+                    </ContentView.GestureRecognizers>
+                    <Image x:Name="CloseImage"
+                           Aspect="AspectFit"
+                           Source="DateTimeSearch.png" />
+                </ContentView>
+            </Grid>
 
-            <StackLayout VerticalOptions="CenterAndExpand"
-                         HorizontalOptions="CenterAndExpand"
-                         Orientation="Vertical" Padding="10,125,10,50" WidthRequest="335">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Active Entries" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" 
+                        FontFamily="{DynamicResource FontFamilyName}"
+                        VerticalOptions="Center" />
+
+                <Switch x:Name="toggleAll" Toggled="ToggleAllEntries" 
+                    Scale="0.75"
+                    HorizontalOptions="Center" />
+                
+                <Label Text="All Entries" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" 
+                        FontFamily="{DynamicResource FontFamilyName}" 
+                        VerticalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                 <ScrollView>
                     <ListView x:Name="JournalEntriesListView" 
                               ItemsSource="{Binding Entries}" 
                               VerticalOptions="FillAndExpand" HasUnevenRows="true" 
                               RefreshCommand="{Binding LoadEntriesCommand}" 
-                              IsPullToRefreshEnabled="true" 
+                              IsPullToRefreshEnabled="true"
                               IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
                               CachingStrategy="RecycleElement"
                               ItemSelected="OnEntrySelected"
@@ -108,6 +110,6 @@
                     </ListView>
                 </ScrollView>
             </StackLayout>
-       </AbsoluteLayout>
+       </StackLayout>
     </ContentPage.Content>
 </ContentPage>

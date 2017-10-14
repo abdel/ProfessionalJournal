@@ -14,12 +14,12 @@
                     WinPhone="20, 20, 20, 20"/>
      </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout 
-            VerticalOptions="CenterAndExpand"
-            HorizontalOptions="CenterAndExpand"
-            Orientation="Vertical"
-            Spacing="60">
-            <Label Text="JOP it" XAlign="Center" FontSize="100" FontFamily="{DynamicResource FontFamilyName1}"
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     Orientation="Vertical"
+                     Spacing="60">
+            <Label Text="JOP it" XAlign="Center" FontSize="100" 
+                   FontFamily="{DynamicResource FontFamilyName1}"
                    TextColor="Black"></Label>
 
             <Entry x:Name="authorUsername" Keyboard="Email" 
@@ -34,9 +34,9 @@
                    Opacity="0.5" TextColor="White" FontFamily="{DynamicResource FontFamilyName}"/>
             
             <Button x:Name="loginButton" Text="Login" Clicked="OnLogin" 
-                BorderColor="Black" BorderWidth="1.6" TextColor="Black" BorderRadius="5"
-                BackgroundColor="Transparent" Opacity="0.8"
-                Font="{DynamicResource FontFamilyName1}" FontSize="30"/>
+                    BorderColor="Black" BorderWidth="1.6" TextColor="Black" BorderRadius="5"
+                    BackgroundColor="Transparent" Opacity="0.8"
+                    Font="{DynamicResource FontFamilyName1}" FontSize="30"/>
        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -3,7 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
             x:Class="ProfessionalJournal.NewJournalPage" 
             Title="Create A New Journal" 
-    BackgroundImage="MainBG.png">
+            BackgroundImage="MainBG.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Clicked="OnSaveButtonClicked"/>
     </ContentPage.ToolbarItems>
@@ -18,11 +18,14 @@
                     HorizontalOptions="CenterAndExpand"
                     Orientation="Vertical" Padding="50,10,50,0" WidthRequest="260">
             <Label Text="space" FontSize="40" Opacity="0"/>
+
             <Label Text="Title" FontSize="Large" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
             <Entry x:Name="newJournalTitle" HeightRequest="50"
                       FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.5" FontFamily="{DynamicResource FontFamilyName}"
                       BackgroundColor="Black" Placeholder="title of journal"/>
+
             <Label Text="space" FontSize="5" Opacity="0"/>
+
             <Label Text="Description" FontSize="Large" TextColor="Black" FontFamily="GillSans-Light"/>
             <Entry x:Name="newJournalDescription" Placeholder="description of journal"
                    HeightRequest="50" FontSize="Medium" PlaceholderColor="Silver" TextColor="White" Opacity="0.55" FontFamily="{DynamicResource FontFamilyName}"

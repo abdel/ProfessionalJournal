@@ -16,17 +16,21 @@
      </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout Spacing="5" Padding="10">
-           <Label Text="{Binding Entry.EntryVersion.CreatedAt}" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+            <Label Text="{Binding Entry.EntryVersion.CreatedAt}" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+
             <Label Text="{Binding Entry.EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" FontSize="25" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+
             <Label Text="{Binding Entry.Location, StringFormat='Location: {0}'}}" FontSize="{DynamicResource FontSizeNo3}" TextColor="Black" FontFamily="{DynamicResource FontFamilyName}"/>
+
             <Label Text="space" FontSize="1" Opacity="0"/>
+
             <StackLayout Spacing="5" Padding="10" BackgroundColor="Black" Opacity="0.55">
                 <ScrollView>
-            <Label Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="17" 
-                   TextColor="White" HorizontalTextAlignment="Start" Margin="5,5,5,5"
-                   FontFamily="{DynamicResource FontFamilyName}"/>
-                   </ScrollView>
+                    <Label Text="{Binding Entry.EntryVersion.TextEntry}" FontSize="17" 
+                           TextColor="White" HorizontalTextAlignment="Start" Margin="5,5,5,5"
+                           FontFamily="{DynamicResource FontFamilyName}"/>
+                </ScrollView>
             </StackLayout>
-            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

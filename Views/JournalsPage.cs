@@ -14,6 +14,7 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
+            NavigationPage.SetBackButtonTitle(this, "");
             NavigationPage.SetHasBackButton(this, false);
 
             BindingContext = viewModel = new JournalsViewModel();
