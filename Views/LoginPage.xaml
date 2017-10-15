@@ -18,8 +18,8 @@
             <StackLayout VerticalOptions="CenterAndExpand"
                          HorizontalOptions="CenterAndExpand"
                          Orientation="Vertical"
-                         Spacing="60">
-                <Label Text="JOP it" XAlign="Center" FontSize="100" 
+                         Spacing="40">
+                <Label Text="JOP it" XAlign="Center" FontSize="80" 
                        FontFamily="{DynamicResource FontFamilyName1}"
                        TextColor="Black"></Label>
 

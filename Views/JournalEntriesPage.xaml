@@ -88,11 +88,18 @@
                                     <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
                                        Text="Delete" IsDestructive="True"/>
                                 </ViewCell.ContextActions>
-                                <StackLayout Padding="0,0,0,0" Spacing="10" Opacity="0.5" BackgroundColor="Black">
+                                <StackLayout Padding="0,0,0,0" Spacing="3" Opacity="0.5" BackgroundColor="Black">
                                     <Label Text="{Binding Title}" 
                                            LineBreakMode="NoWrap" 
                                            Style="{DynamicResource ListItemTextStyle}" 
                                            FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
+
+                                    <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}"
+                                           LineBreakMode="NoWrap"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           FontSize="15" FontFamily="{DynamicResource FontFamilyName2}"
+                                           TextColor="White" Margin="9,0,0,5"/>
+                                    
                                     <StackLayout Grid.Row="1" Orientation="Horizontal">
                                         <Label Text="{Binding EntryVersion.VersionTrackId, StringFormat='Version: {0}'}}" 
                                                FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}" Margin="9,0,0,5"/>
@@ -102,7 +109,7 @@
                                         <Label Text="{Binding Deleted, StringFormat='Deleted: {0}'}"
                                                Margin="7,0,0,5"
                                                FontSize="15" TextColor="White" FontFamily="{DynamicResource FontFamilyName2}"/>
-                                        </StackLayout>
+                                    </StackLayout>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

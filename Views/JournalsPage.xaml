@@ -34,12 +34,14 @@
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemTextStyle}" TextColor="White"
                                        FontSize="20" FontFamily="{DynamicResource FontFamilyName}"/>
+
                                 <Label Text="{Binding Description}" 
                                        LineBreakMode="NoWrap" Margin="10,0,0,0"
                                        Style="{DynamicResource ListItemDetailTextStyle}" TextColor="White"
                                        FontSize="17" FontFamily="{DynamicResource FontFamilyName}"/>
+                                
                                 <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
-                                    <Label Text="{Binding CreatedAt}" 
+                                    <Label Text="{Binding CreatedAt, StringFormat='Created: {0:N}'}" 
                                            Margin="12,0,0,5" TextColor="White"
                                            FontSize="15" FontFamily="{DynamicResource FontFamilyName2}"
                                            HorizontalTextAlignment="End"/>
