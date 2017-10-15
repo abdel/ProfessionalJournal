@@ -55,7 +55,6 @@ namespace ProfessionalJournal
 
         public void UnsubscribeFromMessages()
         {
-            MessagingCenter.Unsubscribe<LoginPage>(this, "AuthorLogin");
             MessagingCenter.Unsubscribe<NewJournalPage, Journal>(this, "AddJournal");
         }
 
