@@ -74,7 +74,7 @@ namespace ProfessionalJournal
         {
             base.OnAppearing();
 
-            this.viewModel.listViewNoItems = listViewNoItems;
+            this.viewModel.JournalsNotFound = JournalsNotFound;
             this.viewModel.JournalsListView = JournalsListView;
 
             viewModel.LoadJournalsCommand.Execute(null);

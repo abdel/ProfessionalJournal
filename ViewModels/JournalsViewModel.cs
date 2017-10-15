@@ -10,7 +10,7 @@ namespace ProfessionalJournal
 {
     public class JournalsViewModel : BaseViewModel
     {
-        public Label listViewNoItems;
+        public ContentView JournalsNotFound;
         public ListView JournalsListView;
 
         public IDataStore<Journal> JournalDataStore => DependencyService.Get<IDataStore<Journal>>() ?? new JournalDataStore();
@@ -69,7 +69,7 @@ namespace ProfessionalJournal
             try
             {
                 JournalsListView.IsVisible = true;
-                listViewNoItems.IsVisible = false;
+                JournalsNotFound.IsVisible = false;
 
                 var journals = await JournalDataStore.GetAllAsync(true);
 
@@ -90,7 +90,7 @@ namespace ProfessionalJournal
                     Journals.Clear();
 
                     JournalsListView.IsVisible = false;
-                    listViewNoItems.IsVisible = true;
+                    JournalsNotFound.IsVisible = true;
                 }
 
                 // Logout user if session expired

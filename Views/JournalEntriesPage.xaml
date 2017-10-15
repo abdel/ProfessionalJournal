@@ -109,15 +109,23 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <Label  
-                    x:Name="listViewNoItems"  
-                    Margin="5,5,5,5"  
-                    VerticalOptions="CenterAndExpand"  
-                    HorizontalOptions="CenterAndExpand"  
-                    Text="No entries found."
-                    FontSize="20"
-                    FontFamily="{DynamicResource FontFamilyName}"
-                    IsVisible="false" />
+                <ContentView x:Name="EntriesNotFound"
+                             IsVisible="false"
+                             VerticalOptions="CenterAndExpand" 
+                             HorizontalOptions="CenterAndExpand">
+                    <StackLayout VerticalOptions="CenterAndExpand" 
+                                 HorizontalOptions="CenterAndExpand">
+                        <Label Text="No entries found."
+                               FontSize="20"
+                               FontFamily="{DynamicResource FontFamilyName}" />
+
+                        <Button Text="Refresh"
+                                Command="{Binding LoadEntriesCommand}"
+                                TextColor="Black"
+                                FontSize="15"
+                                FontFamily="{DynamicResource FontFamilyName3}" />
+                    </StackLayout>
+                </ContentView>
             </StackLayout>
        </StackLayout>
     </ContentPage.Content>

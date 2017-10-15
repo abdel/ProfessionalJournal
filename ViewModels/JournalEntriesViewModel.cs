@@ -12,7 +12,7 @@ namespace ProfessionalJournal
         public bool toggleAll;
         public SearchBar searchBar;
 
-        public Label listViewNoItems;
+        public ContentView EntriesNotFound;
         public ListView EntriesListView;
 
         public Entry Entry { get; set; }
@@ -177,7 +177,7 @@ namespace ProfessionalJournal
             try
             {
                 EntriesListView.IsVisible = true;
-                listViewNoItems.IsVisible = false;
+                EntriesNotFound.IsVisible = false;
 
                 if (toggleAll) {
                     hidden = true;
@@ -203,7 +203,7 @@ namespace ProfessionalJournal
                     Entries.Clear();
 
                     EntriesListView.IsVisible = false;
-                    listViewNoItems.IsVisible = true;
+                    EntriesNotFound.IsVisible = true;
                 }
 
 				// Logout user if session expired

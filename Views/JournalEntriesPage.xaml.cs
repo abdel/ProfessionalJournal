@@ -107,7 +107,7 @@ namespace ProfessionalJournal
             base.OnAppearing();
 
             // Pass contextual details to viewmodel
-            viewModel.listViewNoItems = listViewNoItems;
+            viewModel.EntriesNotFound = EntriesNotFound;
             viewModel.EntriesListView = JournalEntriesListView;
 
             // Load entries
