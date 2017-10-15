@@ -94,7 +94,7 @@
                                            Style="{DynamicResource ListItemTextStyle}" 
                                            FontSize="20" TextColor="White" FontFamily="{DynamicResource FontFamilyName}" Margin="7,5,0,0"/>
 
-                                    <Label Text="{Binding EntryVersion.CreatedAt, StringFormat='Created: {0:N}'}}"
+                                    <Label Text="{Binding CreatedAt, StringFormat='Created: {0:N}'}}"
                                            LineBreakMode="NoWrap"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
                                            FontSize="15" FontFamily="{DynamicResource FontFamilyName2}"
