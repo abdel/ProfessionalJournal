@@ -101,6 +101,7 @@ namespace ProfessionalJournal
 
                 try
                 {
+                    Entries.Remove(_entry);
                     await EntryDataStore.UnhideAsync(_entry.Id);
                     LoadEntriesCommand.Execute(null);
                 }
