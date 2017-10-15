@@ -29,6 +29,8 @@ namespace ProfessionalJournal
             Children.Add(entryHistoryPage);
 
             Title = Children[0].Title;
+
+            NavigationPage.SetBackButtonTitle(this, "");
         }
 
         protected override void OnCurrentPageChanged()

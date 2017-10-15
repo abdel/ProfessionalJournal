@@ -45,7 +45,10 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled"))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
         }

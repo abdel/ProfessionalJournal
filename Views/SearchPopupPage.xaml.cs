@@ -27,13 +27,14 @@ namespace ProfessionalJournal
             base.OnDisappearing();
         }
 
-        private async void OnDateSearch(object sender, EventArgs e)
+        private void OnDateSearch(object sender, EventArgs e)
         {
-            DateTime[] dates = { searchStartDate.Date, searchEndDate.Date };
+            string[] dates = {
+                searchStartDate.Date.ToShortDateString(),
+                searchEndDate.Date.ToShortDateString()
+            };
 
             MessagingCenter.Send(this, "DateSearch", dates);
-
-            await Task.Delay(2000);
 
             CloseAllPopup();
         }

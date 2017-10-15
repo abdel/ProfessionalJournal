@@ -49,8 +49,11 @@ namespace ProfessionalJournal
 			}
 			catch (Exception e)
 			{
-				await DisplayAlert("Error", e.Message, "OK");
-				this.errored = true;
+                if (!e.Message.Contains("A task was cancelled"))
+                {
+                    await DisplayAlert("Error", e.Message, "OK");
+                    this.errored = true;
+                }
 			}
 		}
 
@@ -73,7 +76,6 @@ namespace ProfessionalJournal
 			};
 
 			IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
-			Console.WriteLine(pageStack.Count);
 
 			// Authenticate author
 			await AuthenticateAuthor(author);

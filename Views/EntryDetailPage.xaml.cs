@@ -12,6 +12,8 @@ namespace ProfessionalJournal
         {
             InitializeComponent();
 
+            NavigationPage.SetBackButtonTitle(this, "");
+
             var entry = new Entry
             {
                 Title = "This is an entry"
@@ -24,6 +26,8 @@ namespace ProfessionalJournal
         public EntryDetailPage(EntryDetailViewModel viewModel)
         {
             InitializeComponent();
+
+            NavigationPage.SetBackButtonTitle(this, "");
 
             BindingContext = this.viewModel = viewModel;
 

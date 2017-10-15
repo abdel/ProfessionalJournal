@@ -42,8 +42,11 @@ namespace ProfessionalJournal
             }
             catch (Exception e)
             {
-                this.errored = true;
-                await DisplayAlert("Error", e.Message, "OK");
+                if (!e.Message.Contains("A task was cancelled"))
+                {
+                    await DisplayAlert("Error", e.Message, "OK");
+                    this.errored = true;
+                }
             }
         }
 

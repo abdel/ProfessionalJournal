@@ -120,7 +120,6 @@ namespace ProfessionalJournal
 
             IReadOnlyList<Page> pageStack = Application.Current.MainPage.Navigation.NavigationStack;
 
-            Console.WriteLine(pageStack.Count);
             // Page is getting popped
             if ((pageStack[0].ToString() == "ProfessionalJournal.JournalsPage" && pageStack.Count < 3) ||
                 (pageStack[0].ToString() == "ProfessionalJournal.LoginPage" && pageStack.Count < 4))

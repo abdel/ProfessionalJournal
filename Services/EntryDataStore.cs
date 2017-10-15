@@ -35,11 +35,20 @@ namespace ProfessionalJournal
             journalId = currentJournalId;
         }
 
-        public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false, DateTime[] dates = null)
+        public async Task<IEnumerable<Entry>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false, string[] dates = null)
         {
+            string minDate = null;
+            string maxDate = null;
+
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
-                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}&text={text}&deleted={deleted}&hidden={hidden}&dates={dates}", HttpMethod.Get, null);
+                if (dates != null)
+                {
+                    minDate = dates[0];
+                    maxDate = dates[1];
+                }
+
+                var json = await client.InvokeApiAsync<Response>($"entries?journal_id={journalId}&text={text}&deleted={deleted}&hidden={hidden}&minDate={minDate}&maxDate={maxDate}", HttpMethod.Get, null);
                 entries = json.entries;
             }
 

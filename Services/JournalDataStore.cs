@@ -24,7 +24,7 @@ namespace ProfessionalJournal
             journals = new List<Journal>();
         }
 
-        public async Task<IEnumerable<Journal>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false, DateTime[] dates = null)
+        public async Task<IEnumerable<Journal>> GetAllAsync(bool forceRefresh = false, string text = null, bool deleted = false, bool hidden = false, string[] dates = null)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {

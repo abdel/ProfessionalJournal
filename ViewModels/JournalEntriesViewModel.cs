@@ -11,7 +11,6 @@ namespace ProfessionalJournal
     {
         public bool toggleAll;
         public SearchBar searchBar;
-        public DateTime[] searchDates;
 
         public Label listViewNoItems;
         public ListView EntriesListView;
@@ -52,7 +51,10 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled"))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
 
@@ -67,7 +69,10 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled"))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
 
@@ -83,7 +88,10 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled"))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
 
@@ -98,7 +106,10 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled"))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
 
@@ -114,22 +125,26 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled"))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
 
-            MessagingCenter.Subscribe<SearchPopupPage, DateTime[]>(this, "DateSearch", async (obj, dates) =>
+            MessagingCenter.Subscribe<SearchPopupPage, string[]>(this, "DateSearch", async (obj, dates) =>
             {
-                var _dates = dates as DateTime[];
+                var _dates = dates as string[];
 
                 try
                 {
-                    this.searchDates = dates;
-                    LoadEntriesCommand.Execute(null);
+                    await ExecuteLoadEntriesCommand(null, dates);
                 }
                 catch (Exception e)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    if (!e.Message.Contains("A task was cancelled")) {
+                        await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+                    }
                 }
             });
         }
@@ -141,10 +156,10 @@ namespace ProfessionalJournal
             MessagingCenter.Unsubscribe<JournalEntriesPage, Entry>(this, "HideEntry");
             MessagingCenter.Unsubscribe<JournalEntriesPage, Entry>(this, "UnhideEntry");
             MessagingCenter.Unsubscribe<JournalEntriesPage, Entry>(this, "DeleteEntry");
-            MessagingCenter.Unsubscribe<SearchPopupPage, DateTime[]>(this, "DateSearch");
+            MessagingCenter.Unsubscribe<SearchPopupPage, string[]>(this, "DateSearch");
         }
 
-        public async Task ExecuteLoadEntriesCommand(string text = null)
+        public async Task ExecuteLoadEntriesCommand(string text = null, string[] dates = null)
         {
             if (IsBusy)
                 return;
@@ -168,7 +183,7 @@ namespace ProfessionalJournal
                     deleted = true;
                 }
 
-                var entries = await EntryDataStore.GetAllAsync(true, text, deleted, hidden, searchDates);
+                var entries = await EntryDataStore.GetAllAsync(true, text, deleted, hidden, dates);
 
                 if (entries != null && entries.Any())
                 {

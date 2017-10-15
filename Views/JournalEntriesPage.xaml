@@ -81,10 +81,10 @@
                         <DataTemplate>
                             <ViewCell x:Name="EntryViewCell">
                                 <ViewCell.ContextActions>
+                                    <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
+                                       Text="Unhide" />
                                     <MenuItem Clicked="OnHide" CommandParameter="{Binding .}"
                                        Text="Hide" IsDestructive="True" />
-                                    <MenuItem Clicked="OnUnhide" CommandParameter="{Binding .}"
-                                       Text="Unhide" IsDestructive="True" />
                                     <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
                                        Text="Delete" IsDestructive="True"/>
                                 </ViewCell.ContextActions>

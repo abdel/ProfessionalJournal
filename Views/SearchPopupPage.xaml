@@ -24,6 +24,10 @@
                            TextColor="Black" 
                            FontFamily="{DynamicResource FontFamilyName}"
                            FontSize="30" />
+                    <Label TextColor="Black"
+                           FontFamily="{DynamicResource FontFamilyName}"
+                           FontSize="15"
+                           Text="Tip: Set the Start Date and End Date to the same date to find entries on a specific date." />
 
                     <Label Text="space" FontSize="5" Opacity="0"/>
                     
