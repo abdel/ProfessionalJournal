@@ -47,7 +47,7 @@ namespace ProfessionalJournal
                 {
                     Debug.WriteLine("AddJournalMessage" + e);
 
-                    if (!e.Message.Contains("A task was cancelled"))
+                    if (!e.Message.Contains("A task was canceled"))
                     {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                     }

@@ -51,7 +51,7 @@ namespace ProfessionalJournal
 			{
                 Console.WriteLine("Login:" + e);
 
-                if (!e.Message.Contains("A task was cancelled"))
+                if (!e.Message.Contains("A task was canceled"))
                 {
                     await DisplayAlert("Error", e.Message, "OK");
                     this.errored = true;

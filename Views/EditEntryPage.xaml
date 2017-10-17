@@ -26,11 +26,9 @@
                    FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 
                    HeightRequest="45"/>
 
-            <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55"
-                         Orientation="Vertical" 
-                         VerticalOptions="FillAndExpand">
+            <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55"> 
                 <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" BackgroundColor="Transparent"
-                        FontSize="17" TextColor="White" Margin="5,5,5,5"
+                        FontSize="17" HeightRequest="300" TextColor="White" Margin="5,5,5,5"
                         FontFamily="{DynamicResource FontFamilyName}"/>
             </StackLayout>
         </StackLayout>
