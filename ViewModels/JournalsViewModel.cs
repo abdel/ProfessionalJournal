@@ -45,10 +45,10 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Debug.WriteLine("AddJournalMessage" + e);
+
                     if (!e.Message.Contains("A task was cancelled"))
                     {
-                        Debug.WriteLine("AddJournalMessage" + e);
-
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                     }
                 }
