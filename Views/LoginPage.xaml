@@ -14,7 +14,8 @@
                     WinPhone="20, 20, 20, 20"/>
      </ContentPage.Padding>
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand">
             <StackLayout VerticalOptions="CenterAndExpand"
                          HorizontalOptions="CenterAndExpand"
                          Orientation="Vertical"

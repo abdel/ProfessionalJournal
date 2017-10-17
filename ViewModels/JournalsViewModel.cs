@@ -47,6 +47,8 @@ namespace ProfessionalJournal
                 {
                     if (!e.Message.Contains("A task was cancelled"))
                     {
+                        Debug.WriteLine("AddJournalMessage" + e);
+
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                     }
                 }
@@ -82,7 +84,7 @@ namespace ProfessionalJournal
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Debug.WriteLine("ExecuteLoadJournalsCommand" + ex);
 
                 if (ex.Message.Contains("No journals found"))
                 {

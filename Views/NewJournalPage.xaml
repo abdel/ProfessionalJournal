@@ -16,6 +16,7 @@
     <ContentPage.Content> 
         <StackLayout Spacing="10" 
                     HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     Orientation="Vertical" Padding="50,10,50,0" WidthRequest="260">
             <Label Text="space" FontSize="40" Opacity="0"/>
 

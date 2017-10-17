@@ -51,6 +51,8 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("AddEntry" + e);
+
                     if (!e.Message.Contains("A task was cancelled"))
                     {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
@@ -69,6 +71,8 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("EditEntry" + e);
+
                     if (!e.Message.Contains("A task was cancelled"))
                     {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
@@ -88,6 +92,8 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("HideEntry" + e);
+
                     if (!e.Message.Contains("A task was cancelled"))
                     {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
@@ -107,6 +113,8 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("UnhideEntry" + e);
+
                     if (!e.Message.Contains("A task was cancelled"))
                     {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
@@ -126,6 +134,8 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("DeleteEntry" + e);
+
                     if (!e.Message.Contains("A task was cancelled"))
                     {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
@@ -143,6 +153,8 @@ namespace ProfessionalJournal
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("DateSearch" + e);
+
                     if (!e.Message.Contains("A task was cancelled")) {
                         await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
                     }

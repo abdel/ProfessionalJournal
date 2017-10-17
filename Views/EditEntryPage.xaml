@@ -26,13 +26,11 @@
                    FontFamily="{DynamicResource FontFamilyName}" TextColor="White" 
                    HeightRequest="45"/>
 
-            <ScrollView>
-                <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
-                    <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" BackgroundColor="Transparent"
-                            FontSize="17" HeightRequest="2000" TextColor="White" Margin="5,5,5,5"
-                            FontFamily="{DynamicResource FontFamilyName}"/>
-                </StackLayout>
-            </ScrollView>
+            <StackLayout Padding="0" BackgroundColor="Black" Opacity="0.55">
+                <Editor x:Name="entryText" Text="{Binding Entry.EntryVersion.TextEntry}" BackgroundColor="Transparent"
+                        FontSize="17" HeightRequest="400" TextColor="White" Margin="5,5,5,5"
+                        FontFamily="{DynamicResource FontFamilyName}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
