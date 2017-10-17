@@ -36,13 +36,15 @@ namespace ProfessionalJournal
                 EntryId = entry.Id,
                 TextEntry = entryText.Text,
                 ModifyReason = modifyReason.Text,
-                VersionTrackId = entry.EntryVersion.VersionTrackId + 1
+                VersionTrackId = entry.EntryVersion.VersionTrackId
             };
 
             entry.EntryVersion = entryVersion;
 
 			if (entryVersion.ModifyReason != null && entryVersion.TextEntry != null)
 			{
+                entry.EntryVersion.VersionTrackId = entry.EntryVersion.VersionTrackId + 1;
+
 				MessagingCenter.Send(this, "EditEntry", entry);
 				await Navigation.PopAsync();
 			}
