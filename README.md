@@ -1,15 +1,20 @@
 # Professional Journal
-An immutable journal for professionals.
+An immutable journal for professional engineers.
+
+# Azure Web Backend
+- [ProfesionalJournalServer](https://github.com/abdel/ProfessionalJournalServer)
 
 # Requirements
 - [Visual Studio / Xamarin](https://www.xamarin.com/visual-studio)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- Android SDK 25+
+- iOS SDK 10.2+
 
 # Basic Setup
 - Clone the repository: `git clone https://github.com/abdel/ProfessionalJournal.git`
 - Open the project in Visual Studio
 
-# Working on a Feature
+# Contributing
 - Create a new branch using `git checkout -b BRANCH_NAME` where `BRANCH_NAME` is the name of the feature you're working on. For example, if your task you're working on is "Add Entry", then an optimal branch name would be `add-entry`. The branch name should be informative so other team members can know what you're working on.
 
 - Make changes to the code
@@ -38,10 +43,3 @@ git merge origin master
 git commit
 git push origin BRANCH_NAME
 ```
-
-# Azure Web Backend
-- [ProfesionalJournalServer](https://github.com/abdel/ProfessionalJournalServer)
-
-# Resources
-- [Trello Board](https://trello.com/b/9BI0iUue/product)
-- [Google Drive](https://drive.google.com/drive/u/0/folders/0B7CibQckoVzhMzVha3U4c2hzYUk)
