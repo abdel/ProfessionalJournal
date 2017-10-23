@@ -6,7 +6,6 @@ An immutable journal for professional engineers.
 
 # Requirements
 - [Visual Studio / Xamarin](https://www.xamarin.com/visual-studio)
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Android SDK 25+
 - iOS SDK 10.2+
 
